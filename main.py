@@ -10,5 +10,6 @@ import HeldKarpAlgorithm as hk
 
 
 if __name__ == "__main__":
-    graph = rg.getRandomGraphWithWattsStrogatzModel(7, 4, 10)
+    #graph = rg.getRandomGraphWithWattsStrogatzModel(7, 4, 10)
+    graph = rg.getRandomGraphWithBarabasiAlbertModel(8, 5)
     vis.draw(graph)

@@ -24,4 +24,7 @@ def getRandomGraphWithWattsStrogatzModel(numberOfNodes, numberOfNearestNeighbors
 
 
 def getRandomGraphWithBarabasiAlbertModel(numberOfNodes, numberOfEdgesToAttach):
-    pass
+    graph = nx.barabasi_albert_graph(numberOfNodes, numberOfEdgesToAttach)
+    addRandomWeight(graph)
+    setPostOfficeOnFirstNode(graph)
+    return graph
