@@ -6,7 +6,10 @@ import random
 from math import sqrt
 import numpy
 
-scale = 200
+import Visualization as vis
+
+scaleX = 70
+scaleY = 100
 distScale = 1000
 
 
@@ -20,31 +23,114 @@ class GraphOsm:
 
         self.setPostOffice()
         self.setBuildings()
-        self.setStreet()
+        self.setPossibleStreetNode()
 
         self.connectBuildings()
+        vis.draw(self.graph)
+
+        self.connectStreetNodes()
+        vis.draw(self.graph)
+
+        a = 1
+
+    def connectStreetNodes(self):
+        # add crossing
+        for highway1 in self.getHighwayList():
+            for highway2 in self.getHighwayList():
+                if highway1 is not highway2:
+                    for nd in highway1.nds:
+                        node = self.getNodeByOsmId(nd)
+                        pos = ((node.x - float(self.osm.xmin)) * scaleX, (node.y - float(self.osm.ymin)) * scaleY)
+                        if pos not in self.getListOfRealStreetNodesCoordinate():
+                            self.graph.add_node(self.nodeIndex, pos=pos, osmId='',
+                                                streetName=highway1.tags['name'],
+                                                address='', isPostOffice=False)
+                            self.realStreetNodes.append(self.graph.nodes(data=True)[self.nodeIndex])
+                            self.nodeIndex += 1
+
+        listOfRealStreetNodesCoordinate = self.getListOfRealStreetNodesCoordinate()
+        for highway in self.getHighwayList():
+            path = []
+            listOfCurrentFakeHighwayNodeCoordinate = self.getListOfFakeNodeStreetByOsmWay(highway)
+
+            for coord in listOfCurrentFakeHighwayNodeCoordinate:
+                if coord in listOfRealStreetNodesCoordinate:
+                    path.append(self.getRealGraphNodeByCoordinates(coord)[0])
+
+            # connect
+            isOneWay = True if ('oneway' in highway.tags) and (highway.tags['oneway'] == 'yes') else False
+            streetName = highway.tags['name']
+
+            for id in range(0, len(path) - 1):
+                node1X, node1Y = self.graph.nodes(
+                    data=True)[id]['pos'][0], self.graph.nodes(data=True)[id]['pos'][1]
+                node2X, node2Y = self.graph.nodes(data=True)[id + 1]['pos'][0], \
+                                 self.graph.nodes(data=True)[id + 1]['pos'][1]
+                dist = self.getDistance(node1X, node1Y, node2X, node2Y)
+                dist *= distScale
+                dist = int(dist)
+
+                if isOneWay:
+                    self.graph.add_edge(
+                        path[id], path[id + 1], weight=dist, streetName=streetName)
+                else:
+                    self.graph.add_edge(
+                        path[id], path[id + 1], weight=dist, streetName=streetName)
+                    self.graph.add_edge(
+                        path[id + 1], path[id], weight=dist, streetName=streetName)
+
+    def getListOfFakeNodeStreetByOsmWay(self, osmWay):
+        list = []
+        for key in self.fakeStreetNodeWithInfo:
+            if self.fakeStreetNodeWithInfo[key] is osmWay:
+                list.append(key)
+        return list
+
+    def getListOfRealStreetNodesCoordinate(self):
+        list = []
+        for node in self.realStreetNodes:
+            list.append(node['pos'])
+        return list
 
     def connectBuildings(self):
+        self.realStreetNodes = []
         for building in self.getListAllBuldingsInGraph():
             streetName = building[1]['streetName']
-            streetNodes = self.getStreetNodeListByStreetName(streetName)
-            streetNodeIdxToConnect, dist = self.getTheNearestStreetNode(building, streetNodes)
+            streetNodes = self.getStreetFakeNodeListByStreetName(streetName)
+            streetNodeIdxToConnect, dist = self.getTheNearestStreetNode(building, streetNodes, streetName)
 
             dist *= distScale
             dist = int(dist)
             self.graph.add_edge(building[0], streetNodeIdxToConnect, weight=dist, streetName=streetName)
             self.graph.add_edge(streetNodeIdxToConnect, building[0], weight=dist, streetName=streetName)
+            # vis.draw(self.graph)
 
-    def getTheNearestStreetNode(self, building, listOfNodes):
-        idx = -1
-        dist = -1
+    def getRealGraphNodeByCoordinates(self, coord):
+        for node in self.graph.nodes(data=True):
+            if node[1]['pos'] == coord:
+                return node
+        return None
+
+    def getTheNearestStreetNode(self, building, listOfNodes, streetName):
+        minCoord = None
         minDist = float('inf')
-        for node in listOfNodes:
-            dist = self.getDistance(node[1]['pos'][0], node[1]['pos'][1], building[1]['pos'][0], building[1]['pos'][1])
+        for coord in listOfNodes:
+            dist = self.getDistance(coord[0], coord[1], building[1]['pos'][0], building[1]['pos'][1])
             if dist < minDist:
                 minDist = dist
-                idx = node[0]
-        return idx, dist
+                minCoord = coord
+
+        node = self.getRealGraphNodeByCoordinates(minCoord)
+        if node:
+            idx = node[0]
+        else:
+            idx = self.nodeIndex
+            self.graph.add_node(idx, pos=minCoord, osmId='',
+                                streetName=streetName,
+                                address='', isPostOffice=False)
+            self.realStreetNodes.append(self.graph.nodes(data=True)[idx])
+            self.nodeIndex += 1
+        return idx, minDist
 
     def getListAllBuldingsInGraph(self):
         buildings = []
@@ -53,26 +139,10 @@ class GraphOsm:
                 buildings.append(node)
         return buildings
 
-    def getTheNearBuildingInTheSameStreetAndDistance(self, node1, node2, path):
-        epsilon = 1
-        step = 0.001
-        buildingId = -1
-        minDist = float('inf')
-        for x in numpy.arange(node1.x, node2.x, step):
-            y = self.getEquationOfStreet(
-                x, node1.x, node1.y, node2.x, node2.y)
-            for node in self.graph.nodes(data=True):
-                if node[0] not in path:
+    def setPossibleStreetNode(self):
+        self.fakeStreetNodeWithInfo = dict()  # (x, y) : OsmWay
+        self.fakeStreetNodeList = []  # [(x1, y1), (x2, y2) ...] - list of tuples
 
-                    buildingOsm = self.getNodeByOsmId(node[1]['osmId'])
-                    dist = self.getDistance(
-                        buildingOsm.x, buildingOsm.y, x, y)
-                    if dist < minDist and dist < epsilon:
-                        minDist = dist
-                        buildingId = node[0]
-        return buildingId
-
-    def setStreet(self):
         for highway in self.getHighwayList():
             startIdx, endIdx = -1, -1
 
@@ -89,30 +159,23 @@ class GraphOsm:
             self.splitStreet(startIdx, endIdx, highway)
 
     def splitStreet(self, startIdx, endIdx, highway):
-        # split
         nds = highway.nds
-        streetName = highway.tags['name']
-        isOneWay = True if ('oneway' in highway.tags) and (highway.tags['oneway'] == 'yes') else False
 
-        path = []
         startOsmNode = self.getNodeByOsmId(nds[startIdx])
         endOsmNode = self.getNodeByOsmId(nds[endIdx])
 
-        step = 0.0001
+        step = 0.000001
         step *= 1 if startOsmNode.x < endOsmNode.x else -1
 
         for idx in range(startIdx, endIdx):
             # start nd
             nd1 = self.getNodeByOsmId(nds[idx])
-            if nds[idx] not in self.getListOfOsmIsOfCurrentGraphNode():
-                self.graph.add_node(self.nodeIndex, pos=((nd1.x - float(self.osm.xmin)) * scale,
-                                                         (nd1.y - float(self.osm.ymin)) * scale),
-                                    osmId=nd1.id, streetName=streetName, address="", isPostOffice=False)
-                path.append(self.nodeIndex)
-                self.nodeIndex += 1
-            elif nds[idx] in self.getListOfOsmIsOfCurrentGraphNode() and \
-                    self.getRealGraphNodeByOsmId(nds[idx]) not in path:
-                path.append(self.getRealGraphNodeByOsmId(nds[idx])[0])
+            xn = (nd1.x - float(self.osm.xmin)) * scaleX
+            yn = (nd1.y - float(self.osm.ymin)) * scaleY
+
+            if (xn, yn) not in self.fakeStreetNodeWithInfo:
+                self.fakeStreetNodeWithInfo[(xn, yn)] = highway  # (x, y) : OsmWay
+                self.fakeStreetNodeList.append((xn, yn))
 
             # end nd
             nd2 = self.getNodeByOsmId(nds[idx + 1])
@@ -121,38 +184,25 @@ class GraphOsm:
                 y = self.getEquationOfStreet(x - float(self.osm.xmin), nd1.x - float(self.osm.xmin),
                                              nd1.y - float(self.osm.ymin), nd2.x - float(self.osm.xmin),
                                              nd2.y - float(self.osm.ymin))
-                self.graph.add_node(self.nodeIndex, pos=((x - float(self.osm.xmin)) * scale, y * scale), osmId="",
-                                    streetName=streetName,
-                                    address="", isPostOffice=False)
-                path.append(self.nodeIndex)
-                self.nodeIndex += 1
 
-            if nds[idx + 1] not in self.getListOfOsmIsOfCurrentGraphNode():
-                self.graph.add_node(self.nodeIndex, pos=((nd2.x - float(self.osm.xmin)) * scale,
-                                                         (nd2.y - float(self.osm.ymin)) * scale),
-                                    osmId=nd2.id, streetName=streetName, address="", isPostOffice=False)
-                path.append(self.nodeIndex)
-                self.nodeIndex += 1
-            elif nds[idx + 1] in self.getListOfOsmIsOfCurrentGraphNode() and \
-                    self.getRealGraphNodeByOsmId(nds[idx]) not in path:
-                path.append(self.getRealGraphNodeByOsmId(nds[idx + 1])[0])
+                self.fakeStreetNodeWithInfo[
+                    ((x - float(self.osm.xmin)) * scaleX, y * scaleY)] = highway  # (x, y) : OsmWay
+                self.fakeStreetNodeList.append(((x - float(self.osm.xmin)) * scaleX, y * scaleY))
 
-            for id in range(0, len(path) - 1):
-                node1X, node1Y = self.graph.nodes(
-                    data=True)[id]['pos'][0], self.graph.nodes(data=True)[id]['pos'][1]
-                node2X, node2Y = self.graph.nodes(data=True)[id + 1]['pos'][0], \
-                                 self.graph.nodes(data=True)[id + 1]['pos'][1]
-                dist = self.getDistance(node1X, node1Y, node2X, node2Y)
-                dist *= 1000
-                dist = int(dist)
-                if isOneWay:
-                    self.graph.add_edge(
-                        path[id], path[id + 1], weight=dist, streetName=streetName)
-                else:
-                    self.graph.add_edge(
-                        path[id], path[id + 1], weight=dist, streetName=streetName)
-                    self.graph.add_edge(
-                        path[id + 1], path[id], weight=dist, streetName=streetName)
+            xn = (nd2.x - float(self.osm.xmin)) * scaleX
+            yn = (nd2.y - float(self.osm.ymin)) * scaleY
+
+            if (xn, yn) not in self.fakeStreetNodeWithInfo:
+                self.fakeStreetNodeWithInfo[(xn, yn)] = highway  # (x, y) : OsmWay
+                self.fakeStreetNodeList.append((xn, yn))
+
+    def getTheNearNodeDistance(self, x, y):
+        minDist = float('inf')
+        for node in self.graph.nodes(data=True):
+            dist = self.getDistance(x, y, node[1]['pos'][0], node[1]['pos'][1])
+            if dist < minDist:
+                minDist = dist
+        return minDist
 
     def setPostOffice(self):
         isPostOffice = False
@@ -184,8 +234,6 @@ class GraphOsm:
         else:
             streetName = building.tags['addr:street']
         return streetName
-
-
 
     def isCorrectNode(self, nodeOsmId):
         nodeOsm = self.getNodeByOsmId(nodeOsmId)
@@ -252,7 +300,7 @@ class GraphOsm:
     def addNode(self, osmIndex, houseNumber, streetName, isPostOffice=False):
         building = self.getNodeByOsmId(osmIndex)
         x, y = (building.x - float(self.osm.xmin)) * \
-               scale, (building.y - float(self.osm.ymin)) * scale
+               scaleX, (building.y - float(self.osm.ymin)) * scaleY
         self.graph.add_node(self.nodeIndex, pos=(x, y), osmId=building.id, streetName=streetName,
                             address=streetName + "\n" + houseNumber, isPostOffice=isPostOffice)
         self.nodeIndex += 1
@@ -261,21 +309,33 @@ class GraphOsm:
         for node in self.osm.osmNodes:
             if node.id == indexOsm:
                 return node
+        return None
 
     def getRealGraphNodeByOsmId(self, indexOsm):
         for node in self.graph.nodes(data=True):
             if node[1]['osmId'] == indexOsm:
                 return node
+        return None
 
     def getWayByOsmId(self, indexOsm):
         for way in self.osm.osmWays:
             if way.id == indexOsm:
                 return way
+        return None
 
-    def getStreetNodeListByStreetName(self, streetName):
+    def getStreetFakeNodeListByStreetName(self, streetName):
         nodes = []
-        for node in self.graph.nodes(data=True):
-            if node[1]['address'] == "" and node[1]['streetName'] == streetName:
+        for key in self.fakeStreetNodeWithInfo:
+            if 'name' in self.fakeStreetNodeWithInfo[key].tags and \
+                    self.fakeStreetNodeWithInfo[key].tags['name'] == streetName:
+                nodes.append(key)
+
+        return nodes
+
+    def getStreetRealNodeListByStreetName(self, streetName):
+        nodes = []
+        for node in self.realStreetNodes:
+            if node['osmId'] == '' and node['address'] == '' and node['streetName'] == streetName:
                 nodes.append(node)
 
         return nodes
