@@ -6,10 +6,26 @@ import networkx as nx
 import GraphHelper as gh
 
 
+def getRandomDiGraph(n, e):
+    while True:
+        graph = nx.gnm_random_graph(n, e, directed=True)
+        while not nx.is_strongly_connected(graph):
+            graph = nx.gnm_random_graph(n, e, directed=True)
+        setAttriubutes(graph)
+        graph = nx.MultiDiGraph(graph)
+        vis.draw(graph)
+        if not gh.isEulerianGraph(graph):
+            gh.makeEulerianDiGraph(graph)
+        if graph != None:
+            break
+    return graph
+
+
 def getRandomGraphWithWattsStrogatzModel(numberOfNodes, numberOfNearestNeighborsInRing, probability):
     while True:
         graph = nx.watts_strogatz_graph(numberOfNodes, numberOfNearestNeighborsInRing, probability)
         setAttriubutes(graph)
+        graph = nx.MultiGraph(graph)
         graph = improveIfNecessaryGraph(graph)
         if graph != None:
             break
@@ -20,6 +36,7 @@ def getRandomGraphWithBarabasiAlbertModel(numberOfNodes, numberOfEdgesToAttach):
     while True:
         graph = nx.barabasi_albert_graph(numberOfNodes, numberOfEdgesToAttach)
         setAttriubutes(graph)
+        graph = nx.MultiGraph(graph)
         graph = improveIfNecessaryGraph(graph)
         if graph != None:
             break
@@ -29,7 +46,7 @@ def getRandomGraphWithBarabasiAlbertModel(numberOfNodes, numberOfEdgesToAttach):
 def improveIfNecessaryGraph(graph):
     if not gh.isEulerianGraph(graph):
         vis.draw(graph)
-        graph = gh.makeEulerianGraph(graph)
+        gh.makeEulerianGraph(graph)
     return graph
 
 

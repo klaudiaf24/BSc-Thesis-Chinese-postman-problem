@@ -1,59 +1,61 @@
 #!/usr/bin/python3
+import random
 
 import matplotlib.pyplot as plt
 import networkx as nx
+from networkx.drawing.nx_agraph import write_dot
 
+def draw(graph, route=[], printFakeEdges=False):
+    weight = []
 
-def draw(graph, route=[], printFakeNodes = False):
-    weight = nx.get_edge_attributes(graph, 'weight')
-    address = nx.get_node_attributes(graph, 'address')
-    streetName = nx.get_edge_attributes(graph, 'streetName')
+    for (u, v, attrib_dict) in list(graph.edges.data()):
+        weight.append(attrib_dict['weight'])
 
     position = nx.get_node_attributes(graph, 'pos')
-    if not position:
-        position = nx.spring_layout(graph, k=0.4, iterations=20, seed=2)
+    address = nx.get_node_attributes(graph, 'address')
 
-    # Color nodes -> Post office in red -> crossing yellow
     if address:
         for idx in graph.nodes:
             graph.nodes[idx]['color'] = 'green' if graph.nodes[idx]['address'] == "" else 'grey'
-            graph.nodes[idx]['size'] = 50 if graph.nodes[idx]['address'] == "" else 100
+            graph.nodes[idx]['size'] = 10 if graph.nodes[idx]['address'] == "" else 100
             if graph.nodes[idx]['isPostOffice']:
                 graph.nodes[idx]['color'] = 'red'
 
         colors = [node[1]['color'] for node in graph.nodes(data=True)]
         size = [node[1]['size'] for node in graph.nodes(data=True)]
-
     else:
         for idx in graph.nodes:
-            graph.nodes[idx]['color'] = 'red' if graph.nodes[idx]['isPostOffice']\
-                                                else 'green' if graph.nodes[idx]['isFakeNode']\
-                                                    else'grey'
-            graph.nodes[idx]['size'] = 40 if graph.nodes[idx]['isFakeNode'] else 200
+            graph.nodes[idx]['color'] = 'red' if graph.nodes[idx]['isPostOffice'] else 'grey'
+            graph.nodes[idx]['size'] = 100
 
         colors = [node[1]['color'] for node in graph.nodes(data=True)]
         size = [node[1]['size'] for node in graph.nodes(data=True)]
 
-    nx.draw_networkx_nodes(graph, position, node_size=size, node_color=colors)
 
+    nx.draw_networkx_nodes(graph, position, node_size=size, node_color=colors)
     if address:
-        nx.draw_networkx_labels(graph, position, labels=address, font_size=6)
+        nx.draw_networkx_labels(graph, position, labels=address, font_size=4)
     else:
         nx.draw_networkx_labels(graph, position, font_size=10)
 
-    if streetName:
-        nx.draw_networkx_edge_labels(
-            graph, position, edge_labels=streetName, font_size=6)
-    elif weight:
-        nx.draw_networkx_edge_labels(
-            graph, position, edge_labels=weight, font_size=6)
 
-    # highlight
-    nx.draw_networkx_edges(graph, position, arrows=True,
-                           width=2.5, min_source_margin=0, edgelist=route, edge_color='red')
+    # additional edges - to make graph eulerian
+    fakeEdges = []
+    for edge in graph.edges(data=True):
+        if edge[2]['isFakeRoute'] == True:
+            fakeEdges.append((edge[0], edge[1], 1))
 
-    # non highlight
-    nx.draw_networkx_edges(graph, position, arrows=True, min_source_margin=0,
-                           edgelist=set(graph.edges) - set(route))
+    if printFakeEdges:
+        nx.draw_networkx_edges(graph, position,
+                               arrows=True, width=3,
+                               edgelist=fakeEdges, edge_color='green',
+                               connectionstyle="arc3,rad=rrr".replace('rrr',
+                                                                      str(0.3 * random.uniform(-1.0, 1.0))))
+
+    # normal edges
+    nx.draw_networkx_edges(graph, position,
+                           arrows=True, width=0.5,
+                           edgelist=set(graph.edges) - set(fakeEdges))
 
     plt.show()
+    # write_dot(graph, 'my_graph.dot')
