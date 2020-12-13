@@ -4,9 +4,6 @@ import Visualization as vis
 import OsmHelper as osmh
 import RandomGraph as rg
 import networkx as nx
-import DepthFirstSearch as dfs
-import ChristofidesAlgorithm as ch
-import HeldKarpAlgorithm as hk
 
 if __name__ == "__main__":
     # graph = osmh.getGraphFromOsm(left=19.92514, bottom=50.07657, right=19.93317, top=50.07974) #krk
