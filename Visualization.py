@@ -17,7 +17,7 @@ def draw(graph, route=[], printFakeEdges=False):
     if address:
         for idx in graph.nodes:
             graph.nodes[idx]['color'] = 'green' if graph.nodes[idx]['address'] == "" else 'grey'
-            graph.nodes[idx]['size'] = 10 if graph.nodes[idx]['address'] == "" else 100
+            graph.nodes[idx]['size'] = 0.1 if graph.nodes[idx]['address'] == "" else 100
             if graph.nodes[idx]['isPostOffice']:
                 graph.nodes[idx]['color'] = 'red'
 
@@ -47,14 +47,19 @@ def draw(graph, route=[], printFakeEdges=False):
 
     if printFakeEdges:
         nx.draw_networkx_edges(graph, position,
-                               arrows=True, width=3,
+                               arrows=True, width=3, arrowsize=5,
                                edgelist=fakeEdges, edge_color='green',
                                connectionstyle="arc3,rad=rrr".replace('rrr',
                                                                       str(0.3 * random.uniform(-1.0, 1.0))))
 
     # normal edges
-    nx.draw_networkx_edges(graph, position,
-                           arrows=True, width=0.5,
+    if address:
+        nx.draw_networkx_edges(graph, position,
+                           arrows=True, width=0.2, arrowsize=3, arrowstyle='->',
+                           edgelist=set(graph.edges) - set(fakeEdges))
+    else:
+        nx.draw_networkx_edges(graph, position,
+                           arrows=True, width=0.5, arrowsize=5,
                            edgelist=set(graph.edges) - set(fakeEdges))
 
     plt.show()

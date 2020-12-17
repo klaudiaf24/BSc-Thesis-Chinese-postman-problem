@@ -1,19 +1,17 @@
 #!/usr/bin/python3
-import Visualization as vis
 
 import random
 import networkx as nx
 import GraphHelper as gh
 
 
-def getRandomDiGraph(n, e):
+def getRandomDiGraph(numberOfNodes, numberOfEdges):
     while True:
-        graph = nx.gnm_random_graph(n, e, directed=True)
+        graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=4, directed=True)
         while not nx.is_strongly_connected(graph):
-            graph = nx.gnm_random_graph(n, e, directed=True)
+            graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=4, directed=True)
         setAttriubutes(graph)
         graph = nx.MultiDiGraph(graph)
-        vis.draw(graph)
         if not gh.isEulerianGraph(graph):
             gh.makeEulerianDiGraph(graph)
         if graph != None:
@@ -45,7 +43,6 @@ def getRandomGraphWithBarabasiAlbertModel(numberOfNodes, numberOfEdgesToAttach):
 
 def improveIfNecessaryGraph(graph):
     if not gh.isEulerianGraph(graph):
-        vis.draw(graph)
         gh.makeEulerianGraph(graph)
     return graph
 
