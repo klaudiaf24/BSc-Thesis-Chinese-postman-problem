@@ -14,65 +14,25 @@ def setParam():
     BarbasiAlbertParam = []
     WattsStrogatzParam = []
 
-    for k in range(10, 500, 10):
-        diGraphParam.append((k, int(k * (k - 1) / 2)))
-        diGraphParam.append((k, int(k * (k - 1) / 4)))
-        diGraphParam.append((k, int(k * (k - 1) / 6)))
+    for k in [10, 50, 100, 500, 1000, 10000]:
+        diGraphParam.append((k, k * 3))
+        BarbasiAlbertParam.append((k, k / 2))
+        WattsStrogatzParam.append((k, (k / 2), 0.2))
 
-        BarbasiAlbertParam.append((k, int(k - 1)))
-        BarbasiAlbertParam.append((k, int(k / 2)))
-        BarbasiAlbertParam.append((k, int(k / 4)))
-        BarbasiAlbertParam.append((k, int(k / 6)))
-
-        WattsStrogatzParam.append((k, int(k / 2), 0.2))
-        WattsStrogatzParam.append((k, int(k / 2), 0.5))
-        WattsStrogatzParam.append((k, int(k / 2), 0.8))
-        WattsStrogatzParam.append((k, int(k / 4), 0.2))
-        WattsStrogatzParam.append((k, int(k / 4), 0.5))
-        WattsStrogatzParam.append((k, int(k / 4), 0.8))
-        WattsStrogatzParam.append((k, int(k / 6), 0.2))
-        WattsStrogatzParam.append((k, int(k / 6), 0.5))
-        WattsStrogatzParam.append((k, int(k / 6), 0.8))
-
-    for k in range(500, 1000, 50):
-        diGraphParam.append((k, int(k * (k - 1) / 2)))
-        diGraphParam.append((k, int(k * (k - 1) / 4)))
-        diGraphParam.append((k, int(k * (k - 1) / 6)))
-
-        BarbasiAlbertParam.append((k, int(k - 1)))
-        BarbasiAlbertParam.append((k, int(k / 2)))
-        BarbasiAlbertParam.append((k, int(k / 4)))
-        BarbasiAlbertParam.append((k, int(k / 6)))
-
-        WattsStrogatzParam.append((k, int(k / 2), 0.2))
-        WattsStrogatzParam.append((k, int(k / 2), 0.5))
-        WattsStrogatzParam.append((k, int(k / 2), 0.8))
-        WattsStrogatzParam.append((k, int(k / 4), 0.2))
-        WattsStrogatzParam.append((k, int(k / 4), 0.5))
-        WattsStrogatzParam.append((k, int(k / 4), 0.8))
-        WattsStrogatzParam.append((k, int(k / 6), 0.2))
-        WattsStrogatzParam.append((k, int(k / 6), 0.5))
-        WattsStrogatzParam.append((k, int(k / 6), 0.8))
-
-    for k in range(1000, 10000, 100):
-        diGraphParam.append((k, int(k * (k - 1) / 2)))
-        diGraphParam.append((k, int(k * (k - 1) / 4)))
-        diGraphParam.append((k, int(k * (k - 1) / 6)))
-
-        BarbasiAlbertParam.append((k, int(k - 1)))
-        BarbasiAlbertParam.append((k, int(k / 2)))
-        BarbasiAlbertParam.append((k, int(k / 4)))
-        BarbasiAlbertParam.append((k, int(k / 6)))
-
-        WattsStrogatzParam.append((k, int(k / 2), 0.2))
-        WattsStrogatzParam.append((k, int(k / 2), 0.5))
-        WattsStrogatzParam.append((k, int(k / 2), 0.8))
-        WattsStrogatzParam.append((k, int(k / 4), 0.2))
-        WattsStrogatzParam.append((k, int(k / 4), 0.5))
-        WattsStrogatzParam.append((k, int(k / 4), 0.8))
-        WattsStrogatzParam.append((k, int(k / 6), 0.2))
-        WattsStrogatzParam.append((k, int(k / 6), 0.5))
-        WattsStrogatzParam.append((k, int(k / 6), 0.8))
+    # for k in range(10, 500, 10):
+    #     diGraphParam.append((k, k*3))
+    #     BarbasiAlbertParam.append((k, int(k - 1)))
+    #     WattsStrogatzParam.append((k, int(k / 2), 0.2))
+    #
+    # for k in range(500, 1000, 50):
+    #     diGraphParam.append((k, int(k * (k - 1) / 2)))
+    #     BarbasiAlbertParam.append((k, int(k - 1)))
+    #     WattsStrogatzParam.append((k, int(k / 2), 0.2))
+    #
+    # for k in range(1000, 10000, 100):
+    #     diGraphParam.append((k, int(k * (k - 1) / 2)))
+    #     BarbasiAlbertParam.append((k, int(k - 1)))
+    #     WattsStrogatzParam.append((k, int(k / 2), 0.2))
 
     return diGraphParam, BarbasiAlbertParam, WattsStrogatzParam
 

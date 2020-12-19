@@ -20,6 +20,9 @@ def makeEulerianDiGraph(graph):
             for rep in range(diff[node]):
                 posNodes.append(node)
 
+    if idOddNumber(len(negNodes) - len(posNodes)):
+        return None
+
     listWithAllPerm = list(
         list(zip(r, p)) for (r, p) in zip(itertools.repeat(posNodes), itertools.permutations(negNodes)))
     minPath = getOptimalAdditionalPaths(graph, listWithAllPerm)

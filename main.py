@@ -9,6 +9,7 @@ import HierholzerAlgorithm as ha
 import FleuryAlgorithm as fa
 import GraphHelper
 
+
 def showPath(path, graph):
     edgesToHighlight = []
     visitedEdge = dict()
@@ -24,7 +25,7 @@ def showPath(path, graph):
         visitedEdge[((path[id - 1], path[id], level))] = True
 
         edgesToHighlight.append((path[id - 1], path[id], level))
-        vis.draw(graph, printFakeEdges=False, route=edgesToHighlight)
+        vis.draw(graph, edgesToHighlight, False)
 
 
 if __name__ == "__main__":
@@ -41,21 +42,25 @@ if __name__ == "__main__":
     # graph = osmh.getGraphFromOsm(left=19.91389, bottom=50.06919, right=19.91725, top=50.07131)  #
     # graph = osmh.getGraphFromOsm(left=19.92046, bottom=50.07634, right=19.92297, top=50.07858)  #
 
-
     # graph = osmh.getGraphFromOsm(left=19.92397, bottom=50.07764, right=19.92595, top=50.07924)  #
 
     # graph = rg.getRandomGraphWithBarabasiAlbertModel(8, 4)
     # graph = rg.getRandomGraphWithWattsStrogatzModel(7, 4, 0.2)
-    graph = rg.getRandomDiGraph(5, 10)
+    # listt = []
+    # for k in range(10, 500, 20):
+    #     listt.append((k, k * 10))
+
+    # for l in listt:
+    graph = rg.getRandomDiGraph(50, 1000)
     print(nx.is_eulerian(graph))
 
     vis.draw(graph, printFakeEdges=True)
 
     # path = fa.FleuryAlgorithm(graph)
-    path2 = ha.HierholzerAlgorithm(graph, True, startNode)
-    #
-    # # print(path)
-    print(path2)
-    #
-    # # showPath(path, graph)
-    showPath(path2, graph)
+    # path2 = ha.HierholzerAlgorithm(graph, True, startNode)
+    # #
+    # # # print(path)
+    # print(path2)
+    # #
+    # # # showPath(path, graph)
+    # showPath(path2, graph)

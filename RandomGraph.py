@@ -7,9 +7,10 @@ import GraphHelper as gh
 
 def getRandomDiGraph(numberOfNodes, numberOfEdges):
     while True:
-        graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=4, directed=True)
+        graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=1, directed=True)
         while not nx.is_strongly_connected(graph):
-            graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=4, directed=True)
+            seed = random.randint(1, 6)
+            graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=seed, directed=True)
         setAttriubutes(graph)
         graph = nx.MultiDiGraph(graph)
         if not gh.isEulerianGraph(graph):
