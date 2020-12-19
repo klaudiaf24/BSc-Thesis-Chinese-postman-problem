@@ -51,7 +51,7 @@ if __name__ == "__main__":
     #     listt.append((k, k * 10))
 
     # for l in listt:
-    graph = rg.getRandomDiGraph(50, 1000)
+    graph = rg.getRandomDiGraph(50, 0.8)
     print(nx.is_eulerian(graph))
 
     vis.draw(graph, printFakeEdges=True)

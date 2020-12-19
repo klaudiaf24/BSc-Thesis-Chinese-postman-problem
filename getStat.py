@@ -14,10 +14,10 @@ def setParam():
     BarbasiAlbertParam = []
     WattsStrogatzParam = []
 
-    for k in [10, 50, 100, 500, 1000, 10000]:
-        diGraphParam.append((k, k * 3))
-        BarbasiAlbertParam.append((k, k / 2))
-        WattsStrogatzParam.append((k, (k / 2), 0.2))
+    for k in [10, 50, 100, 500, 1000]:
+        diGraphParam.append((k, 0.8))
+        BarbasiAlbertParam.append((k, int(k / 2)))
+        WattsStrogatzParam.append((k, int(k / 2), 0.8))
 
     # for k in range(10, 500, 10):
     #     diGraphParam.append((k, k*3))
@@ -38,21 +38,32 @@ def setParam():
 
 
 def openFile():
-    randomDiGraph_FleuryAlgo_File = open('stat/randomDiGraph_FleuryAlgo_File.txt', "a")
+    randomDiGraph_HierholzerAlgo_File = open('stat/randomDiGraph_HierholzerAlgo_File.txt', "a")
+    randomGraphWithBarabasiAlbertModel_HierholzerAlgo_File = open(
+        'stat/randomGraphWithBarabasiAlbertModel_HierholzerAlgo_File.txt', "a")
+    randomGraphWithWattsStrogatzModel_HierholzerAlgo_File = open(
+        'stat/randomGraphWithWattsStrogatzModel_HierholzerAlgo_File.txt', "a")
+    
     randomGraphWithBarabasiAlbertModel_FleuryAlgo_File = open(
         'stat/randomGraphWithBarabasiAlbertModel_FleuryAlgo_File.txt', "a")
     randomGraphWithWattsStrogatzModel_FleuryAlgo_File = open(
         'stat/randomGraphWithWattsStrogatzModel_FleuryAlgo_File.txt', "a")
-    return randomDiGraph_FleuryAlgo_File, randomGraphWithBarabasiAlbertModel_FleuryAlgo_File, randomGraphWithWattsStrogatzModel_FleuryAlgo_File
+
+    return randomDiGraph_HierholzerAlgo_File, randomGraphWithBarabasiAlbertModel_HierholzerAlgo_File, randomGraphWithWattsStrogatzModel_HierholzerAlgo_File, \
+     randomGraphWithBarabasiAlbertModel_FleuryAlgo_File, randomGraphWithWattsStrogatzModel_FleuryAlgo_File
 
 
-def closeFile(f1, f2, f3):
+def closeFile(f1, f2, f3, f4, f5):
     f1.close()
     f2.close()
     f3.close()
+    f4.close()
+    f5.close()
 
 
-randomDiGraph_FleuryAlgo_File, \
+randomDiGraph_HierholzerAlgo_File, \
+randomGraphWithBarabasiAlbertModel_HierholzerAlgo_File,\
+randomGraphWithWattsStrogatzModel_HierholzerAlgo_File,\
 randomGraphWithBarabasiAlbertModel_FleuryAlgo_File, \
 randomGraphWithWattsStrogatzModel_FleuryAlgo_File = openFile()
 
@@ -65,39 +76,73 @@ randomGraphWithWattsStrogatzModel_Param = setParam()
 for param in randomDiGraph_Param:
     allTimes = 0
     for _ in range(numberOfSamples):
+        print("digraph {0}, {1}".format(str(param[0]), str(param[1])))
+        graph = RandomGraph.getRandomDiGraph(param[0], param[1])
+        print("DONE")
+
         start = time.time()
-        FleuryAlgorithm.FleuryAlgorithm(RandomGraph.getRandomDiGraph(param[0], param[1]), 0)
+        HierholzerAlgorithm.HierholzerAlgorithm(graph, True, 0)
         end = time.time()
+        
         allTimes += end - start
-    randomDiGraph_FleuryAlgo_File.write(
-        "{0:>7} {0:>7} {0:>50}".format(param[0], param[1], allTimes / numberOfSamples))
+    
+    randomDiGraph_HierholzerAlgo_File.write(
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], param[1], allTimes / numberOfSamples))
 
 ###############################################################
 
 for param in randomGraphWithBarabasiAlbertModel_Param:
-    allTimes = 0
+    allTimesF = 0
+    allTimesH = 0
+
     for _ in range(numberOfSamples):
-        start = time.time()
-        FleuryAlgorithm.FleuryAlgorithm(RandomGraph.getRandomGraphWithBarabasiAlbertModel(param[0], param[1]))
-        end = time.time()
-        allTimes += end - start
+        print("Barabasi {0}, {1}".format(str(param[0]), str(param[1])))
+        grpah = RandomGraph.getRandomGraphWithBarabasiAlbertModel(param[0], param[1])
+        print("DONE")
+
+        startF = time.time()
+        FleuryAlgorithm.FleuryAlgorithm(graph, False, 0)
+        endF = time.time()
+
+        startH = time.time()
+        HierholzerAlgorithm.HierholzerAlgorithm(graph, False, 0)
+        endH = time.time()
+
+        allTimesF += endF - startF
+        allTimesH += endH - startH
+
     randomGraphWithBarabasiAlbertModel_FleuryAlgo_File.write(
-        "{0:>7} {0:>7} {0:>50}".format(param[0], param[1], allTimes / numberOfSamples))
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], param[1], allTimesF / numberOfSamples))
+
+    randomGraphWithBarabasiAlbertModel_HierholzerAlgo_File.write(
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], param[1], allTimesH / numberOfSamples))
 
 ###############################################################
 
 for param in randomGraphWithWattsStrogatzModel_Param:
     allTimes = 0
     for _ in range(numberOfSamples):
-        start = time.time()
-        FleuryAlgorithm.FleuryAlgorithm(RandomGraph.getRandomGraphWithWattsStrogatzModel(param[0], param[1], param[3]),
-                                        0)
-        end = time.time()
-        allTimes += end - start
+        print("Watts {0}, {1}".format(str(param[0]), str(param[1])))
+        graph = RandomGraph.getRandomGraphWithWattsStrogatzModel(param[0], param[1], param[2])
+        print("DONE")
+
+        startF = time.time()
+        FleuryAlgorithm.FleuryAlgorithm(graph, False, 0)
+        endF = time.time()
+
+        startH = time.time()
+        HierholzerAlgorithm.HierholzerAlgorithm(graph, False, 0)
+        endH = time.time()
+
+        allTimesF += endF - startF
+        allTimesH += endH - startH
+
     randomGraphWithWattsStrogatzModel_FleuryAlgo_File.write(
-        "{0:>7} {0:>7} {0:>4} {0:>50}".format(param[0], param[1], param[3], allTimes / numberOfSamples))
+        "{0:>7} {1:>7} {2:>4} {3:>50}\n".format(param[0], param[1], param[2], allTimesF / numberOfSamples))
+
+    randomGraphWithWattsStrogatzModel_HierholzerAlgo_File.write(
+        "{0:>7} {1:>7} {2:>4} {3:>50}\n".format(param[0], param[1], param[2], allTimesH / numberOfSamples))
 
 ###############################################################
 
-closeFile(randomDiGraph_FleuryAlgo_File, randomGraphWithBarabasiAlbertModel_FleuryAlgo_File,
-          randomGraphWithWattsStrogatzModel_FleuryAlgo_File)
+closeFile(randomDiGraph_HierholzerAlgo_File, randomGraphWithWattsStrogatzModel_HierholzerAlgo_File, randomGraphWithBarabasiAlbertModel_HierholzerAlgo_File, randomGraphWithBarabasiAlbertModel_FleuryAlgo_File, randomGraphWithWattsStrogatzModel_FleuryAlgo_File)

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import itertools
+import random
 import networkx as nx
 
 
@@ -23,9 +23,14 @@ def makeEulerianDiGraph(graph):
     if idOddNumber(len(negNodes) - len(posNodes)):
         return None
 
-    listWithAllPerm = list(
-        list(zip(r, p)) for (r, p) in zip(itertools.repeat(posNodes), itertools.permutations(negNodes)))
-    minPath = getOptimalAdditionalPaths(graph, listWithAllPerm)
+    # listWithAllPerm = list(
+    #     list(zip(r, p)) for (r, p) in zip(itertools.repeat(posNodes), itertools.permutations(negNodes)))
+    listOfRandomParams = list()
+    for _ in range(0, 100):
+        random.shuffle(negNodes)
+        listOfRandomParams.append(list(zip(posNodes, negNodes)))
+
+    minPath = getOptimalAdditionalPaths(graph, listOfRandomParams)
     appendFakeEdges(graph, minPath)
 
 

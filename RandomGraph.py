@@ -5,12 +5,12 @@ import networkx as nx
 import GraphHelper as gh
 
 
-def getRandomDiGraph(numberOfNodes, numberOfEdges):
+def getRandomDiGraph(numberOfNodes, probability):
     while True:
-        graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=1, directed=True)
+        graph = nx.fast_gnp_random_graph(numberOfNodes, probability, seed=1, directed=True)
         while not nx.is_strongly_connected(graph):
-            seed = random.randint(1, 6)
-            graph = nx.gnm_random_graph(numberOfNodes, numberOfEdges, seed=seed, directed=True)
+            seed = random.randint(1, 5)
+            graph = nx.fast_gnp_random_graph(numberOfNodes, probability, seed=seed, directed=True)
         setAttriubutes(graph)
         graph = nx.MultiDiGraph(graph)
         if not gh.isEulerianGraph(graph):
@@ -49,7 +49,7 @@ def improveIfNecessaryGraph(graph):
 
 
 def setAttriubutes(graph):
-    position = nx.spring_layout(graph, k=0.4, iterations=20)#, seed=2)
+    position = nx.spring_layout(graph, k=0.4, iterations=20)
     nx.set_node_attributes(graph, position, 'pos')
     addRandomWeight(graph)
     setPostOfficeOnFirstNode(graph)
