@@ -1,55 +1,43 @@
+from collections import deque
+import copy
+import random
 
-def printCircuit(graph):
-    # adj represents the adjacency list of
-    # the directed graph
-    # edge_count represents the number of edges
-    # emerging from a vertex
-    adj = []
-    edge_count = dict()
 
-    for i in range(len(adj)):
-        # find the count of edges to keep track
-        # of unused edges
-        edge_count[i] = len(adj[i])
+def getOutEdges(graph, node):
+    edges = []
+    for neighbour in list(graph.neighbors(node)):
+        for level in graph[node][neighbour]:
+            edges.append((node, neighbour, level))
+    return edges
 
-    if len(adj) == 0:
-        return  # empty graph
 
-    currPath = []
-    path = []   #final path
+def checkOutDegree(graph, node, isDirected):
+    if isDirected:
+        return graph.out_degree(node)
+    else:
+        return graph.degree(node)
 
-    # start from any vertex
-    currPath.append(0)
-    currNode = 0  # Current vertex
 
-    while len(currPath):
+def HierholzerAlgorithm(graph, isDirected, startNode):
+    graphCopy = copy.deepcopy(graph)
+    EulerCycle = list()
+    stackOfNodes = deque()
 
-        # If there's remaining edge
-        if edge_count[curr_v]:
+    node = startNode
+    EulerCycle.append(node)
 
-            # Push the vertex
-            curr_path.append(curr_v)
-
-            # Find the next vertex using an edge
-            next_v = adj[curr_v][-1]
-
-            # and remove that edge
-            edge_count[curr_v] -= 1
-            adj[curr_v].pop()
-
-            # Move to next vertex
-            curr_v = next_v
-
-            # back-track to find remaining circuit
+    while True:
+        if checkOutDegree(graphCopy, node, isDirected):
+            edge = random.choice(getOutEdges(graphCopy, node))
+            stackOfNodes.append(node)
+            graphCopy.remove_edge(edge[0], edge[1], key=edge[2])
+            node = edge[1]
         else:
-            circuit.append(curr_v)
+            node = stackOfNodes.pop()
+            EulerCycle.append(node)
 
-            # Back-tracking
-            curr_v = curr_path[-1]
-            curr_path.pop()
+        if not stackOfNodes:
+            break
 
-            # we've got the circuit, now print it in reverse
-    for i in range(len(circuit) - 1, -1, -1):
-        print(circuit[i], end="")
-        if i:
-            print(" -> ", end="")
+    EulerCycle.reverse()
+    return EulerCycle

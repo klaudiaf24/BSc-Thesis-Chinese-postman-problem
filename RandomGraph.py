@@ -48,11 +48,10 @@ def improveIfNecessaryGraph(graph):
 
 
 def setAttriubutes(graph):
-    position = nx.spring_layout(graph, k=0.4, iterations=20, seed=2)
+    position = nx.spring_layout(graph, k=0.4, iterations=20)#, seed=2)
     nx.set_node_attributes(graph, position, 'pos')
     addRandomWeight(graph)
     setPostOfficeOnFirstNode(graph)
-    nx.set_node_attributes(graph, False, 'isFakeNode')
     nx.set_edge_attributes(graph, False, 'isFakeRoute')
 
 

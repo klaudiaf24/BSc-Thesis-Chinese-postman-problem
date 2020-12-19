@@ -1,73 +1,64 @@
-import networkx as nx
+import GraphHelper
 
 
-def DFSCount(adjList, v, visited):
-    count = 1
+def DFS(adjList, v, visited):
+    cnt = 1
     visited[v] = True
+
     for i in adjList[v]:
-        if visited[i] == False:
-            count = count + DFSCount(adjList, i, visited)
-    return count
+        if visited[i]:
+            cnt = cnt + DFS(adjList, i, visited)
+    return cnt
 
 
-def isValidNextEdge(adjList, u, v):
+def isBridge(adjList, u, v, isDirected):
     if len(adjList[u]) == 1:
         return True
     else:
         visited = [False] * len(adjList)
-        count1 = DFSCount(adjList, u, visited)
+        cntBeforeRestoreEdge = DFS(adjList, u, visited)
 
-        isBothDirection = removeEdge(adjList, u, v)
+        removeEdge(adjList, u, v, isDirected)
         visited = [False] * len(adjList)
-        count2 = DFSCount(adjList, u, visited)
+        cntAfterRestoreEdge = DFS(adjList, u, visited)
 
-        addEdge(adjList, u, v, isBothDirection)
+        # restore edge
+        addEdge(adjList, u, v, isDirected)
 
-        return False if count1 > count2 else True
-
-
-def getAdjList(graph):
-    adjList = dict()
-    for node in graph.nodes():
-        neighbours = []
-        for neighbour in graph.adj[node]:
-            for _ in graph.adj[node][neighbour]:
-                neighbours.append(neighbour)
-        adjList[node] = neighbours
-    return adjList
+        return cntBeforeRestoreEdge < cntAfterRestoreEdge
 
 
-def removeEdge(adjList, u, v):
-    cnt = 0
-    for neighbour in adjList[u]:
-        if neighbour == v:
-            adjList[u].remove(neighbour)
-            cnt += 1
-            break
-    for neighbour in adjList[v]:
-        if neighbour == u:
-            adjList[v].remove(neighbour)
-            cnt += 1
-            break
-    return cnt == 2
-
-
-def addEdge(adjList, u, v, isBothDirection):
+def addEdge(adjList, u, v, isDirected):
     adjList[u].append(v)
-    if isBothDirection:
+    if isDirected:
         adjList[v].append(u)
 
 
-def FleuryAlgorithm(graph, n):
-    adjList = getAdjList(graph)
-    path = []
-    FleuryAlgorithmCD(adjList, n, path)
-    return path
+def removeEdge(adjList, u, v, isDirected):
+    for neighbour in adjList[u]:
+        if neighbour == v:
+            adjList[u].remove(neighbour)
+            break
 
-def FleuryAlgorithmCD(adjList, n, path):
-    path.append(n)
+    if not isDirected:
+        for neighbour in adjList[v]:
+            if neighbour == u:
+                adjList[v].remove(neighbour)
+                break
+
+
+def FleuryAlgorithm(graph, isDirected, startNode):
+    adjList = GraphHelper.getAdjList(graph)
+    EulerCycle = list()
+
+    findNextNode(adjList, startNode, EulerCycle, isDirected)
+    return EulerCycle
+
+
+def findNextNode(adjList, n, EulerCycle, isDirected):
+    EulerCycle.append(n)
+
     for v in adjList[n]:
-        if isValidNextEdge(adjList, n, v):
-            # print("%d-%d " % (n, v)),
-            removeEdge(adjList, n, v)
-            FleuryAlgorithmCD(adjList, v,path)
+        if isBridge(adjList, n, v, isDirected):
+            removeEdge(adjList, n, v, isDirected)
+            findNextNode(adjList, v, EulerCycle, isDirected)

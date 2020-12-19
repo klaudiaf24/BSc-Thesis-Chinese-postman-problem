@@ -7,8 +7,28 @@ import networkx as nx
 
 import HierholzerAlgorithm as ha
 import FleuryAlgorithm as fa
+import GraphHelper
+
+def showPath(path, graph):
+    edgesToHighlight = []
+    visitedEdge = dict()
+    for node in graph.nodes():
+        for neighbour in list(graph.neighbors(node)):
+            for level in list(graph[node][neighbour]):
+                visitedEdge[(node, neighbour, level)] = False
+
+    for id in range(1, len(path)):
+        level = 0
+        while visitedEdge[((path[id - 1], path[id], level))]:
+            level += 1
+        visitedEdge[((path[id - 1], path[id], level))] = True
+
+        edgesToHighlight.append((path[id - 1], path[id], level))
+        vis.draw(graph, printFakeEdges=False, route=edgesToHighlight)
+
 
 if __name__ == "__main__":
+    startNode = 0
     # graph = osmh.getGraphFromOsm(left=19.92514, bottom=50.07657, right=19.93317, top=50.07974) #krk
     # graph = osmh.getGraphFromOsm(left=19.92435, bottom=50.07992, right=19.92837, top=50.08150) #poznanska
     # graph = osmh.getGraphFromOsm(left=22.08252, bottom=49.56268, right=22.09859, top=49.56908) #osiedlowa
@@ -24,10 +44,18 @@ if __name__ == "__main__":
 
     # graph = osmh.getGraphFromOsm(left=19.92397, bottom=50.07764, right=19.92595, top=50.07924)  #
 
-    # graph = rg.getRandomGraphWithBarabasiAlbertModel(100, 4500)
-    graph = rg.getRandomGraphWithWattsStrogatzModel(7, 4, 4444)
-    # graph = rg.getRandomDiGraph(10, 30)
+    # graph = rg.getRandomGraphWithBarabasiAlbertModel(8, 4)
+    # graph = rg.getRandomGraphWithWattsStrogatzModel(7, 4, 0.2)
+    graph = rg.getRandomDiGraph(5, 10)
     print(nx.is_eulerian(graph))
+
     vis.draw(graph, printFakeEdges=True)
-    # ha.printCircuit(graph)
-    # fa.FleuryAlgorithm(graph, 0)
+
+    # path = fa.FleuryAlgorithm(graph)
+    path2 = ha.HierholzerAlgorithm(graph, True, startNode)
+    #
+    # # print(path)
+    print(path2)
+    #
+    # # showPath(path, graph)
+    showPath(path2, graph)

@@ -6,7 +6,7 @@ import networkx as nx
 
 def makeEulerianDiGraph(graph):
     diff = [None] * len(
-        graph.nodes)  # list with nodes diffrence predecessors nodes - successors nodes / input nodes - oputput nodes
+        graph.nodes)  # list with nodes difference : predecessors nodes - successors nodes / input nodes - output nodes
     for node in graph.nodes(data=True):
         diff[node[0]] = len(graph.pred[node[0]]) - len(graph.succ[node[0]])
 
@@ -23,7 +23,7 @@ def makeEulerianDiGraph(graph):
     listWithAllPerm = list(
         list(zip(r, p)) for (r, p) in zip(itertools.repeat(posNodes), itertools.permutations(negNodes)))
     minPath = getOptimalAdditionalPaths(graph, listWithAllPerm)
-    appendFakeEgdes(graph, minPath)
+    appendFakeEdges(graph, minPath)
 
 
 def makeEulerianGraph(graph):
@@ -37,7 +37,7 @@ def makeEulerianGraph(graph):
 
     listWithAllPerm = allPairCombination(listOfOddDegreeNodes)
     minPath = getOptimalAdditionalPaths(graph, listWithAllPerm)
-    appendFakeEgdes(graph, minPath)
+    appendFakeEdges(graph, minPath)
 
 
 def allPairCombination(listOfNodes):
@@ -52,7 +52,7 @@ def allPairCombination(listOfNodes):
                 yield [pair] + rest
 
 
-def appendFakeEgdes(graph, minPath):
+def appendFakeEdges(graph, minPath):
     for pair in minPath:
         path = nx.shortest_path(graph, pair[0], pair[1], weight='weight')
         for idx in range(1, len(path)):
@@ -64,13 +64,13 @@ def appendFakeEgdes(graph, minPath):
 def getOptimalAdditionalPaths(graph, listWithAllPerm):
     minDist = float('inf')
     minPath = []
-    for list in listWithAllPerm:
+    for currentList in listWithAllPerm:
         dist = 0
-        for pair in list:
+        for pair in currentList:
             dist += nx.shortest_path_length(graph, source=pair[0], target=pair[1], weight='weight')
         if dist < minDist:
             minDist = dist
-            minPath = list
+            minPath = currentList
     return minPath
 
 
@@ -80,3 +80,14 @@ def idOddNumber(number):
 
 def isEulerianGraph(graph):
     return nx.is_eulerian(graph)
+
+
+def getAdjList(graph):
+    adjList = dict()
+    for node in graph.nodes():
+        neighbours = []
+        for neighbour in graph.adj[node]:
+            for _ in graph.adj[node][neighbour]:
+                neighbours.append(neighbour)
+        adjList[node] = neighbours
+    return adjList
