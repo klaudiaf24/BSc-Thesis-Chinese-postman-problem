@@ -54,8 +54,8 @@ class OsmGraph:
     def setScale(self):
         global scaleX
         global scaleY
-        scaleX = abs(float(self.osm.xmin) - float(self.osm.xmax)) * 9000
-        scaleY = abs(float(self.osm.ymin) - float(self.osm.ymax)) * 10000
+        scaleX = abs(float(self.osm.xmin) - float(self.osm.xmax)) * 120000
+        scaleY = abs(float(self.osm.ymin) - float(self.osm.ymax)) * 160000
 
     def removeUnusedStreetNodes(self):
         nodesToRemove = []
@@ -228,26 +228,38 @@ class OsmGraph:
     def setPostOffice(self):
         isPostOffice = False
         for building in self.getBuildingList():
-            if 'amenity' in building.tags and building.tags['amenity'] == 'post_office':
-                streetName = self.getStreetName(building)
-                self.addNode(
-                    building.nds[0], building.tags['addr:housenumber'], streetName, True)
+            if 'amenity' in building[0].tags and building[0].tags['amenity'] == 'post_office':
+                streetName = self.getStreetName(building[0])
+                if building[1]:
+                    self.addNode(
+                        building[0].nds[0], building[0].tags['addr:housenumber'], streetName, True)
+                else:
+                    self.addNode(
+                        building[0].id, building[0].tags['addr:housenumber'], streetName, True)
                 isPostOffice = True
                 break
 
         # if post office doesnt exist in map, set random building as a post office
         if not isPostOffice:
             building = random.choice(self.getBuildingList())
-            streetName = self.getStreetName(building)
-            self.addNode(
-                building.nds[0], building.tags['addr:housenumber'], streetName, True)
+            streetName = self.getStreetName(building[0])
+            if building[1]:
+                self.addNode(
+                    building[0].nds[0], building[0].tags['addr:housenumber'], streetName, True)
+            else:
+                self.addNode(
+                    building[0].id, building[0].tags['addr:housenumber'], streetName, True)
 
     def setBuildings(self):
         for building in self.getBuildingList():
-            if building.nds[0] != self.graph.nodes[0]['osmId']:
-                streetName = self.getStreetName(building)
+            if building[1] == True and building[0].nds[0] != self.graph.nodes[0]['osmId']:
+                streetName = self.getStreetName(building[0])
                 self.addNode(
-                    building.nds[0], building.tags['addr:housenumber'], streetName, False)
+                    building[0].nds[0], building[0].tags['addr:housenumber'], streetName, False)
+            elif building[1] == False and building[0].id != self.graph.nodes[0]['osmId']:
+                streetName = self.getStreetName(building[0])
+                self.addNode(
+                    building[0].id, building[0].tags['addr:housenumber'], streetName, False)
 
     def getStreetName(self, building):
         if 'addr:street' not in building.tags:
@@ -319,7 +331,14 @@ class OsmGraph:
                     and 'addr:housenumber' in elem.tags \
                     and self.isCorrectNode(elem.nds[0]) \
                     and self.isExistingStreet(elem.tags['addr:street']):
-                buildings.append(elem)
+                buildings.append((elem, True))
+
+        for elem in self.osm.osmNodes:
+            if 'addr:street' in elem.tags \
+                    and 'addr:housenumber' in elem.tags \
+                    and self.isCorrectNode(elem.id) \
+                    and self.isExistingStreet(elem.tags['addr:street']):
+                buildings.append((elem, False))
         return buildings
 
     def isExistingStreet(self, streetName):

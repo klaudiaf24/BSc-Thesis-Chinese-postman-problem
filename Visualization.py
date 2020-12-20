@@ -40,7 +40,7 @@ def drawNodesAndLabels(address, graph, position):
 def drawRegularEdges(isRealGraph, fakeEdges, graph, position, eulerCycle):
     if isRealGraph:
         nx.draw_networkx_edges(graph, position,
-                               arrows=True, width=0.2, arrowsize=3, arrowstyle='->',
+                               arrows=True, width=0.3, arrowsize=8, arrowstyle='->',
                                edgelist=set(graph.edges) - set(fakeEdges))
     else:
         nx.draw_networkx_edges(graph, position,

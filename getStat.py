@@ -15,9 +15,9 @@ def setParam():
     WattsStrogatzParam = []
 
     for k in [10, 50, 100, 500, 1000]:
-        diGraphParam.append((k, 0.8))
+        diGraphParam.append((k, 0.6))
         BarbasiAlbertParam.append((k, int(k / 2)))
-        WattsStrogatzParam.append((k, int(k / 2), 0.8))
+        WattsStrogatzParam.append((k, int(k / 2), 0.6))
 
     # for k in range(10, 500, 10):
     #     diGraphParam.append((k, k*3))
@@ -75,9 +75,11 @@ randomGraphWithWattsStrogatzModel_Param = setParam()
 
 for param in randomDiGraph_Param:
     allTimes = 0
+    edges = 0
     for _ in range(numberOfSamples):
         print("digraph {0}, {1}".format(str(param[0]), str(param[1])))
         graph = RandomGraph.getRandomDiGraph(param[0], param[1])
+        edges += len(graph.edges)
         print("DONE")
 
         start = time.time()
@@ -87,17 +89,19 @@ for param in randomDiGraph_Param:
         allTimes += end - start
     
     randomDiGraph_HierholzerAlgo_File.write(
-        "{0:>7} {1:>7} {2:>50}\n".format(param[0], param[1], allTimes / numberOfSamples))
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], edges / numberOfSamples, allTimes / numberOfSamples))
 
 ###############################################################
 
 for param in randomGraphWithBarabasiAlbertModel_Param:
     allTimesF = 0
     allTimesH = 0
+    edges = 0
 
     for _ in range(numberOfSamples):
         print("Barabasi {0}, {1}".format(str(param[0]), str(param[1])))
-        grpah = RandomGraph.getRandomGraphWithBarabasiAlbertModel(param[0], param[1])
+        graph = RandomGraph.getRandomGraphWithBarabasiAlbertModel(param[0], param[1])
+        edges += len(graph.edges)
         print("DONE")
 
         startF = time.time()
@@ -112,18 +116,22 @@ for param in randomGraphWithBarabasiAlbertModel_Param:
         allTimesH += endH - startH
 
     randomGraphWithBarabasiAlbertModel_FleuryAlgo_File.write(
-        "{0:>7} {1:>7} {2:>50}\n".format(param[0], param[1], allTimesF / numberOfSamples))
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], edges / numberOfSamples, allTimesF / numberOfSamples))
 
     randomGraphWithBarabasiAlbertModel_HierholzerAlgo_File.write(
-        "{0:>7} {1:>7} {2:>50}\n".format(param[0], param[1], allTimesH / numberOfSamples))
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], edges / numberOfSamples, allTimesH / numberOfSamples))
 
 ###############################################################
 
 for param in randomGraphWithWattsStrogatzModel_Param:
-    allTimes = 0
+    allTimesF = 0
+    allTimesH = 0
+    edges = 0
+
     for _ in range(numberOfSamples):
         print("Watts {0}, {1}".format(str(param[0]), str(param[1])))
         graph = RandomGraph.getRandomGraphWithWattsStrogatzModel(param[0], param[1], param[2])
+        edges += len(graph.edges)
         print("DONE")
 
         startF = time.time()
@@ -138,10 +146,10 @@ for param in randomGraphWithWattsStrogatzModel_Param:
         allTimesH += endH - startH
 
     randomGraphWithWattsStrogatzModel_FleuryAlgo_File.write(
-        "{0:>7} {1:>7} {2:>4} {3:>50}\n".format(param[0], param[1], param[2], allTimesF / numberOfSamples))
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], edges / numberOfSamples, allTimesF / numberOfSamples))
 
     randomGraphWithWattsStrogatzModel_HierholzerAlgo_File.write(
-        "{0:>7} {1:>7} {2:>4} {3:>50}\n".format(param[0], param[1], param[2], allTimesH / numberOfSamples))
+        "{0:>7} {1:>7} {2:>50}\n".format(param[0], edges / numberOfSamples, allTimesH / numberOfSamples))
 
 ###############################################################
 

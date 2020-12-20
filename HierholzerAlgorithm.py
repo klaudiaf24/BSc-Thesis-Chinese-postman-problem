@@ -1,25 +1,22 @@
 from collections import deque
-import copy
-import random
+import GraphHelper
+
+def getNextOutEdge(adjList, node):
+    return adjList[node][0]
 
 
-def getOutEdges(graph, node):
-    edges = []
-    for neighbour in list(graph.neighbors(node)):
-        for level in graph[node][neighbour]:
-            edges.append((node, neighbour, level))
-    return edges
+def checkOutDegree(adjList, node):
+    return len(adjList[node])
 
 
-def checkOutDegree(graph, node, isDirected):
-    if isDirected:
-        return graph.out_degree(node)
-    else:
-        return graph.degree(node)
+def removeEdge(adjList, u, v, isDirected):
+    adjList[u].remove(v)
+    if not isDirected:
+        adjList[v].remove(u)
 
 
 def HierholzerAlgorithm(graph, isDirected, startNode):
-    graphCopy = copy.deepcopy(graph)
+    adjList = GraphHelper.getAdjList(graph)
     EulerCycle = list()
     stackOfNodes = deque()
 
@@ -27,11 +24,11 @@ def HierholzerAlgorithm(graph, isDirected, startNode):
     EulerCycle.append(node)
 
     while True:
-        if checkOutDegree(graphCopy, node, isDirected):
-            edge = random.choice(getOutEdges(graphCopy, node))
+        if checkOutDegree(adjList, node):
+            v = getNextOutEdge(adjList, node)
             stackOfNodes.append(node)
-            graphCopy.remove_edge(edge[0], edge[1], key=edge[2])
-            node = edge[1]
+            removeEdge(adjList,node, v, isDirected)
+            node = v
         else:
             node = stackOfNodes.pop()
             EulerCycle.append(node)

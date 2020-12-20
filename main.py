@@ -8,7 +8,7 @@ import networkx as nx
 import HierholzerAlgorithm as ha
 import FleuryAlgorithm as fa
 import GraphHelper
-
+import time
 
 def showPath(path, graph):
     edgesToHighlight = []
@@ -51,14 +51,17 @@ if __name__ == "__main__":
     #     listt.append((k, k * 10))
 
     # for l in listt:
-    graph = rg.getRandomDiGraph(50, 0.8)
+    # graph = rg.getRandomDiGraph(50, 0.8)
+
+    graph = rg.getRandomGraphWithWattsStrogatzModel(1000, 50, 0.6)
+
     print(nx.is_eulerian(graph))
 
-    vis.draw(graph, printFakeEdges=True)
-
+    # vis.draw(graph, printFakeEdges=True)
     # path = fa.FleuryAlgorithm(graph)
-    # path2 = ha.HierholzerAlgorithm(graph, True, startNode)
-    # #
+    start = time.time()
+    path2 = ha.HierholzerAlgorithm(graph, False, startNode)
+    print(time.time() - start)
     # # # print(path)
     # print(path2)
     # #

@@ -25,8 +25,9 @@ def makeEulerianDiGraph(graph):
 
     # listWithAllPerm = list(
     #     list(zip(r, p)) for (r, p) in zip(itertools.repeat(posNodes), itertools.permutations(negNodes)))
+    
     listOfRandomParams = list()
-    for _ in range(0, 100):
+    for _ in range(0, 10):
         random.shuffle(negNodes)
         listOfRandomParams.append(list(zip(posNodes, negNodes)))
 
@@ -43,10 +44,15 @@ def makeEulerianGraph(graph):
     if idOddNumber(len(listOfOddDegreeNodes)):
         return None
 
-    listWithAllPerm = allPairCombination(listOfOddDegreeNodes)
-    minPath = getOptimalAdditionalPaths(graph, listWithAllPerm)
+    # listWithAllPerm = allPairCombination(listOfOddDegreeNodes)
+    listOfOddDegreeNodes1 = listOfOddDegreeNodes[:len(listOfOddDegreeNodes) // 2]
+    listOfOddDegreeNodes2 = listOfOddDegreeNodes[len(listOfOddDegreeNodes) // 2:]
+    listOfRandomParams = list()
+    for _ in range(0, 10):
+        random.shuffle(listOfOddDegreeNodes2)
+        listOfRandomParams.append(list(zip(listOfOddDegreeNodes1, listOfOddDegreeNodes2)))
+    minPath = getOptimalAdditionalPaths(graph, listOfRandomParams)
     appendFakeEdges(graph, minPath)
-
 
 def allPairCombination(listOfNodes):
     if len(listOfNodes) < 2:
@@ -73,9 +79,10 @@ def getOptimalAdditionalPaths(graph, listWithAllPerm):
     minDist = float('inf')
     minPath = []
     for currentList in listWithAllPerm:
+
         dist = 0
         for pair in currentList:
-            dist += nx.shortest_path_length(graph, source=pair[0], target=pair[1], weight='weight')
+            dist += nx.shortest_path_length(graph, source=pair[0], target=pair[1], weight='weigth')
         if dist < minDist:
             minDist = dist
             minPath = currentList
