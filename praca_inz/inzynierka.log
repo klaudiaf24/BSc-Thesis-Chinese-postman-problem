@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.16)  20 DEC 2020 19:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.16)  26 DEC 2020 02:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -23,6 +23,8 @@ File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
 )
+\c@theorem=\count175
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks14
@@ -67,6 +69,59 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
+
+! LaTeX Error: Option clash for package inputenc.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.9 \usepackage
+               {subfig}
+The package inputenc has already been loaded with options:
+  [utf8]
+There has now been an attempt to load it with options
+  [cp1250]
+Adding the global options:
+  utf8,cp1250
+to your \documentclass declaration may fix this.
+Try typing  <return>  to proceed.
+
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen137
+\captionmargin@=\dimen138
+\captionwidth=\dimen139
+\caption@tempdima=\dimen140
+\caption@indent=\dimen141
+\caption@parindent=\dimen142
+\caption@hangindent=\dimen143
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count176
+\c@continuedfloat=\count177
+)
+\c@KVtest=\count178
+\sf@farskip=\skip49
+\sf@captopadj=\dimen144
+\sf@capskip=\skip50
+\sf@nearskip=\skip51
+\c@subfigure=\count179
+\c@subfigure@save=\count180
+\c@lofdepth=\count181
+\c@subtable=\count182
+\c@subtable@save=\count183
+\c@lotdepth=\count184
+\sf@top=\skip52
+\sf@bottom=\skip53
+)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -76,59 +131,97 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2019/11/07 v1.0c TeX engine tests
 ))
-\Gm@cnth=\count175
-\Gm@cntv=\count176
-\c@Gm@tempcnt=\count177
-\Gm@bindingoffset=\dimen137
-\Gm@wd@mp=\dimen138
-\Gm@odd@mp=\dimen139
-\Gm@even@mp=\dimen140
-\Gm@layoutwidth=\dimen141
-\Gm@layoutheight=\dimen142
-\Gm@layouthoffset=\dimen143
-\Gm@layoutvoffset=\dimen144
+\Gm@cnth=\count185
+\Gm@cntv=\count186
+\c@Gm@tempcnt=\count187
+\Gm@bindingoffset=\dimen145
+\Gm@wd@mp=\dimen146
+\Gm@odd@mp=\dimen147
+\Gm@even@mp=\dimen148
+\Gm@layoutwidth=\dimen149
+\Gm@layoutheight=\dimen150
+\Gm@layouthoffset=\dimen151
+\Gm@layoutvoffset=\dimen152
 \Gm@dimlist=\toks17
 )
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count188
+\lst@gtempboxa=\box45
+\lst@token=\toks18
+\lst@length=\count189
+\lst@currlwidth=\dimen153
+\lst@column=\count190
+\lst@pos=\count191
+\lst@lostspace=\dimen154
+\lst@width=\dimen155
+\lst@newlines=\count192
+\lst@lineno=\count193
+\lst@maxwidth=\dimen156
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+\c@lstnumber=\count194
+\lst@skipnumbers=\count195
+\lst@framebox=\box46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2019/09/10 1.8c listings configuration
+))
+Package: listings 2019/09/10 1.8c (Carsten Heinz)
+\c@nalg=\count196
+
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count178
-\l__pdf_internal_box=\box45
+\l__kernel_color_stack_int=\count197
+\l__pdf_internal_box=\box47
 )
 
 LaTeX Warning: Unused global option(s):
     [openright].
 
-(./inzynierka.aux)
+(./inzynierka.aux
+
+LaTeX Warning: Label `makeeulerianDG' multiply defined.
+
+
+LaTeX Warning: Label `makeeulerianDG' multiply defined.
+
+
+LaTeX Warning: Label `makeeulerianDG' multiply defined.
+
+
+LaTeX Warning: Label `makeeulerianDG' multiply defined.
+
+)
 \openout1 = `inzynierka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count179
-\scratchdimen=\dimen145
-\scratchbox=\box46
-\nofMPsegments=\count180
-\nofMParguments=\count181
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count182
-\MPscratchDim=\dimen146
-\MPnumerator=\count183
-\makeMPintoPDFobject=\count184
-\everyMPtoPDFconversion=\toks19
+\scratchcounter=\count198
+\scratchdimen=\dimen157
+\scratchbox=\box48
+\nofMPsegments=\count199
+\nofMParguments=\count266
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count267
+\MPscratchDim=\dimen158
+\MPnumerator=\count268
+\makeMPintoPDFobject=\count269
+\everyMPtoPDFconversion=\toks20
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -138,6 +231,11 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -172,26 +270,31 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+\c@lstlisting=\count270
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
 <logo_agh.jpg, id=1, 557.4426pt x 284.7438pt>
 File: logo_agh.jpg Graphic file (type jpg)
 <use logo_agh.jpg>
-Package pdftex.def Info: logo_agh.jpg  used on input line 18.
+Package pdftex.def Info: logo_agh.jpg  used on input line 46.
 (pdftex.def)             Requested size: 208.87885pt x 106.69783pt.
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 20
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 48
 .
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo_agh.jpg>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 61.
+(Font)              <12> on input line 89.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 61.
+(Font)              <8> on input line 89.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 61.
+(Font)              <6> on input line 89.
 
-Overfull \hbox (37.6533pt too wide) in paragraph at lines 61--66
+Overfull \hbox (37.6533pt too wide) in paragraph at lines 89--94
  [] 
  []
 
@@ -205,52 +308,96 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout3 = `inzynierka.toc'.
 
  [5] [6]
-<OSM1.png, id=28, 338.76563pt x 459.96844pt>
-File: OSM1.png Graphic file (type png)
-<use OSM1.png>
-Package pdftex.def Info: OSM1.png  used on input line 126.
-(pdftex.def)             Requested size: 226.48395pt x 307.52452pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 131.
- [7 <./OSM1.png>]
-<OSM1graf.png, id=38, 452.4403pt x 331.2375pt>
-File: OSM1graf.png Graphic file (type png)
-<use OSM1graf.png>
-Package pdftex.def Info: OSM1graf.png  used on input line 137.
-(pdftex.def)             Requested size: 407.66833pt x 298.45973pt.
- [8 <./OSM1graf.png>]
-[9] [10] [11] [12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 259--260
-[]\T1/cmr/m/n/14.4 https://wiki.openstreetmap.org/wiki/Category:Properties [do-
-st¦p:
+Overfull \hbox (3.51854pt too wide) in paragraph at lines 144--146
+\T1/cmr/m/n/14.4 wy-ge-ne-ro-wa-no lo-so-we sie-ci, któ-re umo»-li-wi-ªy szer-s
+ze ich prze-te-sto-wa-nie. Stwo-
  []
 
-[14] (./inzynierka.aux) ) 
+<WSTEP1.png, id=29, 160.34906pt x 119.69719pt>
+File: WSTEP1.png Graphic file (type png)
+<use WSTEP1.png>
+Package pdftex.def Info: WSTEP1.png  used on input line 165.
+(pdftex.def)             Requested size: 226.48395pt x 169.06892pt.
+[7] [8 <./WSTEP1.png>] [9]
+<bara_1a.png, id=48, 456.20438pt x 294.34969pt>
+File: bara_1a.png Graphic file (type png)
+<use bara_1a.png>
+Package pdftex.def Info: bara_1a.png  used on input line 219.
+(pdftex.def)             Requested size: 181.18439pt x 116.90237pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 219.
+<bara_1b.png, id=49, 456.20438pt x 340.27126pt>
+File: bara_1b.png Graphic file (type png)
+<use bara_1b.png>
+Package pdftex.def Info: bara_1b.png  used on input line 222.
+(pdftex.def)             Requested size: 181.18439pt x 135.14035pt.
+<bara_1c.png, id=50, 456.20438pt x 347.79938pt>
+File: bara_1c.png Graphic file (type png)
+<use bara_1c.png>
+Package pdftex.def Info: bara_1c.png  used on input line 225.
+(pdftex.def)             Requested size: 181.18439pt x 138.13017pt.
+<bara_1d.png, id=51, 456.20438pt x 348.55219pt>
+File: bara_1d.png Graphic file (type png)
+<use bara_1d.png>
+Package pdftex.def Info: bara_1d.png  used on input line 228.
+(pdftex.def)             Requested size: 181.18439pt x 138.42915pt.
+ [10 <./bara_1a.png> <./bara_1b.png> <./bara_1c.png> <./bara_1d.png>] [11] [12]
+<OSM1.png, id=75, 338.76563pt x 459.96844pt>
+File: OSM1.png Graphic file (type png)
+<use OSM1.png>
+Package pdftex.def Info: OSM1.png  used on input line 335.
+(pdftex.def)             Requested size: 226.48395pt x 307.52452pt.
+<OSM1graf.png, id=76, 452.4403pt x 331.2375pt>
+File: OSM1graf.png Graphic file (type png)
+<use OSM1graf.png>
+Package pdftex.def Info: OSM1graf.png  used on input line 346.
+(pdftex.def)             Requested size: 407.66833pt x 298.45973pt.
+ [13]
+Underfull \vbox (badness 4765) has occurred while \output is active []
+
+ [14 <./OSM1.png>] [15 <./OSM1graf.png>] [16] [17] [18] [19] [20] (./inzynierka
+.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1972 strings out of 482600
- 28270 string characters out of 5953935
- 266861 words of memory out of 5000000
- 17130 multiletter control sequences out of 15000+600000
- 571142 words of font info for 67 fonts, out of 8000000 for 9000
+ 5102 strings out of 482600
+ 74988 string characters out of 5953935
+ 505817 words of memory out of 5000000
+ 20223 multiletter control sequences out of 15000+600000
+ 575425 words of font info for 74 fonts, out of 8000000 for 9000
  306 hyphenation exceptions out of 8191
- 30i,7n,25p,1287b,260s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour
-/jknappen/ec/ecti1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljf
-our/jknappen/ec/ecbx1200.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecrm1000.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/
-pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/klaudia/.texlive2019/texmf-var/fon
-ts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/klaudia/.texlive2019/texmf-var/
-fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/klaudia/.texlive2019/texmf-v
-ar/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/klaudia/.texlive2019/texm
-f-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/klaudia/.texlive2019/t
-exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk>{/usr/share/texlive/texmf-d
-ist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/urw/
-helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhv
-r8a.pfb>
-Output written on inzynierka.pdf (14 pages, 355644 bytes).
+ 50i,10n,49p,1287b,1696s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.6
+00pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti080
+0.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm
+0800.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+cbi0800.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/e
+c/ecrm0800.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappe
+n/ec/ecrm0600.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecti1200.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/j
+knappen/ec/tcrm1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfou
+r/jknappen/ec/ecrm1000.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecbx1200.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk
+/ljfour/jknappen/ec/ecti1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/klaudia/.texlive2019/texmf-var/fo
+nts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/klaudia/.texlive2019/texmf-var
+/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/klaudia/.texlive2019/texmf-
+var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk>{/usr/share/texlive/texmf-dist/f
+onts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on inzynierka.pdf (20 pages, 535231 bytes).
 PDF statistics:
- 400 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+ 648 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
