@@ -21,52 +21,53 @@ class OsmWay(object):
 
 class Osm(object):
     def __init__(self, osmData):
+        [self.xmin, self.xmax, self.ymin, self.ymax] = [0, 0, 0, 0]
         self.osmNodes = []
         self.osmWays = []
         superself = self
 
         class OsmHandler(xml.sax.ContentHandler):
             @classmethod
-            def setDocumentLocator(self, loc):
+            def setDocumentLocator(cls, loc):
                 pass
 
             @classmethod
-            def startDocument(self):
+            def startDocument(cls):
                 pass
 
             @classmethod
-            def endDocument(self):
+            def endDocument(cls):
                 pass
 
             @classmethod
-            def startElement(self, name, attrs):
+            def startElement(cls, name, attrs):
                 if name == 'node':
-                    self.elem = OsmNode(attrs['id'], float(attrs['lon']), float(attrs['lat']))
+                    cls.elem = OsmNode(attrs['id'], float(attrs['lon']), float(attrs['lat']))
                 elif name == 'way':
-                    self.elem = OsmWay(attrs['id'], superself)
+                    cls.elem = OsmWay(attrs['id'], superself)
                 elif name == 'tag':
-                    self.elem.tags[attrs['k']] = attrs['v']
+                    cls.elem.tags[attrs['k']] = attrs['v']
                 elif name == 'nd':
-                    self.elem.nds.append(attrs['ref'])
+                    cls.elem.nds.append(attrs['ref'])
                 elif name == 'bounds':
                     superself.setRangeOfCoordinates(attrs['minlon'], attrs['maxlon'], attrs['minlat'], attrs['maxlat'])
 
             @classmethod
-            def endElement(self, name):
+            def endElement(cls, name):
                 if name == 'node':
-                    superself.osmNodes.append(self.elem)
+                    superself.osmNodes.append(cls.elem)
                 elif name == 'way':
-                    superself.osmWays.append(self.elem)
+                    superself.osmWays.append(cls.elem)
 
             @classmethod
-            def characters(self, chars):
+            def characters(cls, chars):
                 pass
 
             @classmethod
-            def getElementIndexById(self, list, id):
-                for ele in list:
+            def getElementIndexById(cls, listOfAllElements, id):
+                for ele in listOfAllElements:
                     if ele.id == id:
-                        return list.index(ele)
+                        return listOfAllElements.index(ele)
 
         xml.sax.parseString(osmData, OsmHandler)
 

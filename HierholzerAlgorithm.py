@@ -1,6 +1,7 @@
 from collections import deque
 import GraphHelper
 
+
 def getNextOutEdge(adjList, node):
     return adjList[node][0]
 
@@ -27,7 +28,7 @@ def HierholzerAlgorithm(graph, isDirected, startNode):
         if checkOutDegree(adjList, node):
             v = getNextOutEdge(adjList, node)
             stackOfNodes.append(node)
-            removeEdge(adjList,node, v, isDirected)
+            removeEdge(adjList, node, v, isDirected)
             node = v
         else:
             node = stackOfNodes.pop()

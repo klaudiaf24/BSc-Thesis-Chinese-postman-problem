@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.16)  26 DEC 2020 02:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.16)  29 DEC 2020 21:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -23,18 +23,17 @@ File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
 )
-\c@theorem=\count175
-
+(/usr/share/texlive/texmf-dist/tex/latex/polski/polski.sty
+Package: polski 2017/05/04 v1.3.4 Polish language package
+)
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 )
-(/usr/share/texlive/texmf-dist/tex/latex/polski/polski.sty
-Package: polski 2017/05/04 v1.3.4 Polish language package
+\c@theorem=\count175
 
-   Inputenc package detected. Catcodes not changed.
-) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
 Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
@@ -69,24 +68,6 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-
-! LaTeX Error: Option clash for package inputenc.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.9 \usepackage
-               {subfig}
-The package inputenc has already been loaded with options:
-  [utf8]
-There has now been an attempt to load it with options
-  [cp1250]
-Adding the global options:
-  utf8,cp1250
-to your \documentclass declaration may fix this.
-Try typing  <return>  to proceed.
-
 (/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 
@@ -122,6 +103,91 @@ Package caption Info: Standard document class detected.
 \sf@top=\skip52
 \sf@bottom=\skip53
 )
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen145
+\ar@mcellbox=\box45
+\extrarowheight=\dimen146
+\NC@list=\toks17
+\extratabsurround=\skip54
+\backup@length=\skip55
+\ar@cellbox=\box46
+)
+\everycr=\toks18
+\minrowclearance=\skip56
+)
+LaTeX Info: Redefining \color on input line 709.
+\rownum=\count185
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/svgnam.def
+File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count186
+\float@exts=\toks19
+\float@box=\box47
+\@float@everytoks=\toks20
+\@floatcapt=\box48
+)
+(/usr/share/texlive/texmf-dist/tex/latex/cellspace/cellspace.sty
+Package: cellspace 2019/03/11 v1.8.1 Spacing table cells (JN)
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count187
+\calc@Bcount=\count188
+\calc@Adimen=\dimen147
+\calc@Bdimen=\dimen148
+\calc@Askip=\skip57
+\calc@Bskip=\skip58
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count189
+\calc@Cskip=\skip59
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks21
+\XKV@tempa@toks=\toks22
+)
+\XKV@depth=\count190
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+\cellspacetoplimit=\dimen149
+\cellspacebottomlimit=\dimen150
+\cellspace@firstht=\dimen151
+\cellspace@lastdp=\dimen152
+)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -131,97 +197,89 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2019/11/07 v1.0c TeX engine tests
 ))
-\Gm@cnth=\count185
-\Gm@cntv=\count186
-\c@Gm@tempcnt=\count187
-\Gm@bindingoffset=\dimen145
-\Gm@wd@mp=\dimen146
-\Gm@odd@mp=\dimen147
-\Gm@even@mp=\dimen148
-\Gm@layoutwidth=\dimen149
-\Gm@layoutheight=\dimen150
-\Gm@layouthoffset=\dimen151
-\Gm@layoutvoffset=\dimen152
-\Gm@dimlist=\toks17
+\Gm@cnth=\count191
+\Gm@cntv=\count192
+\c@Gm@tempcnt=\count193
+\Gm@bindingoffset=\dimen153
+\Gm@wd@mp=\dimen154
+\Gm@odd@mp=\dimen155
+\Gm@even@mp=\dimen156
+\Gm@layoutwidth=\dimen157
+\Gm@layoutheight=\dimen158
+\Gm@layouthoffset=\dimen159
+\Gm@layoutvoffset=\dimen160
+\Gm@dimlist=\toks23
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count188
-\lst@gtempboxa=\box45
-\lst@token=\toks18
-\lst@length=\count189
-\lst@currlwidth=\dimen153
-\lst@column=\count190
-\lst@pos=\count191
-\lst@lostspace=\dimen154
-\lst@width=\dimen155
-\lst@newlines=\count192
-\lst@lineno=\count193
-\lst@maxwidth=\dimen156
+\lst@mode=\count194
+\lst@gtempboxa=\box49
+\lst@token=\toks24
+\lst@length=\count195
+\lst@currlwidth=\dimen161
+\lst@column=\count196
+\lst@pos=\count197
+\lst@lostspace=\dimen162
+\lst@width=\dimen163
+\lst@newlines=\count198
+\lst@lineno=\count199
+\lst@maxwidth=\dimen164
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count194
-\lst@skipnumbers=\count195
-\lst@framebox=\box46
+\c@lstnumber=\count266
+\lst@skipnumbers=\count267
+\lst@framebox=\box50
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2019/09/10 1.8c listings configuration
 ))
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
-\c@nalg=\count196
+
+(/usr/share/texlive/texmf-dist/tex/latex/cmap/cmap.sty
+Package: cmap 2008/03/06 v1.0h CMap support: searchable PDF
+)
+\c@nalg=\count268
 
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count197
-\l__pdf_internal_box=\box47
+\l__kernel_color_stack_int=\count269
+\l__pdf_internal_box=\box51
 )
 
 LaTeX Warning: Unused global option(s):
     [openright].
 
-(./inzynierka.aux
-
-LaTeX Warning: Label `makeeulerianDG' multiply defined.
-
-
-LaTeX Warning: Label `makeeulerianDG' multiply defined.
-
-
-LaTeX Warning: Label `makeeulerianDG' multiply defined.
-
-
-LaTeX Warning: Label `makeeulerianDG' multiply defined.
-
-)
+(./inzynierka.aux)
 \openout1 = `inzynierka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
- (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+<<t1.cmap>>
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
-\scratchdimen=\dimen157
-\scratchbox=\box48
-\nofMPsegments=\count199
-\nofMParguments=\count266
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count267
-\MPscratchDim=\dimen158
-\MPnumerator=\count268
-\makeMPintoPDFobject=\count269
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count270
+\scratchdimen=\dimen165
+\scratchbox=\box52
+\nofMPsegments=\count271
+\nofMParguments=\count272
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count273
+\MPscratchDim=\dimen166
+\MPnumerator=\count274
+\makeMPintoPDFobject=\count275
+\everyMPtoPDFconversion=\toks26
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -233,6 +291,7 @@ e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
@@ -270,134 +329,590 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count270
+\c@lstlisting=\count276
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
-<logo_agh.jpg, id=1, 557.4426pt x 284.7438pt>
-File: logo_agh.jpg Graphic file (type jpg)
-<use logo_agh.jpg>
-Package pdftex.def Info: logo_agh.jpg  used on input line 46.
+<img/logo_agh.jpg, id=2, 557.4426pt x 284.7438pt>
+File: img/logo_agh.jpg Graphic file (type jpg)
+<use img/logo_agh.jpg>
+Package pdftex.def Info: img/logo_agh.jpg  used on input line 49.
 (pdftex.def)             Requested size: 208.87885pt x 106.69783pt.
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 48
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 51
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo_agh.jpg>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 89.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 89.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 89.
-
-Overfull \hbox (37.6533pt too wide) in paragraph at lines 89--94
- [] 
- []
-
-[2] [3] [4] (./inzynierka.toc
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/logo_agh.jpg>] [2] [
+3] [4]
+(./inzynierka.toc<<ot1.cmap>><<oml.cmap>><<oms.cmap>>
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 2.
+<<omx.cmap>>
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 2.
-)
+ [5])
 \tf@toc=\write3
 \openout3 = `inzynierka.toc'.
 
- [5] [6]
-Overfull \hbox (3.51854pt too wide) in paragraph at lines 144--146
+ [6]
+[7]
+Overfull \hbox (3.51854pt too wide) in paragraph at lines 146--148
 \T1/cmr/m/n/14.4 wy-ge-ne-ro-wa-no lo-so-we sie-ci, któ-re umo»-li-wi-ªy szer-s
 ze ich prze-te-sto-wa-nie. Stwo-
  []
 
-<WSTEP1.png, id=29, 160.34906pt x 119.69719pt>
-File: WSTEP1.png Graphic file (type png)
-<use WSTEP1.png>
-Package pdftex.def Info: WSTEP1.png  used on input line 165.
-(pdftex.def)             Requested size: 226.48395pt x 169.06892pt.
-[7] [8 <./WSTEP1.png>] [9]
-<bara_1a.png, id=48, 456.20438pt x 294.34969pt>
-File: bara_1a.png Graphic file (type png)
-<use bara_1a.png>
-Package pdftex.def Info: bara_1a.png  used on input line 219.
+[8]
+<img/wstep/w1.png, id=42, 762.85pt x 542.025pt>
+File: img/wstep/w1.png Graphic file (type png)
+<use img/wstep/w1.png>
+Package pdftex.def Info: img/wstep/w1.png  used on input line 167.
+(pdftex.def)             Requested size: 226.48395pt x 160.92154pt.
+ [9 <./img/wstep/w1.png>]
+<img/wstep/bara_1a.png, id=52, 456.20438pt x 294.34969pt>
+File: img/wstep/bara_1a.png Graphic file (type png)
+<use img/wstep/bara_1a.png>
+Package pdftex.def Info: img/wstep/bara_1a.png  used on input line 219.
 (pdftex.def)             Requested size: 181.18439pt x 116.90237pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 219.
-<bara_1b.png, id=49, 456.20438pt x 340.27126pt>
-File: bara_1b.png Graphic file (type png)
-<use bara_1b.png>
-Package pdftex.def Info: bara_1b.png  used on input line 222.
+<img/wstep/bara_1b.png, id=53, 456.20438pt x 340.27126pt>
+File: img/wstep/bara_1b.png Graphic file (type png)
+<use img/wstep/bara_1b.png>
+Package pdftex.def Info: img/wstep/bara_1b.png  used on input line 222.
 (pdftex.def)             Requested size: 181.18439pt x 135.14035pt.
-<bara_1c.png, id=50, 456.20438pt x 347.79938pt>
-File: bara_1c.png Graphic file (type png)
-<use bara_1c.png>
-Package pdftex.def Info: bara_1c.png  used on input line 225.
+<img/wstep/bara_1c.png, id=54, 456.20438pt x 347.79938pt>
+File: img/wstep/bara_1c.png Graphic file (type png)
+<use img/wstep/bara_1c.png>
+Package pdftex.def Info: img/wstep/bara_1c.png  used on input line 225.
 (pdftex.def)             Requested size: 181.18439pt x 138.13017pt.
-<bara_1d.png, id=51, 456.20438pt x 348.55219pt>
-File: bara_1d.png Graphic file (type png)
-<use bara_1d.png>
-Package pdftex.def Info: bara_1d.png  used on input line 228.
+<img/wstep/bara_1d.png, id=55, 456.20438pt x 348.55219pt>
+File: img/wstep/bara_1d.png Graphic file (type png)
+<use img/wstep/bara_1d.png>
+Package pdftex.def Info: img/wstep/bara_1d.png  used on input line 228.
 (pdftex.def)             Requested size: 181.18439pt x 138.42915pt.
- [10 <./bara_1a.png> <./bara_1b.png> <./bara_1c.png> <./bara_1d.png>] [11] [12]
-<OSM1.png, id=75, 338.76563pt x 459.96844pt>
-File: OSM1.png Graphic file (type png)
-<use OSM1.png>
-Package pdftex.def Info: OSM1.png  used on input line 335.
+<img/wstep/bara_1e.png, id=56, 450.9347pt x 328.22626pt>
+File: img/wstep/bara_1e.png Graphic file (type png)
+<use img/wstep/bara_1e.png>
+Package pdftex.def Info: img/wstep/bara_1e.png  used on input line 231.
+(pdftex.def)             Requested size: 181.18439pt x 131.87915pt.
+<img/wstep/bara_1f.png, id=57, 453.94594pt x 336.50719pt>
+File: img/wstep/bara_1f.png Graphic file (type png)
+<use img/wstep/bara_1f.png>
+Package pdftex.def Info: img/wstep/bara_1f.png  used on input line 234.
+(pdftex.def)             Requested size: 181.18439pt x 134.31294pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 236.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 236.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 236.
+ [10] [11 <./img/wstep/bara_1a.png> <./img/wstep/bara_1b.png> <./img/wstep/bara
+_1c.png> <./img/wstep/bara_1d.png> <./img/wstep/bara_1e.png> <./img/wstep/bara_
+1f.png>] [12]
+<img/wstep/ws_1a.png, id=78, 601.24625pt x 444.66125pt>
+File: img/wstep/ws_1a.png Graphic file (type png)
+<use img/wstep/ws_1a.png>
+Package pdftex.def Info: img/wstep/ws_1a.png  used on input line 291.
+(pdftex.def)             Requested size: 158.54152pt x 117.25116pt.
+<img/wstep/ws_1b.png, id=79, 608.2725pt x 444.66125pt>
+File: img/wstep/ws_1b.png Graphic file (type png)
+<use img/wstep/ws_1b.png>
+Package pdftex.def Info: img/wstep/ws_1b.png  used on input line 294.
+(pdftex.def)             Requested size: 158.54152pt x 115.89417pt.
+<img/wstep/ws_1c.png, id=80, 604.2575pt x 445.665pt>
+File: img/wstep/ws_1c.png Graphic file (type png)
+<use img/wstep/ws_1c.png>
+Package pdftex.def Info: img/wstep/ws_1c.png  used on input line 297.
+(pdftex.def)             Requested size: 158.54152pt x 116.931pt.
+<img/wstep/ws_1d.png, id=81, 606.265pt x 444.66125pt>
+File: img/wstep/ws_1d.png Graphic file (type png)
+<use img/wstep/ws_1d.png>
+Package pdftex.def Info: img/wstep/ws_1d.png  used on input line 300.
+(pdftex.def)             Requested size: 158.54152pt x 116.2809pt.
+<img/wstep/ws_1e.png, id=82, 604.2575pt x 445.665pt>
+File: img/wstep/ws_1e.png Graphic file (type png)
+<use img/wstep/ws_1e.png>
+Package pdftex.def Info: img/wstep/ws_1e.png  used on input line 303.
+(pdftex.def)             Requested size: 158.54152pt x 116.931pt.
+<img/wstep/ws_1f.png, id=83, 603.25375pt x 441.65pt>
+File: img/wstep/ws_1f.png Graphic file (type png)
+<use img/wstep/ws_1f.png>
+Package pdftex.def Info: img/wstep/ws_1f.png  used on input line 306.
+(pdftex.def)             Requested size: 158.54152pt x 116.06627pt.
+<img/wstep/ws_1g.png, id=84, 608.2725pt x 445.665pt>
+File: img/wstep/ws_1g.png Graphic file (type png)
+<use img/wstep/ws_1g.png>
+Package pdftex.def Info: img/wstep/ws_1g.png  used on input line 309.
+(pdftex.def)             Requested size: 158.54152pt x 116.15578pt.
+<img/wstep/ws_1h.png, id=85, 604.2575pt x 446.66875pt>
+File: img/wstep/ws_1h.png Graphic file (type png)
+<use img/wstep/ws_1h.png>
+Package pdftex.def Info: img/wstep/ws_1h.png  used on input line 312.
+(pdftex.def)             Requested size: 158.54152pt x 117.19437pt.
+ [13] [14 <./img/wstep/ws_1a.png> <./img/wstep/ws_1b.png> <./img/wstep/ws_1c.pn
+g> <./img/wstep/ws_1d.png> <./img/wstep/ws_1e.png> <./img/wstep/ws_1f.png> <./i
+mg/wstep/ws_1g.png> <./img/wstep/ws_1h.png>] [15] [16] [17] [18]
+Underfull \vbox (badness 6063) has occurred while \output is active []
+
+ [19]
+<img/grafRzecz/osm1.png, id=126, 338.76563pt x 459.96844pt>
+File: img/grafRzecz/osm1.png Graphic file (type png)
+<use img/grafRzecz/osm1.png>
+Package pdftex.def Info: img/grafRzecz/osm1.png  used on input line 437.
 (pdftex.def)             Requested size: 226.48395pt x 307.52452pt.
-<OSM1graf.png, id=76, 452.4403pt x 331.2375pt>
-File: OSM1graf.png Graphic file (type png)
-<use OSM1graf.png>
-Package pdftex.def Info: OSM1graf.png  used on input line 346.
+<img/grafRzecz/osm1Graf.png, id=127, 452.4403pt x 331.2375pt>
+File: img/grafRzecz/osm1Graf.png Graphic file (type png)
+<use img/grafRzecz/osm1Graf.png>
+Package pdftex.def Info: img/grafRzecz/osm1Graf.png  used on input line 449.
 (pdftex.def)             Requested size: 407.66833pt x 298.45973pt.
- [13]
-Underfull \vbox (badness 4765) has occurred while \output is active []
 
- [14 <./OSM1.png>] [15 <./OSM1graf.png>] [16] [17] [18] [19] [20] (./inzynierka
-.aux)
+[20 <./img/grafRzecz/osm1.png>]
+Underfull \vbox (badness 1292) has occurred while \output is active []
 
-LaTeX Warning: There were multiply-defined labels.
+ [21 <./img/grafRzecz/osm1Graf.png>] [22]
+<img/fluAlgo/flu_algo99.png, id=140, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo99.png Graphic file (type png)
+<use img/fluAlgo/flu_algo99.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo99.png  used on input line 520.
+(pdftex.def)             Requested size: 317.07614pt x 237.81816pt.
+<img/fluAlgo/flu_algo0.png, id=141, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo0.png Graphic file (type png)
+<use img/fluAlgo/flu_algo0.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo0.png  used on input line 522.
+(pdftex.def)             Requested size: 317.07614pt x 237.81816pt.
+ [23]
+<img/fluAlgo/flu_algo1.png, id=145, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo1.png Graphic file (type png)
+<use img/fluAlgo/flu_algo1.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo1.png  used on input line 532.
+(pdftex.def)             Requested size: 181.18439pt x 135.88702pt.
+<img/fluAlgo/flu_algo2.png, id=146, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo2.png Graphic file (type png)
+<use img/fluAlgo/flu_algo2.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo2.png  used on input line 535.
+(pdftex.def)             Requested size: 181.18439pt x 135.88702pt.
+<img/fluAlgo/flu_algo3.png, id=147, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo3.png Graphic file (type png)
+<use img/fluAlgo/flu_algo3.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo3.png  used on input line 538.
+(pdftex.def)             Requested size: 181.18439pt x 135.88702pt.
+<img/fluAlgo/flu_algo4.png, id=148, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo4.png Graphic file (type png)
+<use img/fluAlgo/flu_algo4.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo4.png  used on input line 541.
+(pdftex.def)             Requested size: 181.18439pt x 135.88702pt.
+<img/fluAlgo/flu_algo5.png, id=149, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo5.png Graphic file (type png)
+<use img/fluAlgo/flu_algo5.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo5.png  used on input line 544.
+(pdftex.def)             Requested size: 181.18439pt x 135.88702pt.
+<img/fluAlgo/flu_algo6.png, id=150, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo6.png Graphic file (type png)
+<use img/fluAlgo/flu_algo6.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo6.png  used on input line 547.
+(pdftex.def)             Requested size: 181.18439pt x 135.88702pt.
+<img/fluAlgo/flu_algo7.png, id=151, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo7.png Graphic file (type png)
+<use img/fluAlgo/flu_algo7.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo7.png  used on input line 556.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/fluAlgo/flu_algo8.png, id=152, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo8.png Graphic file (type png)
+<use img/fluAlgo/flu_algo8.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo8.png  used on input line 559.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/fluAlgo/flu_algo9.png, id=153, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo9.png Graphic file (type png)
+<use img/fluAlgo/flu_algo9.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo9.png  used on input line 562.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/fluAlgo/flu_algo10.png, id=154, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo10.png Graphic file (type png)
+<use img/fluAlgo/flu_algo10.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo10.png  used on input line 565.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/fluAlgo/flu_algo11.png, id=155, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo11.png Graphic file (type png)
+<use img/fluAlgo/flu_algo11.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo11.png  used on input line 568.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/fluAlgo/flu_algo12.png, id=156, 462.528pt x 346.896pt>
+File: img/fluAlgo/flu_algo12.png Graphic file (type png)
+<use img/fluAlgo/flu_algo12.png>
+Package pdftex.def Info: img/fluAlgo/flu_algo12.png  used on input line 571.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+ [24 <./img/fluAlgo/flu_algo99.png> <./img/fluAlgo/flu_algo0.png>] [25 <./img/f
+luAlgo/flu_algo1.png> <./img/fluAlgo/flu_algo2.png> <./img/fluAlgo/flu_algo3.pn
+g> <./img/fluAlgo/flu_algo4.png> <./img/fluAlgo/flu_algo5.png> <./img/fluAlgo/f
+lu_algo6.png>] [26 <./img/fluAlgo/flu_algo7.png> <./img/fluAlgo/flu_algo8.png> 
+<./img/fluAlgo/flu_algo9.png> <./img/fluAlgo/flu_algo10.png> <./img/fluAlgo/flu
+_algo11.png> <./img/fluAlgo/flu_algo12.png>]
+[27]
+<img/heiAlgo/hei_algo0.png, id=184, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo0.png Graphic file (type png)
+<use img/heiAlgo/hei_algo0.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo0.png  used on input line 618.
+(pdftex.def)             Requested size: 452.9679pt x 339.74402pt.
+<img/heiAlgo/hei_algo1.png, id=185, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo1.png Graphic file (type png)
+<use img/heiAlgo/hei_algo1.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo1.png  used on input line 627.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo2.png, id=186, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo2.png Graphic file (type png)
+<use img/heiAlgo/hei_algo2.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo2.png  used on input line 630.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo3.png, id=187, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo3.png Graphic file (type png)
+<use img/heiAlgo/hei_algo3.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo3.png  used on input line 633.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo4.png, id=188, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo4.png Graphic file (type png)
+<use img/heiAlgo/hei_algo4.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo4.png  used on input line 636.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo5.png, id=189, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo5.png Graphic file (type png)
+<use img/heiAlgo/hei_algo5.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo5.png  used on input line 639.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo6.png, id=190, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo6.png Graphic file (type png)
+<use img/heiAlgo/hei_algo6.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo6.png  used on input line 642.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo7.png, id=191, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo7.png Graphic file (type png)
+<use img/heiAlgo/hei_algo7.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo7.png  used on input line 650.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo8.png, id=192, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo8.png Graphic file (type png)
+<use img/heiAlgo/hei_algo8.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo8.png  used on input line 653.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo9.png, id=193, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo9.png Graphic file (type png)
+<use img/heiAlgo/hei_algo9.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo9.png  used on input line 656.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo10.png, id=194, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo10.png Graphic file (type png)
+<use img/heiAlgo/hei_algo10.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo10.png  used on input line 659.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo11.png, id=195, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo11.png Graphic file (type png)
+<use img/heiAlgo/hei_algo11.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo11.png  used on input line 662.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/hei_algo12.png, id=196, 462.528pt x 346.896pt>
+File: img/heiAlgo/hei_algo12.png Graphic file (type png)
+<use img/heiAlgo/hei_algo12.png>
+Package pdftex.def Info: img/heiAlgo/hei_algo12.png  used on input line 665.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+ [28 <./img/heiAlgo/hei_algo0.png>] [29 <./img/heiAlgo/hei_algo1.png> <./img/he
+iAlgo/hei_algo2.png> <./img/heiAlgo/hei_algo3.png> <./img/heiAlgo/hei_algo4.png
+> <./img/heiAlgo/hei_algo5.png> <./img/heiAlgo/hei_algo6.png>] [30 <./img/heiAl
+go/hei_algo7.png> <./img/heiAlgo/hei_algo8.png> <./img/heiAlgo/hei_algo9.png> <
+./img/heiAlgo/hei_algo10.png> <./img/heiAlgo/hei_algo11.png> <./img/heiAlgo/hei
+_algo12.png>]
+<img/heiAlgo/DIRhei_algo99.png, id=219, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo99.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo99.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo99.png  used on input line 679.
 
- ) 
+(pdftex.def)             Requested size: 312.54895pt x 234.42523pt.
+<img/heiAlgo/DIRhei_algo0.png, id=220, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo0.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo0.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo0.png  used on input line 681.
+(pdftex.def)             Requested size: 312.54895pt x 234.42523pt.
+<img/heiAlgo/DIRhei_algo1.png, id=221, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo1.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo1.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo1.png  used on input line 691.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo2.png, id=222, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo2.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo2.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo2.png  used on input line 694.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo3.png, id=223, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo3.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo3.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo3.png  used on input line 697.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo4.png, id=224, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo4.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo4.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo4.png  used on input line 700.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo5.png, id=225, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo5.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo5.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo5.png  used on input line 703.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo6.png, id=226, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo6.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo6.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo6.png  used on input line 713.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo7.png, id=227, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo7.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo7.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo7.png  used on input line 716.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo8.png, id=228, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo8.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo8.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo8.png  used on input line 719.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo9.png, id=229, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo9.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo9.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo9.png  used on input line 722.
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo10.png, id=230, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo10.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo10.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo10.png  used on input line 725.
+
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+
+
+LaTeX Warning: Float too large for page by 5.77982pt on input line 729.
+
+<img/heiAlgo/DIRhei_algo11.png, id=231, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo11.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo11.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo11.png  used on input line 735.
+
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo12.png, id=232, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo12.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo12.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo12.png  used on input line 738.
+
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo13.png, id=233, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo13.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo13.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo13.png  used on input line 741.
+
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo14.png, id=234, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo14.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo14.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo14.png  used on input line 744.
+
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+<img/heiAlgo/DIRhei_algo15.png, id=235, 462.528pt x 346.896pt>
+File: img/heiAlgo/DIRhei_algo15.png Graphic file (type png)
+<use img/heiAlgo/DIRhei_algo15.png>
+Package pdftex.def Info: img/heiAlgo/DIRhei_algo15.png  used on input line 747.
+
+(pdftex.def)             Requested size: 212.89546pt x 159.67465pt.
+[31 <./img/heiAlgo/DIRhei_algo99.png> <./img/heiAlgo/DIRhei_algo0.png>]
+[32 <./img/heiAlgo/DIRhei_algo1.png> <./img/heiAlgo/DIRhei_algo2.png> <./img/he
+iAlgo/DIRhei_algo3.png> <./img/heiAlgo/DIRhei_algo4.png> <./img/heiAlgo/DIRhei_
+algo5.png>] [33 <./img/heiAlgo/DIRhei_algo6.png> <./img/heiAlgo/DIRhei_algo7.pn
+g> <./img/heiAlgo/DIRhei_algo8.png> <./img/heiAlgo/DIRhei_algo9.png> <./img/hei
+Algo/DIRhei_algo10.png>] [34 <./img/heiAlgo/DIRhei_algo11.png> <./img/heiAlgo/D
+IRhei_algo12.png> <./img/heiAlgo/DIRhei_algo13.png> <./img/heiAlgo/DIRhei_algo1
+4.png> <./img/heiAlgo/DIRhei_algo15.png>]
+Overfull \hbox (6.99149pt too wide) in paragraph at lines 758--759
+[]\T1/cmr/m/n/14.4 Podczas ge-ne-ro-wa-nia sie-ci zªo-»o-nych Ba-ra-bási^^UAlbe
+rta i Wat-t-sa^^UStrogatza,
+ []
+
+[35]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36]
+Package epstopdf Info: Source file: <img/wyniki/E_N.eps>
+(epstopdf)                    date: 2020-12-29 18:50:29
+(epstopdf)                    size: 27617 bytes
+(epstopdf)             Output file: <img/wyniki/E_N-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-12-29 18:50:34
+(epstopdf)                    size: 9674 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/wyniki/E_N-eps-convert
+ed-to.pdf img/wyniki/E_N.eps>
+(epstopdf)             \includegraphics on input line 857.
+Package epstopdf Info: Output file is already uptodate.
+<img/wyniki/E_N-eps-converted-to.pdf, id=272, 505.89pt x 722.7pt>
+File: img/wyniki/E_N-eps-converted-to.pdf Graphic file (type pdf)
+<use img/wyniki/E_N-eps-converted-to.pdf>
+Package pdftex.def Info: img/wyniki/E_N-eps-converted-to.pdf  used on input lin
+e 857.
+(pdftex.def)             Requested size: 505.88875pt x 722.69823pt.
+Package epstopdf Info: Source file: <img/wyniki/gen_n.eps>
+(epstopdf)                    date: 2020-12-29 18:50:29
+(epstopdf)                    size: 26809 bytes
+(epstopdf)             Output file: <img/wyniki/gen_n-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-12-29 18:50:34
+(epstopdf)                    size: 8813 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/wyniki/gen_n-eps-conve
+rted-to.pdf img/wyniki/gen_n.eps>
+(epstopdf)             \includegraphics on input line 860.
+Package epstopdf Info: Output file is already uptodate.
+<img/wyniki/gen_n-eps-converted-to.pdf, id=273, 505.89pt x 722.7pt>
+File: img/wyniki/gen_n-eps-converted-to.pdf Graphic file (type pdf)
+<use img/wyniki/gen_n-eps-converted-to.pdf>
+Package pdftex.def Info: img/wyniki/gen_n-eps-converted-to.pdf  used on input l
+ine 860.
+(pdftex.def)             Requested size: 505.88875pt x 722.69823pt.
+
+[37] [38 <./img/wyniki/E_N-eps-converted-to.pdf> <./img/wyniki/gen_n-eps-conver
+ted-to.pdf>]
+
+LaTeX Warning: Command \' invalid in math mode on input line 906.
+
+Missing character: There is no á in font cmr10!
+
+Underfull \vbox (badness 1048) has occurred while \output is active []
+
+ [39]
+Overfull \hbox (1.99904pt too wide) in paragraph at lines 937--938
+[]\T1/cmr/m/n/14.4 Zgodnie z da-ny-mi z ta-bel wy-zna-czo-no ró»-ni-ce dla trze
+ch ilo-±ci $\OML/cmm/m/it/14.4 n$ $\OT1/cmr/m/n/14.4 ^^A\OML/cmm/m/it/14.4 t\OT
+1/cmr/m/n/14.4 (100) \OMS/cmsy/m/n/14.4 ^^Y
+ []
+
+[40]
+Package epstopdf Info: Source file: <img/wyniki/Fleury_n.eps>
+(epstopdf)                    date: 2020-12-29 18:50:29
+(epstopdf)                    size: 25911 bytes
+(epstopdf)             Output file: <img/wyniki/Fleury_n-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-12-29 18:50:34
+(epstopdf)                    size: 8312 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/wyniki/Fleury_n-eps-co
+nverted-to.pdf img/wyniki/Fleury_n.eps>
+(epstopdf)             \includegraphics on input line 942.
+Package epstopdf Info: Output file is already uptodate.
+<img/wyniki/Fleury_n-eps-converted-to.pdf, id=297, 505.89pt x 722.7pt>
+File: img/wyniki/Fleury_n-eps-converted-to.pdf Graphic file (type pdf)
+<use img/wyniki/Fleury_n-eps-converted-to.pdf>
+Package pdftex.def Info: img/wyniki/Fleury_n-eps-converted-to.pdf  used on inpu
+t line 942.
+(pdftex.def)             Requested size: 505.88875pt x 722.69823pt.
+ [41 <./img/wyniki/Fleury_n-eps-converted-to.pdf>]
+
+LaTeX Warning: Command \' invalid in math mode on input line 984.
+
+Missing character: There is no á in font cmr10!
+[42]
+Underfull \vbox (badness 3148) has occurred while \output is active []
+
+ [43]
+Package epstopdf Info: Source file: <img/wyniki/Hierholzer_n.eps>
+(epstopdf)                    date: 2020-12-29 18:50:29
+(epstopdf)                    size: 28121 bytes
+(epstopdf)             Output file: <img/wyniki/Hierholzer_n-eps-converted-to.p
+df>
+(epstopdf)                    date: 2020-12-29 18:50:35
+(epstopdf)                    size: 9634 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/wyniki/Hierholzer_n-ep
+s-converted-to.pdf img/wyniki/Hierholzer_n.eps>
+(epstopdf)             \includegraphics on input line 1050.
+Package epstopdf Info: Output file is already uptodate.
+<img/wyniki/Hierholzer_n-eps-converted-to.pdf, id=313, 505.89pt x 722.7pt>
+File: img/wyniki/Hierholzer_n-eps-converted-to.pdf Graphic file (type pdf)
+<use img/wyniki/Hierholzer_n-eps-converted-to.pdf>
+Package pdftex.def Info: img/wyniki/Hierholzer_n-eps-converted-to.pdf  used on 
+input line 1050.
+(pdftex.def)             Requested size: 505.88875pt x 722.69823pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[44]
+Package epstopdf Info: Source file: <img/wyniki/Hierholzer_vs_Fleury_WS_n.eps>
+(epstopdf)                    date: 2020-12-29 18:50:29
+(epstopdf)                    size: 25803 bytes
+(epstopdf)             Output file: <img/wyniki/Hierholzer_vs_Fleury_WS_n-eps-c
+onverted-to.pdf>
+(epstopdf)                    date: 2020-12-29 18:50:35
+(epstopdf)                    size: 8095 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/wyniki/Hierholzer_vs_F
+leury_WS_n-eps-converted-to.pdf img/wyniki/Hierholzer_vs_Fleury_WS_n.eps>
+(epstopdf)             \includegraphics on input line 1065.
+Package epstopdf Info: Output file is already uptodate.
+<img/wyniki/Hierholzer_vs_Fleury_WS_n-eps-converted-to.pdf, id=318, 505.89pt x 
+722.7pt>
+File: img/wyniki/Hierholzer_vs_Fleury_WS_n-eps-converted-to.pdf Graphic file (t
+ype pdf)
+<use img/wyniki/Hierholzer_vs_Fleury_WS_n-eps-converted-to.pdf>
+Package pdftex.def Info: img/wyniki/Hierholzer_vs_Fleury_WS_n-eps-converted-to.
+pdf  used on input line 1065.
+(pdftex.def)             Requested size: 505.88875pt x 722.69823pt.
+Package epstopdf Info: Source file: <img/wyniki/Hierholzer_vs_Fleury_BA_n.eps>
+(epstopdf)                    date: 2020-12-29 18:50:29
+(epstopdf)                    size: 25534 bytes
+(epstopdf)             Output file: <img/wyniki/Hierholzer_vs_Fleury_BA_n-eps-c
+onverted-to.pdf>
+(epstopdf)                    date: 2020-12-29 18:50:35
+(epstopdf)                    size: 8000 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/wyniki/Hierholzer_vs_F
+leury_BA_n-eps-converted-to.pdf img/wyniki/Hierholzer_vs_Fleury_BA_n.eps>
+(epstopdf)             \includegraphics on input line 1068.
+Package epstopdf Info: Output file is already uptodate.
+<img/wyniki/Hierholzer_vs_Fleury_BA_n-eps-converted-to.pdf, id=319, 505.89pt x 
+722.7pt>
+File: img/wyniki/Hierholzer_vs_Fleury_BA_n-eps-converted-to.pdf Graphic file (t
+ype pdf)
+<use img/wyniki/Hierholzer_vs_Fleury_BA_n-eps-converted-to.pdf>
+Package pdftex.def Info: img/wyniki/Hierholzer_vs_Fleury_BA_n-eps-converted-to.
+pdf  used on input line 1068.
+(pdftex.def)             Requested size: 505.88875pt x 722.69823pt.
+ [45 <./img/wyniki/Hierholzer_n-eps-converted-to.pdf>] [46 <./img/wyniki/Hierho
+lzer_vs_Fleury_WS_n-eps-converted-to.pdf> <./img/wyniki/Hierholzer_vs_Fleury_BA
+_n-eps-converted-to.pdf>] [47] [48] [49] [50] (./inzynierka.aux) ) 
 Here is how much of TeX's memory you used:
- 5102 strings out of 482600
- 74988 string characters out of 5953935
- 505817 words of memory out of 5000000
- 20223 multiletter control sequences out of 15000+600000
+ 6908 strings out of 482600
+ 105723 string characters out of 5953935
+ 536360 words of memory out of 5000000
+ 21840 multiletter control sequences out of 15000+600000
  575425 words of font info for 74 fonts, out of 8000000 for 9000
  306 hyphenation exceptions out of 8191
- 50i,10n,49p,1287b,1696s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.6
-00pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti080
+ 50i,11n,87p,1287b,1824s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/klaud
+ia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/kl
+audia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0800.600pk> </home
+/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.600pk> </h
+ome/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> 
+</home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi0800.600p
+k> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.6
+00pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti120
 0.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm
-0800.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/e
-cbi0800.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/e
-c/ecrm0800.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappe
-n/ec/ecrm0600.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jkna
-ppen/ec/ecti1200.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/j
-knappen/ec/tcrm1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfou
-r/jknappen/ec/ecrm1000.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecbx1200.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk
-/ljfour/jknappen/ec/ecti1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts
-/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/klaudia/.texlive2019/texmf-var/fo
-nts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/klaudia/.texlive2019/texmf-var
-/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/klaudia/.texlive2019/texmf-
-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk>{/usr/share/texlive/texmf-dist/f
-onts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on inzynierka.pdf (20 pages, 535231 bytes).
+1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+crm1000.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/e
+c/ecbx1200.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jknappe
+n/ec/ecti1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecbx1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecbx1728.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/ljfou
+r/jknappen/ec/ecrm1440.600pk> </home/klaudia/.texlive2019/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecrm1200.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
+base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
+uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on inzynierka.pdf (50 pages, 2039746 bytes).
 PDF statistics:
- 648 PDF objects out of 1000 (max. 8388607)
- 135 compressed objects within 2 object streams
+ 980 PDF objects out of 1000 (max. 8388607)
+ 237 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 361 words of extra memory for PDF output out of 10000 (max. 10000000)
 

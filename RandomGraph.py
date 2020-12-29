@@ -11,11 +11,11 @@ def getRandomDiGraph(numberOfNodes, probability):
         while not nx.is_strongly_connected(graph):
             seed = random.randint(1, 5)
             graph = nx.fast_gnp_random_graph(numberOfNodes, probability, seed=seed, directed=True)
-        setAttriubutes(graph)
+        setAttributes(graph)
         graph = nx.MultiDiGraph(graph)
         if not gh.isEulerianGraph(graph):
             gh.makeEulerianDiGraph(graph)
-        if graph != None:
+        if graph is not None:
             break
     return graph
 
@@ -23,10 +23,10 @@ def getRandomDiGraph(numberOfNodes, probability):
 def getRandomGraphWithWattsStrogatzModel(numberOfNodes, numberOfNearestNeighborsInRing, probability):
     while True:
         graph = nx.watts_strogatz_graph(numberOfNodes, numberOfNearestNeighborsInRing, probability)
-        setAttriubutes(graph)
+        setAttributes(graph)
         graph = nx.MultiGraph(graph)
         graph = improveIfNecessaryGraph(graph)
-        if graph != None:
+        if graph is not None:
             break
     return graph
 
@@ -34,10 +34,10 @@ def getRandomGraphWithWattsStrogatzModel(numberOfNodes, numberOfNearestNeighbors
 def getRandomGraphWithBarabasiAlbertModel(numberOfNodes, numberOfEdgesToAttach):
     while True:
         graph = nx.barabasi_albert_graph(numberOfNodes, numberOfEdgesToAttach)
-        setAttriubutes(graph)
+        setAttributes(graph)
         graph = nx.MultiGraph(graph)
         graph = improveIfNecessaryGraph(graph)
-        if graph != None:
+        if graph is not None:
             break
     return graph
 
@@ -48,8 +48,9 @@ def improveIfNecessaryGraph(graph):
     return graph
 
 
-def setAttriubutes(graph):
-    position = nx.spring_layout(graph, k=0.4, iterations=20)
+def setAttributes(graph):
+    position = nx.circular_layout(graph, scale=1)
+    # position = nx.spring_layout(graph, k=0.4, iterations=20)
     nx.set_node_attributes(graph, position, 'pos')
     addRandomWeight(graph)
     setPostOfficeOnFirstNode(graph)

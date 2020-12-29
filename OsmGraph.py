@@ -2,27 +2,34 @@
 
 import networkx
 import OsmParser as osmp
-import GraphHelper as gh
 import random
-from math import sqrt
 import numpy
-import Visualization as vis
+import GraphHelper as gh
+from math import radians, cos, sin, asin, sqrt
 
-scaleX = 0
-scaleY = 0
 distScale = 1000
 stepStreetNode = 0.00001
 
 
+def getDistance(x1, y1, x2, y2):
+    x1, y1, x2, y2 = map(radians, [x1, y1, x2, y2])
+    dx = x2 - x1
+    dy = y2 - y1
+    a = sin(dy / 2) ** 2 + cos(y1) * cos(y2) * sin(dx / 2) ** 2
+    c = 2 * asin(sqrt(a))
+    r = 6371
+    r *= 1000
+    return c * r
+
+
 class OsmGraph:
     def __init__(self, osmData):
+        self.street = []
         self.nodeIndex = 0
         self.edgeIndex = 0
 
         self.graph = networkx.MultiDiGraph()
         self.osm = osmp.Osm(osmData)
-
-        self.setScale()
 
         self.setPostOffice()
         self.setBuildings()
@@ -33,14 +40,14 @@ class OsmGraph:
         self.removeUnusedStreetNodes()
 
         gen = networkx.strongly_connected_components(self.graph)
-        maxCommponent = None
+        maxComponent = None
         maxLen = -1
         for s in gen:
             if len(s) > maxLen:
                 maxLen = len(s)
-                maxCommponent = s
+                maxComponent = s
 
-        nodesToRemove = set(self.graph.nodes()) - set(maxCommponent)
+        nodesToRemove = set(self.graph.nodes()) - set(maxComponent)
         for node in nodesToRemove:
             self.graph.remove_node(node)
 
@@ -48,14 +55,11 @@ class OsmGraph:
         #     try:
         #         gh.makeEulerianDiGraph(self.graph)
         #     except:
-        #         print("Niemożliwe stworzenie grafu")
+        #         print("Stworzenie grafu jest niemożliwe")
         #         exit(-1)
 
-    def setScale(self):
-        global scaleX
-        global scaleY
-        scaleX = abs(float(self.osm.xmin) - float(self.osm.xmax)) * 120000
-        scaleY = abs(float(self.osm.ymin) - float(self.osm.ymax)) * 160000
+    def getRange(self):  # ranges = [xmin, xmax, ymin, ymax]
+        return [float(self.osm.xmin), float(self.osm.xmax), float(self.osm.ymin), float(self.osm.ymax)]
 
     def removeUnusedStreetNodes(self):
         nodesToRemove = []
@@ -111,7 +115,7 @@ class OsmGraph:
         dist = -1
         minDist = float('inf')
         for node in listOfNodes:
-            dist = self.getDistance(node[1]['pos'][0], node[1]['pos'][1], building[1]['pos'][0], building[1]['pos'][1])
+            dist = getDistance(node[1]['pos'][0], node[1]['pos'][1], building[1]['pos'][0], building[1]['pos'][1])
             if dist < minDist:
                 minDist = dist
                 idx = node[0]
@@ -136,7 +140,7 @@ class OsmGraph:
                 if node[0] not in path:
 
                     buildingOsm = self.getNodeByOsmId(node[1]['osmId'])
-                    dist = self.getDistance(
+                    dist = getDistance(
                         buildingOsm.x, buildingOsm.y, x, y)
                     if dist < minDist and dist < epsilon:
                         minDist = dist
@@ -144,20 +148,81 @@ class OsmGraph:
         return buildingId
 
     def setStreet(self):
+        dictOfStreets = dict()
         for highway in self.getHighwayList():
-            startIdx, endIdx = -1, -1
+            if highway.tags['name'] not in dictOfStreets:
+                dictOfStreets[highway.tags['name']] = list()
+            dictOfStreets[highway.tags['name']].append(highway)
 
-            for idx in range(0, len(highway.nds) - 1):
-                if self.isCorrectNode(highway.nds[idx]):
-                    startIdx = idx
-                    break
+        for key in dictOfStreets:
+            nds = []
+            toRemove = []
+            notAdded = []
+            for way in dictOfStreets[key]:
+                if 'oneway' in way.tags:
+                    self.street.append(way)
+                    toRemove.append(way)
+                    continue
+                if not nds:
+                    nds.extend(way.nds)
+                else:
+                    if way.nds[0] == nds[0]:
+                        for idx in range(1, len(way.nds)):
+                            nds.insert(0, way.nds[idx])
+                    elif way.nds[-1] == nds[0]:
+                        for idx in range(1, len(way.nds)):
+                            nds.insert(0, way.nds[len(way.nds) - idx - 1])
+                    elif way.nds[0] == nds[-1]:
+                        nds.pop(-1)
+                        nds.extend(way.nds)
+                    elif way.nds[-1] == nds[-1]:
+                        for idx in range(1, len(way.nds)):
+                            nds.append(way.nds[idx])
+                    else:
+                        notAdded.append(way)
+                        continue
+                    toRemove.append(way)
 
-            for idx in range(len(highway.nds) - 1, 0, -1):
-                if self.isCorrectNode(highway.nds[idx]):
-                    endIdx = idx
-                    break
+            notAdded2 = []
+            while notAdded:
+                for way in notAdded:
+                    if way.nds[0] == nds[0]:
+                        for idx in range(1, len(way.nds)):
+                            nds.insert(0, way.nds[idx])
+                    elif way.nds[-1] == nds[0]:
+                        for idx in range(1, len(way.nds)):
+                            nds.insert(0, way.nds[len(way.nds) - idx - 1])
+                    elif way.nds[0] == nds[-1]:
+                        nds.pop(-1)
+                        nds.extend(way.nds)
+                    elif way.nds[-1] == nds[-1]:
+                        for idx in range(1, len(way.nds)):
+                            nds.append(way.nds[idx])
+                    else:
+                        notAdded2.append(way)
+                for _ in notAdded2:
+                    notAdded.remove(_)
+                notAdded2 = []
+            for _ in toRemove:
+                dictOfStreets[key].remove(_)
 
-            self.splitStreet(startIdx, endIdx, highway)
+            dictOfStreets[key][0].nds = nds
+            self.street.append(dictOfStreets[key][0])
+
+        # for highway in self.getHighwayList():
+        #     startIdx, endIdx = -1, -1
+        #
+        #     for idx in range(0, len(highway.nds) - 1):
+        #         if self.isCorrectNode(highway.nds[idx]):
+        #             startIdx = idx
+        #             break
+        #
+        #     for idx in range(len(highway.nds) - 1, 0, -1):
+        #         if self.isCorrectNode(highway.nds[idx]):
+        #             endIdx = idx
+        #             break
+        #
+        #     self.splitStreet(startIdx, endIdx, highway)
 
     def splitStreet(self, startIdx, endIdx, highway):
         # split
@@ -176,8 +241,7 @@ class OsmGraph:
             # start nd
             nd1 = self.getNodeByOsmId(nds[idx])
             if nds[idx] not in self.getListOfOsmIsOfCurrentGraphNode():
-                self.graph.add_node(self.nodeIndex, pos=((nd1.x - float(self.osm.xmin)) * scaleX,
-                                                         (nd1.y - float(self.osm.ymin)) * scaleY),
+                self.graph.add_node(self.nodeIndex, pos=(nd1.x, nd1.y),
                                     osmId=nd1.id, streetName=streetName, address="", isPostOffice=False)
                 path.append(self.nodeIndex)
                 self.nodeIndex += 1
@@ -189,18 +253,17 @@ class OsmGraph:
             nd2 = self.getNodeByOsmId(nds[idx + 1])
 
             for x in numpy.arange(nd1.x + step, nd2.x - step, step):
-                y = self.getEquationOfStreet(x - float(self.osm.xmin), nd1.x - float(self.osm.xmin),
-                                             nd1.y - float(self.osm.ymin), nd2.x - float(self.osm.xmin),
-                                             nd2.y - float(self.osm.ymin))
-                self.graph.add_node(self.nodeIndex, pos=((x - float(self.osm.xmin)) * scaleX, y * scaleY), osmId="",
+                y = self.getEquationOfStreet(x, nd1.x,
+                                             nd1.y, nd2.x,
+                                             nd2.y)
+                self.graph.add_node(self.nodeIndex, pos=(x, y), osmId="",
                                     streetName=streetName,
                                     address="", isPostOffice=False)
                 path.append(self.nodeIndex)
                 self.nodeIndex += 1
 
             if nds[idx + 1] not in self.getListOfOsmIsOfCurrentGraphNode():
-                self.graph.add_node(self.nodeIndex, pos=((nd2.x - float(self.osm.xmin)) * scaleX,
-                                                         (nd2.y - float(self.osm.ymin)) * scaleY),
+                self.graph.add_node(self.nodeIndex, pos=(nd2.x, nd2.y),
                                     osmId=nd2.id, streetName=streetName, address="", isPostOffice=False)
                 path.append(self.nodeIndex)
                 self.nodeIndex += 1
@@ -213,7 +276,7 @@ class OsmGraph:
                     data=True)[id]['pos'][0], self.graph.nodes(data=True)[id]['pos'][1]
                 node2X, node2Y = self.graph.nodes(data=True)[id + 1]['pos'][0], \
                                  self.graph.nodes(data=True)[id + 1]['pos'][1]
-                dist = self.getDistance(node1X, node1Y, node2X, node2Y)
+                dist = getDistance(node1X, node1Y, node2X, node2Y)
                 dist *= 1000
                 dist = int(dist)
                 if isOneWay:
@@ -231,11 +294,13 @@ class OsmGraph:
             if 'amenity' in building[0].tags and building[0].tags['amenity'] == 'post_office':
                 streetName = self.getStreetName(building[0])
                 if building[1]:
+                    x, y = self.getBuildingPosition(building[0].nds)
                     self.addNode(
-                        building[0].nds[0], building[0].tags['addr:housenumber'], streetName, True)
+                        building[0].nds[0], building[0].tags['addr:housenumber'], streetName, x, y, True)
                 else:
                     self.addNode(
-                        building[0].id, building[0].tags['addr:housenumber'], streetName, True)
+                        building[0].id, building[0].tags['addr:housenumber'], streetName, building[0].x, building[0].y,
+                        True)
                 isPostOffice = True
                 break
 
@@ -244,22 +309,36 @@ class OsmGraph:
             building = random.choice(self.getBuildingList())
             streetName = self.getStreetName(building[0])
             if building[1]:
+                x, y = self.getBuildingPosition(building[0].nds)
                 self.addNode(
-                    building[0].nds[0], building[0].tags['addr:housenumber'], streetName, True)
+                    building[0].nds[0], building[0].tags['addr:housenumber'], streetName, x, y, True)
             else:
                 self.addNode(
-                    building[0].id, building[0].tags['addr:housenumber'], streetName, True)
+                    building[0].id, building[0].tags['addr:housenumber'], streetName, building[0].x, building[0].y,
+                    True)
 
     def setBuildings(self):
         for building in self.getBuildingList():
             if building[1] == True and building[0].nds[0] != self.graph.nodes[0]['osmId']:
                 streetName = self.getStreetName(building[0])
+                x, y = self.getBuildingPosition(building[0].nds)
                 self.addNode(
-                    building[0].nds[0], building[0].tags['addr:housenumber'], streetName, False)
+                    building[0].nds[0], building[0].tags['addr:housenumber'], streetName, x, y, False)
             elif building[1] == False and building[0].id != self.graph.nodes[0]['osmId']:
                 streetName = self.getStreetName(building[0])
                 self.addNode(
-                    building[0].id, building[0].tags['addr:housenumber'], streetName, False)
+                    building[0].id, building[0].tags['addr:housenumber'], streetName, building[0].x, building[0].y,
+                    False)
+
+    def getBuildingPosition(self, nds):
+        x, y = 0, 0
+        cnt = 0
+        for nd in nds:
+            node = self.getNodeByOsmId(nd)
+            x += node.x
+            y += node.y
+            cnt += 1
+        return x / cnt, y / cnt
 
     def getStreetName(self, building):
         if 'addr:street' not in building.tags:
@@ -294,7 +373,8 @@ class OsmGraph:
             if 'highway' in elem.tags and 'name' in elem.tags and \
                     elem.tags['name'] in streetNames:
                 highways.append(elem)
-            elif 'highway' in elem.tags and (elem.tags['highway'] == 'service' or elem.tags['highway'] == 'residential'):
+            elif 'highway' in elem.tags and (
+                    elem.tags['highway'] == 'service' or elem.tags['highway'] == 'residential'):
                 self.addNoNameHighway(elem, highways, streetNames)
 
         return highways
@@ -305,7 +385,7 @@ class OsmGraph:
                 if elem is not way and \
                         nd in elem.nds and \
                         'name' in elem.tags and \
-                        elem.tags['name'] in streetNames:# and self.isCorrectStreet(elem):
+                        elem.tags['name'] in streetNames:  # and self.isCorrectStreet(elem):
                     way.tags['name'] = elem.tags['name']
                     highways.append(way)
                     return
@@ -319,9 +399,6 @@ class OsmGraph:
 
     def getEquationOfStreet(self, x, x1, y1, x2, y2):
         return ((y1 - y2) / (x1 - x2)) * x + (y1 - (y1 - y2) / (x1 - x2) * x1)
-
-    def getDistance(self, node1X, node1Y, node2X, node2Y):
-        return sqrt((node2X - node1X) ** 2 + (node2Y - node1Y) ** 2)
 
     def getBuildingList(self):
         buildings = []
@@ -349,10 +426,8 @@ class OsmGraph:
                 return True
         return False
 
-    def addNode(self, osmIndex, houseNumber, streetName, isPostOffice=False):
+    def addNode(self, osmIndex, houseNumber, streetName, x, y, isPostOffice=False):
         building = self.getNodeByOsmId(osmIndex)
-        x, y = (building.x - float(self.osm.xmin)) * \
-               scaleX, (building.y - float(self.osm.ymin)) * scaleY
         self.graph.add_node(self.nodeIndex, pos=(x, y), osmId=building.id, streetName=streetName,
                             address=streetName + "\n" + houseNumber, isPostOffice=isPostOffice)
         self.nodeIndex += 1
@@ -367,11 +442,6 @@ class OsmGraph:
             if node[1]['osmId'] == indexOsm:
                 return node
         return None
-
-    # def getWayByOsmId(self, indexOsm):
-    #     for way in self.osm.osmWays:
-    #         if way.id == indexOsm:
-    #             return way
 
     def getStreetNodeListByStreetName(self, streetName):
         nodes = []

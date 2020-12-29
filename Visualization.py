@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 
-def draw(graph, eulerCycle=None, printFakeEdges=False):
+def draw(graph, number, eulerCycle=None, printFakeEdges=False, ranges=None):
+    if ranges is None:  #ranges = [xmin, xmax, ymin, ymax]
+        ranges = []
     if eulerCycle is None:
         eulerCycle = []
 
@@ -23,7 +25,16 @@ def draw(graph, eulerCycle=None, printFakeEdges=False):
     # current edges form Euler cycle
     drawHighlightedEulerCycleEdges(graph, position, eulerCycle)
 
-    plt.show()
+    if ranges:
+        plt.xlim(ranges[0],ranges[1])
+        plt.ylim(ranges[2], ranges[3])
+
+    # plt.show()
+    name = 'praca_inz/img/heiAlgo/DIRhei_algo' + str(number) + '.png'
+    # plt.savefig(name, figsize=(1280, 960))
+
+    fig = plt.gcf()
+    fig.savefig(name, figsize=(1280, 960))
 
 
 def drawNodesAndLabels(address, graph, position):
@@ -44,7 +55,7 @@ def drawRegularEdges(isRealGraph, fakeEdges, graph, position, eulerCycle):
                                edgelist=set(graph.edges) - set(fakeEdges))
     else:
         nx.draw_networkx_edges(graph, position,
-                               arrows=True, width=0.5, arrowsize=10,
+                               arrows=True, width=0.5, arrowsize=25,
                                edgelist=set(graph.edges) - set(fakeEdges) - set(eulerCycle))
 
 
@@ -57,29 +68,32 @@ def drawFakeEdges(graph, position, printFakeEdges):
 
     if printFakeEdges:
         nx.draw_networkx_edges(graph, position,
-                               arrows=True, width=1, arrowsize=5,
-                               edgelist=fakeEdges, edge_color='green',
-                               connectionstyle="arc3,rad=rrr".replace('rrr',
-                                                                      str(0.3 * random.uniform(-1.0, 1.0))))
+                               arrows=True, width=2.5, arrowsize=15,
+                               edgelist=fakeEdges, edge_color='blue')#,
+                               # connectionstyle="arc3,rad=rrr".replace('rrr',
+                               #                                        str(0.3 * random.uniform(-1.0, 1.0))))
 
     return fakeEdges
 
 
 def drawHighlightedEulerCycleEdges(graph, position, eulerCycle):
     if eulerCycle:
+        nx.draw_networkx_edges(graph, position, edge_color='white',
+                               arrows=True, width=3, arrowsize=25,
+                               edgelist=set(eulerCycle))
         nx.draw_networkx_edges(graph, position, edge_color='red',
-                               arrows=True, width=0.7, arrowsize=5,
+                               arrows=True, width=0.8, arrowsize=10,
                                edgelist=set(eulerCycle[:-1]))
 
         nx.draw_networkx_edges(graph, position, edge_color='red',
-                               arrows=True, width=2.5, arrowsize=10,
+                               arrows=True, width=2.5, arrowsize=25,
                                edgelist=set(eulerCycle[-1:]))
 
 
 def setDataForRandomGraph(graph):
     for idx in graph.nodes:
         graph.nodes[idx]['color'] = 'red' if graph.nodes[idx]['isPostOffice'] else 'grey'
-        graph.nodes[idx]['size'] = 100
+        graph.nodes[idx]['size'] = 300
 
     colors = [node[1]['color'] for node in graph.nodes(data=True)]
     size = [node[1]['size'] for node in graph.nodes(data=True)]
