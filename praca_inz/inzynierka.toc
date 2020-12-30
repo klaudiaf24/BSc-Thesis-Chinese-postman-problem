@@ -13,19 +13,17 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Modyfikacja grafu nieskierowanego}{17}%
 \contentsline {subsubsection}{\numberline {3.1.2}Modyfikacja grafu skierowanego}{19}%
 \contentsline {subsection}{\numberline {3.2}Graf rzeczywisty}{20}%
-\contentsline {subsection}{\numberline {3.3}Implementacja grafu rzeczywistego}{22}%
-\contentsline {subsection}{\numberline {3.4}Algorytm Fleury’ego}{22}%
-\contentsline {subsubsection}{\numberline {3.4.1}Wizualizacja grafu nieskierowanego}{24}%
-\contentsline {subsection}{\numberline {3.5}Algorytm Hierholzera}{27}%
-\contentsline {subsubsection}{\numberline {3.5.1}Wizualizacja grafu nieskierowanego}{28}%
-\contentsline {subsubsection}{\numberline {3.5.2}Wizualizacja grafu skierowanego}{31}%
-\contentsline {section}{\numberline {4}Wyniki}{35}%
-\contentsline {subsection}{\numberline {4.1}Generowanie grafów losowych}{35}%
-\contentsline {subsection}{\numberline {4.2}Algorytm Fleury'ego}{39}%
-\contentsline {subsection}{\numberline {4.3}Algorytm Hierholzera}{42}%
-\contentsline {subsection}{\numberline {4.4}Algorytm Fleury'ego vs. Hierholzera}{45}%
-\contentsline {subsection}{\numberline {4.5}Graf rzeczywisty}{47}%
-\contentsline {subsubsection}{\numberline {4.5.1}Algorytm Fleury'ego}{47}%
-\contentsline {subsubsection}{\numberline {4.5.2}Algorytm Hierholzera}{47}%
-\contentsline {section}{\numberline {5}Podsumowanie}{48}%
-\contentsline {section}{\numberline {}Literatura}{48}%
+\contentsline {subsubsection}{\numberline {3.2.1}Implementacja grafu rzeczywistego}{22}%
+\contentsline {subsection}{\numberline {3.3}Algorytm Fleury’ego}{25}%
+\contentsline {subsubsection}{\numberline {3.3.1}Wizualizacja grafu nieskierowanego}{27}%
+\contentsline {subsection}{\numberline {3.4}Algorytm Hierholzera}{30}%
+\contentsline {subsubsection}{\numberline {3.4.1}Wizualizacja grafu nieskierowanego}{31}%
+\contentsline {subsubsection}{\numberline {3.4.2}Wizualizacja grafu skierowanego}{34}%
+\contentsline {section}{\numberline {4}Wyniki}{38}%
+\contentsline {subsection}{\numberline {4.1}Generowanie grafów losowych}{38}%
+\contentsline {subsection}{\numberline {4.2}Algorytm Fleury'ego}{42}%
+\contentsline {subsection}{\numberline {4.3}Algorytm Hierholzera}{45}%
+\contentsline {subsection}{\numberline {4.4}Algorytm Fleury'ego vs. Hierholzera}{48}%
+\contentsline {subsection}{\numberline {4.5}Graf rzeczywisty}{50}%
+\contentsline {section}{\numberline {5}Podsumowanie}{52}%
+\contentsline {section}{\numberline {}Literatura}{52}%

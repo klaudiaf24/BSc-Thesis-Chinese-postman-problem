@@ -396,6 +396,7 @@ def getOptimalAdditionalPaths(graph, listWithAllPerm):
 \subsubsection{Modyfikacja grafu skierowanego} \label{modSkier}
 \indent\par
 	Analogiczna sytuacja do \ref{mgnieskier} ma miejsce dla DG w odniesieniu do twierdzenia \ref{twEuleraDG}. Początkowe informacje klasyfikujące wierzchołek do dodania nowych krawędzi zbierane są w liniach 2-16 algorytmu \ref{makeeulerianDG}, gdzie sprawdzana jest różnica połączeń wchodzących a wychodzących. Następnie również odwołujemy się do algorytmu \ref{getOptimalPaths}, przystosowanego zarówno dla UG i DG, tym razem wysyłając tablice \textit{negNodes} - wierzchołki z liczniejszą ilością krawędzi wchodzących oraz \textit{posNodes} - węzły z większą liczbą wyjść. I w tym przypadku optymalnie jest zrezygnować z wszystkich permutacji. Po  obliczeniach dodawane są fałszywe krawędzie z odpowiednią etykietą do grafu.
+	
 \begin{algorithm}[caption={\textit{makeEulerianDiGraph} przekształcający graf skierowany do grafu Eulera}, label={makeeulerianDG}]
 def makeEulerianDiGraph(graph):
 	diff = [None] * len(
@@ -434,7 +435,7 @@ Algorytmy docelowo szukają optymalnej trasy na planie miasta Kraków. Poprawne 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{img/grafRzecz/osm1}
+	\includegraphics[width=1\textwidth]{img/grafRzecz/osm1}
 	\caption[]{Fragment mapy Krakowa\footnotemark}
 	\label{osm1}
 \end{figure}
@@ -446,53 +447,119 @@ Fragment programu przetwarzający mapę z rysunku \ref{osm1} formuje graf, któr
 \captionsetup{justification=centering}
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.9\textwidth]{img/grafRzecz/osm1Graf}
-	\caption[]{Graf rzeczywisty(mieszany) stworzony z mapy z rysunku \ref{osm1}, gdzie czerwone węzły oznaczają początek trasy listonosza, szare są budynkami mieszkalnymi, zielone to fragmenty ulicy zachowane w celu odwzorowania rzeczywistego jej przebiegu tj. zakrętów, skrzyżowań. Kierunki ulic rzeczywistych (jedno- lub dwukierunkowe drogi) mają wpływ na obecność i kierunek krawędzi.}
+	\includegraphics[width=1\textwidth]{img/grafRzecz/osm1Graf}
+	\caption[]{Graf rzeczywisty(mieszany) stworzony z mapy z rysunku \ref{osm1}, gdzie czerwone węzeł oznaczają początek trasy listonosza, szare są budynkami mieszkalnymi, zielone to fragmenty ulicy zachowane w celu odwzorowania rzeczywistego jej przebiegu tj. zakrętów, skrzyżowań. Kierunki ulic rzeczywistych (jedno- lub dwukierunkowe drogi) mają wpływ na obecność i kierunek krawędzi.}
 	\label{osm1G}
 \end{figure}
 
-Program odpowiedzialny za generowanie grafu, przy pobieraniu danych z bazy OpenStreetMap, filtruje odpowiednie informacje o obiektach i znajduje placówkę pocztową (o ile taka istnieje na danych fragmencie miasta) dzięki konkretnym tagom$^{\cite{osmPropertis}}$. W przypadku wgrania fragmentu mapy, gdzie nie ma poczty, obierany jest inny punkt początkowy trasy listonosza, czy sprzedawcy, który losowany jest wśród istniejących na planie budynków.
+Program odpowiedzialny za generowanie grafu przy pobieraniu danych z bazy OpenStreetMap filtruje odpowiednie informacje o obiektach i znajduje placówkę pocztową (o ile taka istnieje na danych fragmencie miasta) dzięki konkretnym tagom$^{\cite{osmPropertis}}$. W przypadku wgrania fragmentu mapy, gdzie nie ma poczty, obierany jest inny punkt początkowy trasy listonosza, czy sprzedawcy, który losowany jest wśród istniejących na planie budynków.
 
-Wierzchołki w grafie podpisano rzeczywistymi adresami oraz oznaczono różnymi kolorami, w celu zwiększenia czytelności. Placówkę pocztową lub punkt startowy przedstawiono na czerwono, zwykłe budynki mieszkalne na szaro. Natomiast wierzchołki będące fragmentami drogi pokolorowano na zielono i zmniejszono ich rozmiar względem pozostałych.
+Wierzchołki w grafie umieszczono na rysunku odwzorowując rzeczywiste położenie na mapie, przez co krawędzie stworzone na drogach, czy pomiędzy ulicami a budynkami mają odpowiednio proporcjonalne długości. Węzły oznaczono różnymi kolorami, w celu zwiększenia czytelności. Placówkę pocztową lub punkt startowy przedstawiono na czerwono, zwykłe budynki mieszkalne na szaro. Natomiast wierzchołki będące fragmentami drogi pokolorowano na zielono i zmniejszono ich rozmiar względem pozostałych.
 
-Analizując kierunki dróg na rysunku \ref{osm1} można zauważyć, że wpływają one na budowę grafu rzeczywistego z rysunku \ref{osm1G}, który w przypadku kiedy listonosz porusza się np. samochodem jest grafem mieszanym. Dla pieszej podróży  określono go jako UG.
+Analizując kierunki dróg na rysunku \ref{osm1} można zauważyć, że wpływają one na budowę grafu rzeczywistego z rysunku \ref{osm1G}, który w przypadku kiedy listonosz porusza się np. samochodem jest grafem mieszanym. Niektóre z krawędzi mogą być słabo widoczne, ze względu na duże zagęszczenie węzłów.
 
 
-
-\subsection{Implementacja grafu rzeczywistego}
+\subsubsection{Implementacja grafu rzeczywistego}
 \indent\par
-Graf rzeczywisty stworzony został  jako obiekt klasy \textit{OsmGraph} przy pomocy funkcji z \textit{OsmParser}.
+Graf rzeczywisty stworzony został  jako obiekt klasy \textit{OsmGraph} przy pomocy funkcji z \textit{OsmParser}, która to odpowiedzialna była za poprawne sparsowanie łańcucha znaków danych w formacie XML$^{\cite{xml}}$.
+
+Dane pobierane z strony internetowej OpenStreetMap za pomocą algorytmu \ref{getData}.
+\begin{algorithm}[caption={\textit{getOsmData} funkcja pobierająca dane z strony \textit{opensteermap.org} w formacie \textit{osm}, dla zadanych jej początkowych wartości szerokości i długości geograficznych, tworzących prostokątny obszar do wygenerowania danych.}, label={getData}]
+  def getOsmData(top, right, bottom, left):
+	  request = "http://api.openstreetmap.org/api/0.6/map?bbox=%f,%f,%f,%f" 
+	  						% (left, bottom, right, top)
+	  fp = urllib.request.urlopen(request)
+	  return fp.read().decode('utf-8') 
+\end{algorithm}
+
+Zaimplementowane zostało to tak, żeby główna klasa odpowiedzialna za przechowywanie danych w formacie grafu, na którym mogłyby być wykonywanie algorytmy szukające cykli Eulera, czyli \textit{OsmGraph}, posiadała obiekt \textit{MultiDiGraph} z biblioteki \textit{Networkx}. Wszystkie funkcje z tej klasy operują na nim, odpowiednio modyfikując jego strukturę przy dostosowaniu go rzeczywistości.
+
+Przy przetwarzaniu danych z XML wykorzystano dwie pomocnicze struktury $OsmNode$ i $OsmWay$, odpowiedzialne za przechowanie podstawowych informacji wyciągniętych z bazy OSM.\\
+\begin{algorithm}[caption={\textit{OsmNode} struktura tagu XML - $node$, w którym przechowywane są punkty }, label={OsmNode}]
+class OsmNode(object):
+	def __init__(self, id, x, y):
+		self.id = id
+		self.x = x
+		self.y = y
+		self.tags = {}
+\end{algorithm}
+
+\begin{algorithm}[caption={\textit{OsmWay} struktura tagu XML - $node$, w którym przechowywane są punkty.}, label={OsmWay}]
+	class OsmWay(object):
+		def __init__(self, id, osm):
+			self.id = id
+			self.osm = osm
+			self.nds = []  # list of nodes' references
+			self.tags = {}
+\end{algorithm}
+
+Kolejne elementy zaimplementowane do stworzenia grafu rzeczywistego:
+\begin{enumerate}
+	\item Pobranie danych przy pomocy klasy \textit{OsmParser}, które przechowywane są w listach jako obiekty typu alg. \ref{OsmNode} i alg. \ref{OsmWay}.   
+	\item Wyszukanie budynku z listy $OsmWay$ i $OsmNode$, który w swoich tagach zawiera informację, czy jest to placówka pocztowa. Ewentualne losowe wybranie punktu startowego wśród budynków.
+	\item Dodanie budynków mieszkalnych jako wierzchołków grafu.
+	\item Wyznaczenie potencjalnych ulic posługując się obiektami typu $OsmNode$ przechowywanymi jako referencje w polu klasy $OsmWay$ \textit{nds} oraz podstawowego równania na prostą o dwóch zadanych punktach (kolejnych referencjach z listy).
+	\item Połączenie budynków i potencjalnych punktów ulic, obliczając minimalne odległości wykorzystując funkcję z algorytmu \ref{getDistance}.
+	\item Wykonanie funkcji modyfikującej do grafu Eulera opisanej w punkcie \ref{modSkier}. W przypadku, kiedy obszar zaznaczony jest niemożliwy do konwersji(część ulicy jednokierunkowej urwanej na krawędzi), program kończy działanie z informacją, że dla tego fragmentu mapy nie jest w stanie wyznaczyć pożądanej ścieżki.
+\end{enumerate}
 
 
 
+Odległości pomiędzy budynkami zostały zachowane jako wartości wag odpowiednich krawędzi. Ponieważ pobrano informacje o położeniu geograficznym wskazanych budynków na globie, wykorzystano funkcję Haversine\cite{haver}, do wyznaczenia dystansu (równania \ref{haversie} - \ref{haversieD}) między nimi. Określa ona najkrótszą odległość po ortodromie pomiędzy dowolnymi punktami na globie, dzięki ich współrzędnym geograficznym.
+
+\begin{equation} \label{haversie}
+	a = \sqrt{sin^2({{\Delta\phi}\over{2}}) + cos(\phi_1) \cdot cos(\phi_2) \cdot sin^2({{\Delta\lambda}\over{2}})}
+\end{equation}
+\begin{equation} \label{haversieC}
+	c = 2 \cdot asin(\sqrt{a})
+\end{equation}
+\begin{equation} \label{haversieD}
+	d = R \cdot c
+\end{equation}
+
+\begin{algorithm}[caption={\textit{getDistance} funkcja obliczająca odległości między rzeczywistymi budynkami, generująca wagi dla krawędzi. Przy jej implementacji sugerowano się wzorami \ref{haversie} -  \ref{haversieD}.}, label={getDistance}]
+def getDistance(x1, y1, x2, y2):
+	x1, y1, x2, y2 = map(radians, [x1, y1, x2, y2])
+	dx = x2 - x1
+	dy = y2 - y1
+	a = sin(dy / 2) ** 2 + cos(y1) * cos(y2) * sin(dx / 2) ** 2
+	c = 2 * asin(sqrt(a))
+	r = 6371
+	r *= 1000	#metres
+	return c * r
+\end{algorithm}
+
+
+\newpage
 \subsection{Algorytm Fleury’ego} \label{FleuryAlgo}
 \indent\par
 	Jednym z prostszych sposobów znajdowania cyklu Eulera w UG jest algorytm Fleury'ego. Przede wszystkim zakłada on, że graf, który przyjmuje jest eulerowski, co zapewnia algorytm \ref{makeeulerianUG}. 
-	
-	UG, na którym wywołujemy \textit{FleuryAlgorithm} konwertowany przez prostą funkcję \textit{getAdjList} do listy sąsiedztwa, jednej z możliwych reprezentacji grafu, która zazwyczaj jest jego najefektywniejszym przedstawicielstwem. Wierzchołek startowy, narzucony przez parametr wejściowy, jest tym od którego zaczynane jest poszukiwanie ścieżki. Algorytm odwiedza kolejne krawędzie i usuwa je odkładając kolejno na listę, kierując się zasadą, że połączenie będące mostem (czyli taką krawędzią w grafie, której usunięcie zwiększy ilość jego spójnych składowych SS\footnote{ Jako spójną składową określamy taki podgraf grafu, który jesteśmy w stanie wyodrębnić z całości bez usuwania krawędzi}) usuwane jest w ostateczności. Program trwa, aż do odwiedzenia wszystkich krawędzi, a cykl Eulera, będącym rozwiązaniem algorytmu, jest listą kolejno odwiedzonych wierzchołków.
-
 \begin{algorithm}[caption={\textit{FleuryAlgorithm} wyszukujący ścieżkę w grafie nieskierowanym}, label={FleuryAlgorithm}]
-def FleuryAlgorithm(graph, startNode):
+	def FleuryAlgorithm(graph, startNode):
 	adjList = GraphHelper.getAdjList(graph)
 	EulerCycle = list()
 	
 	findNextNode(adjList, startNode, EulerCycle)
 	return EulerCycle
+\end{algorithm}	
+	UG, na którym wywołujemy \textit{FleuryAlgorithm} konwertowany przez prostą funkcję \textit{getAdjList} do listy sąsiedztwa, jednej z możliwych reprezentacji grafu, która zazwyczaj jest jego najefektywniejszym przedstawicielstwem. Wierzchołek startowy, narzucony przez parametr wejściowy, jest tym od którego zaczynane jest poszukiwanie ścieżki. Algorytm odwiedza kolejne krawędzie i usuwa je odkładając kolejno na listę, kierując się zasadą, że połączenie będące mostem (czyli taką krawędzią w grafie, której usunięcie zwiększy ilość jego spójnych składowych SS\footnote{ Jako spójną składową określamy taki podgraf grafu, który jesteśmy w stanie wyodrębnić z całości bez usuwania krawędzi}) usuwane jest w ostateczności. Program trwa, aż do odwiedzenia wszystkich krawędzi, a cykl Eulera, będącym rozwiązaniem algorytmu, jest listą kolejno odwiedzonych wierzchołków.
+
+\begin{algorithm}[caption={\textit{findNextNode} rekurencyjna funkcja pomocnicza dla \textit{FleuryAlgorithm} }, label={findNextNode}]
+	def findNextNode(adjList, n, EulerCycle):
+	EulerCycle.append(n)
+	for v in adjList[n]:
+	if isBridge(adjList, n, v):
+	removeEdge(adjList, n, v)
+	findNextNode(adjList, v, EulerCycle)
 \end{algorithm}
+
 
 	Implementacja problemu w pracy została podzielona na 3 główne funkcje: \textit{FleuryAlgorithm} przedstawiony jako nr \ref{FleuryAlgorithm}, który wywołuje rekurencyjną część oznaczoną jako algorytm \ref{findNextNode} oraz fragment sprawdzający, czy aktualnie sprawdzana krawędź jest mostem (alg. \ref{isBridge}).
  
-\begin{algorithm}[caption={\textit{findNextNode} rekurencyjna funkcja pomocnicza dla \textit{FleuryAlgorithm} }, label={findNextNode}]
-def findNextNode(adjList, n, EulerCycle):
-	EulerCycle.append(n)
-	for v in adjList[n]:
-		if isBridge(adjList, n, v):
-			removeEdge(adjList, n, v)
-			findNextNode(adjList, v, EulerCycle)
-\end{algorithm}
-	
 	W algorytmie \ref{isBridge}, w przypadku gdy ilość sąsiadów jest większa niż jeden, program najpierw posiłkuje się prostym algorytmem rekurencyjnym $DFS$ (przeszukiwanie w głąb$^{\cite{cormen}}$), który ma za zadanie wyznaczyć ilość spójnych składowych. Następnie usuwana jest sprawdzana krawędź i ponownie obliczana jest ilość SS. Finalnie przywraca się wcześniej wspomniane połączenie między-wierzchołkowe. W zależności, czy wartości obliczone są różne zwracana jest zmienna typu $Bool$, pozwalająca lub nie na poszukiwanie kolejnego wierzchołka w funkcji \textit{findNextNode}.
 	
+	Złożoność obliczeniowa szacowana jest na $O(V(V+E))$.
+
 \begin{algorithm}[caption={\textit{isBridge} rekurencyjna funkcja pomocnicza dla \textit{FleuryAlgorithm} }, label={isBridge}]
 def isBridge(adjList, u, v):
 	if len(adjList[u]) == 1:
@@ -511,10 +578,9 @@ def isBridge(adjList, u, v):
 		return cntBeforeRestoreEdge < cntAfterRestoreEdge
 
 \end{algorithm}
-	Złożoność obliczeniowa szacowana jest na $O(V(V+E))$.
-	
+	\newpage
 \subsubsection{Wizualizacja grafu nieskierowanego}
-	\begin{figure}[!htb]
+	\begin{figure}[H]
 			\centering
 		\subfloat[]{\label{f_DD}
 			\includegraphics[width=0.7\textwidth]{img/fluAlgo/flu_algo99.png}}		\quad
@@ -1036,7 +1102,7 @@ Wyniki drugiego z zaimplementowanych algorytmów do znajdowania cyklu Eulera dla
 			500 & 192001.6   	& 0.6641	\\ \hline				
 			700 & 387793.2		& 1.6977	\\ \hline
 			1000& 767803.0	    & 2.8085	\\ \hline
-			2000& 3003152.6	  	& 9.0027	\\ \hline
+			2000& 3003152.6	  	& 7.8537	\\ \hline
 		\end{tabular} 
 	}
 	\label{Tab:Hie_DiG}
@@ -1072,31 +1138,65 @@ Czasy do około 200 wierzchołków są bardzo podobne dla każdego badanego typu
 
 \par\indent
 
-	Algorytmy porównano tylko względem grafów nieskierowanych, ponieważ jeden z nich działa tylko na takich.
+	Algorytmy porównano względem grafów nieskierowanych, ponieważ jeden z nich działa tylko dla takich.
 	
 	Patrząc na wykresy z rysunku \ref{fh}, bez większej analizy jesteśmy w stanie określić bardziej optymalne rozwiązanie w szukaniu cyklu Eulera, zarówno dla modelu Wattsa–Strogatza i Barabási–Alberta, którym jest algorytm Hierholzera. 
 	
 	Należy wziąć pod uwagę, że przedstawiono tu porównanie tylko do 280 wierzchołków, ze względu na ograniczenia ilości rekurencji dla algorytmu Fleury'ego, a już widoczna jest znaczna przewaga drugiego z nich.
+	
+	
 	
 	Maksymalny czas obliczony dla funkcji Hierholzera przy 2000 wierzchołkach wynosił $t_{max} \approx 7.5$, dla trudniejszego do przeszukiwań modelu sieci Barabási–Alberta. Dla funkcji Fleury'ego czas przybliżony do $t_{max}$ osiągany jest już pomiędzy 180 węzłami sprawdzanymi, a 200.
 	
 
 
 \subsection{Graf rzeczywisty}
-\subsubsection{Algorytm Fleury'ego}
 \par\indent
-\subsubsection{Algorytm Hierholzera}
-\par\indent
+
+Dla grafu rzeczywistego z rysunku \ref{osm1G} wygenerowano cykle Eulera, przy pomocy funkcji Hierholzera. Stworzony graf miał parametry $n=211$, $e=852$, gdzie $n$ to liczba wierzchołków, a $e$ krawędzi. 
+
+Czas trwania algorytmu wynosił w przybliżeniu $t\approx0.0018$. Porównując wynik z tabelą \ref{Tab:Hie_DiG} można zauważyć, że dla podobnej ilości wierzchołków różnica ta jest rzędu $10^{-2}$, jednak złożoność tego algorytmu to $O(E)$, co oscyluje pomiędzy pierwszy, a drugim wierszem tabeli i zgodne jest z danymi testowymi.
+
+Zaprezentowano je na rysunku \ref{g_rzecz}
+
+\begin{figure}[!p]
+	\centering
+	\subfloat[]{\label{g_1}
+		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz1.png}}		
+	\quad
+	\subfloat[]{\label{g_2}
+		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz2.png}}
+	\quad	
+		\subfloat[]{\label{g_3}
+		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz3.png}}		
+	\quad
+	\subfloat[]{\label{g_4}
+		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz4.png}}
+	\quad	
+		\subfloat[]{\label{g_5}
+		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz5.png}}		
+	\quad
+	\subfloat[]{\label{g_6}
+		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz6.png}}
+	
+	\caption[]{Przebieg algorytmu Hierholzera na grafie powstałym z mapy rzeczywistej z rysunku \ref{osm1}, zaprezentowano niektóre z kroków w cyklu Eulera.}
+	\label{g_rzecz}
+\end{figure}	
+\captionsetup{justification=centering}
+
 
 % ======================= 5 =======================
 \newpage
 \section{Podsumowanie}
 \indent\par
-Fleury prosty w chuj do implementacji, ale słaby wydajnościowo
+Dwa programy rozwiązujące problem chińskiego listonosza obrane za cel pracy zostały zaimplementowane. Ich poprawność zilustrowano autorskim programem zaznaczającym przebieg szukanego cyklu Eulera oraz podsumowaniem testów rożnych modeli grafów, gdzie wyniki wyszły zgodne z estymowaną złożonością obliczeniową. Dzięki kilku typom danych testujących (sieci Barabási–Alberta i Wattsa–Strogatza oraz losowy graf skierowany) możliwe było szersze porównanie działania algorytmów, w zależności od typów połączeń, ilości wierzchołków, czy krawędzi w grafie. Ponadto udało się stworzyć graf z danych rzeczywistych, na którym wywołano jeden z napisanych algorytmów.
 
-Hierholzera zajebisty, szybki i przystosowany dla dwóch typów danych
+Funkcja konwertująca graf na eulerowski została zaimplementowana i pomimo braku wszystkich możliwych permutacji, określa najlepsze rozwiązanie na danym zbiorze, które jest wystarczające na potrzeby działań programów.
 
-Można by porównać jeszcze w jakiś sposób czasy rzeczywiste listonosza, po kontakcie z pocztą lub firmą kurierską.
+Algorytm Fleury'ego był znacznie prostszy do stworzenia, ale słabszy wydajnościowo. Problematyczny może być również w jego przypadku limit rekurencji uniemożliwiający zebranie większej ilości danych testowych na przeciętnej klasy sprzęcie.
+Funkcja Hierholzera rozwiązuje problemy zarówno dla grafów skierowany i nieskierowanych, jest znacznie szybsza, co całkowicie przeważa na jej korzyść.
+
+Innym ciekawym rozszerzeniem pracy mogłoby być porównanie czasów oraz ścieżek wygenerowanych dla grafów rzeczywistych z danymi statystycznymi otrzymanymi po kontakcie z placówką pocztową lub firmą kurierską.
 
 
 \addcontentsline{toc}{section}{\protect\numberline{}Literatura}
@@ -1179,6 +1279,15 @@ Można by porównać jeszcze w jakiś sposób czasy rzeczywiste listonosza, po k
 		
 	[dostęp: 20.12.2020]
 
+	% 3.3
+	\bibitem{xml}
+	https://www.w3.org/XML/ 	[dostęp: 25.12.2020]
+	
+	\bibitem{haver}
+	https://www.movable-type.co.uk/scripts/latlong.html 
+	
+	
+	[dostęp: 25.12.2020]
 	%3.4
 	\bibitem{cormen}
 	T. H. Cormen, Ch. E. Leiserson, R. L. Rivest, C. Stein, \textit{Wprowadzenie do algorytmów}, Wydawnictwo Naukowe PWN, Warszawa 2012

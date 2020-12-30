@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 
-def draw(graph, number, eulerCycle=None, printFakeEdges=False, ranges=None):
+def draw(graph, eulerCycle=None, printFakeEdges=False, ranges=None, numer = None):
     if ranges is None:  #ranges = [xmin, xmax, ymin, ymax]
         ranges = []
     if eulerCycle is None:
@@ -29,19 +29,21 @@ def draw(graph, number, eulerCycle=None, printFakeEdges=False, ranges=None):
         plt.xlim(ranges[0],ranges[1])
         plt.ylim(ranges[2], ranges[3])
 
-    # plt.show()
-    name = 'praca_inz/img/heiAlgo/DIRhei_algo' + str(number) + '.png'
-    # plt.savefig(name, figsize=(1280, 960))
-
-    fig = plt.gcf()
-    fig.savefig(name, figsize=(1280, 960))
+    if not numer:
+        plt.show()
+    else:
+        name = 'vis/realWYN' + str(numer) + '.png'
+        plt.savefig(name, figsize=(1280, 960))
+        #
+        # fig = plt.gcf()
+        # fig.savefig(name, figsize=(1280, 960))
 
 
 def drawNodesAndLabels(address, graph, position):
     if address:
         colors, size = setDataForRealGraph(graph)
         nx.draw_networkx_nodes(graph, position, node_size=size, node_color=colors)
-        nx.draw_networkx_labels(graph, position, labels=address, font_size=4)
+        # nx.draw_networkx_labels(graph, position, labels=address, font_size=4)
     else:
         colors, size = setDataForRandomGraph(graph)
         nx.draw_networkx_nodes(graph, position, node_size=size, node_color=colors)
@@ -51,7 +53,7 @@ def drawNodesAndLabels(address, graph, position):
 def drawRegularEdges(isRealGraph, fakeEdges, graph, position, eulerCycle):
     if isRealGraph:
         nx.draw_networkx_edges(graph, position,
-                               arrows=True, width=0.3, arrowsize=8, arrowstyle='->',
+                               arrows=True, width=0.4, arrowsize=6, arrowstyle='-|>',
                                edgelist=set(graph.edges) - set(fakeEdges))
     else:
         nx.draw_networkx_edges(graph, position,
@@ -62,16 +64,16 @@ def drawRegularEdges(isRealGraph, fakeEdges, graph, position, eulerCycle):
 def drawFakeEdges(graph, position, printFakeEdges):
     fakeEdges = []
 
-    for edge in graph.edges(data=True):
-        if edge[2]['isFakeRoute']:
-            fakeEdges.append((edge[0], edge[1], 1))
-
-    if printFakeEdges:
-        nx.draw_networkx_edges(graph, position,
-                               arrows=True, width=2.5, arrowsize=15,
-                               edgelist=fakeEdges, edge_color='blue')#,
-                               # connectionstyle="arc3,rad=rrr".replace('rrr',
-                               #                                        str(0.3 * random.uniform(-1.0, 1.0))))
+    # for edge in graph.edges(data=True):
+    #     if edge[2]['isFakeRoute']:
+    #         fakeEdges.append((edge[0], edge[1], 1))
+    #
+    # if printFakeEdges:
+    #     nx.draw_networkx_edges(graph, position,
+    #                            arrows=True, width=2.5, arrowsize=15,
+    #                            edgelist=fakeEdges, edge_color='blue')#,
+    #                            # connectionstyle="arc3,rad=rrr".replace('rrr',
+    #                            #                                        str(0.3 * random.uniform(-1.0, 1.0))))
 
     return fakeEdges
 
@@ -79,10 +81,10 @@ def drawFakeEdges(graph, position, printFakeEdges):
 def drawHighlightedEulerCycleEdges(graph, position, eulerCycle):
     if eulerCycle:
         nx.draw_networkx_edges(graph, position, edge_color='white',
-                               arrows=True, width=3, arrowsize=25,
+                               arrows=True, width=3, arrowsize=30,
                                edgelist=set(eulerCycle))
         nx.draw_networkx_edges(graph, position, edge_color='red',
-                               arrows=True, width=0.8, arrowsize=10,
+                               arrows=True, width=0.8, arrowsize=5,
                                edgelist=set(eulerCycle[:-1]))
 
         nx.draw_networkx_edges(graph, position, edge_color='red',
@@ -104,7 +106,7 @@ def setDataForRandomGraph(graph):
 def setDataForRealGraph(graph):
     for idx in graph.nodes:
         graph.nodes[idx]['color'] = 'green' if graph.nodes[idx]['address'] == "" else 'grey'
-        graph.nodes[idx]['size'] = 0.1 if graph.nodes[idx]['address'] == "" else 100
+        graph.nodes[idx]['size'] = 20 if graph.nodes[idx]['address'] == "" else 200
         if graph.nodes[idx]['isPostOffice']:
             graph.nodes[idx]['color'] = 'red'
 

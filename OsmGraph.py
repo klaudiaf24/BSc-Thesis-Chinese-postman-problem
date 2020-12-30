@@ -39,6 +39,17 @@ class OsmGraph:
 
         self.removeUnusedStreetNodes()
 
+        self.makeStrongConnected()
+
+        self.relabelNodes()
+        # if not gh.isEulerianGraph(self.graph):
+        #     try:
+        gh.makeEulerianDiGraph(self.graph)
+        #     except:
+        #         print("Stworzenie grafu jest niemożliwe")
+        #         exit(-1)
+
+    def makeStrongConnected(self):
         gen = networkx.strongly_connected_components(self.graph)
         maxComponent = None
         maxLen = -1
@@ -46,17 +57,19 @@ class OsmGraph:
             if len(s) > maxLen:
                 maxLen = len(s)
                 maxComponent = s
-
         nodesToRemove = set(self.graph.nodes()) - set(maxComponent)
         for node in nodesToRemove:
             self.graph.remove_node(node)
 
-        # if not gh.isEulerianGraph(self.graph):
-        #     try:
-        #         gh.makeEulerianDiGraph(self.graph)
-        #     except:
-        #         print("Stworzenie grafu jest niemożliwe")
-        #         exit(-1)
+    def relabelNodes(self):
+        idx = 0
+        mapping = dict()
+        for node in self.graph.nodes():
+            mapping[node] = idx
+            idx += 1
+
+        self.graph = networkx.relabel_nodes(self.graph, mapping, False)
+        a = 1
 
     def getRange(self):  # ranges = [xmin, xmax, ymin, ymax]
         return [float(self.osm.xmin), float(self.osm.xmax), float(self.osm.ymin), float(self.osm.ymax)]
@@ -128,101 +141,21 @@ class OsmGraph:
                 buildings.append(node)
         return buildings
 
-    def getTheNearBuildingInTheSameStreetAndDistance(self, node1, node2, path):
-        epsilon = 1
-        step = 0.001
-        buildingId = -1
-        minDist = float('inf')
-        for x in numpy.arange(node1.x, node2.x, step):
-            y = self.getEquationOfStreet(
-                x, node1.x, node1.y, node2.x, node2.y)
-            for node in self.graph.nodes(data=True):
-                if node[0] not in path:
-
-                    buildingOsm = self.getNodeByOsmId(node[1]['osmId'])
-                    dist = getDistance(
-                        buildingOsm.x, buildingOsm.y, x, y)
-                    if dist < minDist and dist < epsilon:
-                        minDist = dist
-                        buildingId = node[0]
-        return buildingId
-
     def setStreet(self):
-        dictOfStreets = dict()
         for highway in self.getHighwayList():
-            if highway.tags['name'] not in dictOfStreets:
-                dictOfStreets[highway.tags['name']] = list()
-            dictOfStreets[highway.tags['name']].append(highway)
+            startIdx, endIdx = -1, -1
 
-        for key in dictOfStreets:
-            nds = []
-            toRemove = []
-            notAdded = []
-            for way in dictOfStreets[key]:
-                if 'oneway' in way.tags:
-                    self.street.append(way)
-                    toRemove.append(way)
-                    continue
-                if not nds:
-                    nds.extend(way.nds)
-                else:
-                    if way.nds[0] == nds[0]:
-                        for idx in range(1, len(way.nds)):
-                            nds.insert(0, way.nds[idx])
-                    elif way.nds[-1] == nds[0]:
-                        for idx in range(1, len(way.nds)):
-                            nds.insert(0, way.nds[len(way.nds) - idx - 1])
-                    elif way.nds[0] == nds[-1]:
-                        nds.pop(-1)
-                        nds.extend(way.nds)
-                    elif way.nds[-1] == nds[-1]:
-                        for idx in range(1, len(way.nds)):
-                            nds.append(way.nds[idx])
-                    else:
-                        notAdded.append(way)
-                        continue
-                    toRemove.append(way)
+            for idx in range(0, len(highway.nds) - 1):
+                if self.isCorrectNode(highway.nds[idx]):
+                    startIdx = idx
+                    break
 
-            notAdded2 = []
-            while notAdded:
-                for way in notAdded:
-                    if way.nds[0] == nds[0]:
-                        for idx in range(1, len(way.nds)):
-                            nds.insert(0, way.nds[idx])
-                    elif way.nds[-1] == nds[0]:
-                        for idx in range(1, len(way.nds)):
-                            nds.insert(0, way.nds[len(way.nds) - idx - 1])
-                    elif way.nds[0] == nds[-1]:
-                        nds.pop(-1)
-                        nds.extend(way.nds)
-                    elif way.nds[-1] == nds[-1]:
-                        for idx in range(1, len(way.nds)):
-                            nds.append(way.nds[idx])
-                    else:
-                        notAdded2.append(way)
-                for _ in notAdded2:
-                    notAdded.remove(_)
-                notAdded2 = []
-            for _ in toRemove:
-                dictOfStreets[key].remove(_)
+            for idx in range(len(highway.nds) - 1, 0, -1):
+                if self.isCorrectNode(highway.nds[idx]):
+                    endIdx = idx
+                    break
 
-            dictOfStreets[key][0].nds = nds
-            self.street.append(dictOfStreets[key][0])
-
-        # for highway in self.getHighwayList():
-        #     startIdx, endIdx = -1, -1
-        #
-        #     for idx in range(0, len(highway.nds) - 1):
-        #         if self.isCorrectNode(highway.nds[idx]):
-        #             startIdx = idx
-        #             break
-        #
-        #     for idx in range(len(highway.nds) - 1, 0, -1):
-        #         if self.isCorrectNode(highway.nds[idx]):
-        #             endIdx = idx
-        #             break
-        #
-        #     self.splitStreet(startIdx, endIdx, highway)
+            self.splitStreet(startIdx, endIdx, highway)
 
     def splitStreet(self, startIdx, endIdx, highway):
         # split

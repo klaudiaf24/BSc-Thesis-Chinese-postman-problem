@@ -11,14 +11,14 @@ import GraphHelper
 import time
 
 
-def showPath(path, graph):
+def showPath(path, graph, ranges = []):
     edgesToHighlight = []
     visitedEdge = dict()
     for node in graph.nodes():
         for neighbour in list(graph.neighbors(node)):
             for level in list(graph[node][neighbour]):
                 visitedEdge[(node, neighbour, level)] = False
-    vis.draw(graph, 0, None, True)
+
     number = 1
     for id in range(1, len(path)):
         level = 0
@@ -27,7 +27,7 @@ def showPath(path, graph):
         visitedEdge[((path[id - 1], path[id], level))] = True
 
         edgesToHighlight.append((path[id - 1], path[id], level))
-        vis.draw(graph, number, edgesToHighlight, True)
+        vis.draw(graph, edgesToHighlight, True, ranges, number)
         number += 1
 
 
@@ -46,26 +46,42 @@ if __name__ == "__main__":
 
     ########################################################################################################
 
-    # graph, ranges = osmh.getGraphFromOsm(left=19.90689, bottom=50.07160, right=19.91086, top=50.07291)  # TEN
-    # graph, ranges = osmh.getGraphFromOsm(left=19.91864, bottom=50.06933, right=19.92585, top=50.07442)  # TEN
-    # graph = graph.to_undirected()
+    # graph, ranges = osmh.getGraphFromOsm(left=19.90110, bottom=50.07229, right=19.90473, top=50.07429)
+    graph, ranges = osmh.getGraphFromOsm(left=19.90040, bottom=50.07430, right=19.90448, top=50.07620)  # TEN
+
+    # graph, ranges = osmh.getGraphFromOsm(left=20.04038, bottom=50.05407, right=20.04790, top=50.05817)
+
+    #graph = graph.to_undirected()
 
     ########################################################################################################
     # graph = rg.getRandomGraphWithBarabasiAlbertModel(7, 5)
     # graph = rg.getRandomGraphWithWattsStrogatzModel(6, 4, 0)
     # graph = rg.getRandomDiGraph(700, 0.5)
-    graph = nx.fast_gnp_random_graph(2000, 0.75, seed=1, directed=True)
+    # graph = nx.fast_gnp_random_graph(2000, 0.75, seed=1, directed=True)
+
+    print(nx.is_eulerian(graph))
     print(len(graph.nodes))
     print(len(graph.edges))
-    # vis.draw(graph, 99, None, False)
-    # vis.draw(graph, printFakeEdges=True)
-    #
-    # start = time.time()
-    # path = ha.HierholzerAlgorithm(graph, True, startNode)
-    # end = time.time()
-    # print(end - start)
-    # print(path)
-    # showPath(path, graph)
+
+
+    vis.draw(graph, printFakeEdges=True, ranges=ranges)
+    start = time.time()
+    path = ha.HierholzerAlgorithm(graph, True, startNode)
+    end = time.time()
+
+    toRemove = []
+    last = None
+    for id in range(0, len(path)):
+        if last == path[id]:
+            toRemove.append(id)
+        last = path[id]
+
+    for _ in sorted(toRemove, reverse=True):
+        del path[_]
+
+    print(end - start)
+    print(path)
+    showPath(path, graph, ranges)
 
     # #
     # start = time.time()

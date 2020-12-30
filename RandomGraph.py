@@ -49,8 +49,8 @@ def improveIfNecessaryGraph(graph):
 
 
 def setAttributes(graph):
-    position = nx.circular_layout(graph, scale=1)
-    # position = nx.spring_layout(graph, k=0.4, iterations=20)
+    # position = nx.circular_layout(graph, scale=1)
+    position = nx.spring_layout(graph, k=0.4, iterations=20)
     nx.set_node_attributes(graph, position, 'pos')
     addRandomWeight(graph)
     setPostOfficeOnFirstNode(graph)
