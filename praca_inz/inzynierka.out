@@ -1,0 +1,30 @@
+\BOOKMARK [1][-]{section.1}{Wstep}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Wprowadzenie}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Cel pracy}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Problemu chinskiego listonosza}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Cykl Eulera}{section.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.4.1}{Graf Eulera}{subsection.1.4}% 6
+\BOOKMARK [2][-]{subsection.1.5}{Sieci z\233ozone}{section.1}% 7
+\BOOKMARK [3][-]{subsubsection.1.5.1}{Siec Barab\341si\205Albert}{subsection.1.5}% 8
+\BOOKMARK [3][-]{subsubsection.1.5.2}{Siec Wattsa\205Strogatza}{subsection.1.5}% 9
+\BOOKMARK [1][-]{section.2}{Narzedzia}{}% 10
+\BOOKMARK [1][-]{section.3}{Algorytmy i implementacja}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Modyfikacja do grafu Eulera}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Modyfikacja grafu nieskierowanego}{subsection.3.1}% 13
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Modyfikacja grafu skierowanego}{subsection.3.1}% 14
+\BOOKMARK [2][-]{subsection.3.2}{Graf rzeczywisty}{section.3}% 15
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Implementacja grafu rzeczywistego}{subsection.3.2}% 16
+\BOOKMARK [2][-]{subsection.3.3}{Algorytm Fleury\220ego}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Wizualizacja grafu nieskierowanego}{subsection.3.3}% 18
+\BOOKMARK [2][-]{subsection.3.4}{Algorytm Hierholzera}{section.3}% 19
+\BOOKMARK [3][-]{subsubsection.3.4.1}{Wizualizacja grafu nieskierowanego}{subsection.3.4}% 20
+\BOOKMARK [3][-]{subsubsection.3.4.2}{Wizualizacja grafu skierowanego}{subsection.3.4}% 21
+\BOOKMARK [1][-]{section.4}{Wyniki}{}% 22
+\BOOKMARK [2][-]{subsection.4.1}{Generowanie graf\363w losowych}{section.4}% 23
+\BOOKMARK [2][-]{subsection.4.2}{Algorytm Fleury'ego}{section.4}% 24
+\BOOKMARK [2][-]{subsection.4.3}{Algorytm Hierholzera}{section.4}% 25
+\BOOKMARK [2][-]{subsection.4.4}{Algorytm Fleury'ego vs. Hierholzera}{section.4}% 26
+\BOOKMARK [2][-]{subsection.4.5}{Graf rzeczywisty}{section.4}% 27
+\BOOKMARK [1][-]{section.5}{Podsumowanie}{}% 28
+\BOOKMARK [1][-]{section.5}{Dane testowe}{}% 29
+\BOOKMARK [1][-]{table.caption.32}{Literatura}{}% 30

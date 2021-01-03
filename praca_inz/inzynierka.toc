@@ -1,29 +1,30 @@
-\contentsline {section}{\numberline {1}Wstęp}{7}%
-\contentsline {subsection}{\numberline {1.1}Wprowadzenie}{7}%
-\contentsline {subsection}{\numberline {1.2}Cel pracy}{7}%
-\contentsline {subsection}{\numberline {1.3}Problemu chińskiego listonosza}{8}%
-\contentsline {subsection}{\numberline {1.4}Cykl Eulera}{8}%
-\contentsline {subsubsection}{\numberline {1.4.1}Graf Eulera}{9}%
-\contentsline {subsection}{\numberline {1.5}Sieci złożone}{10}%
-\contentsline {subsubsection}{\numberline {1.5.1}Sieć Barabási–Albert}{10}%
-\contentsline {subsubsection}{\numberline {1.5.2}Sieć Wattsa–Strogatza}{12}%
-\contentsline {section}{\numberline {2}Narzędzia}{16}%
-\contentsline {section}{\numberline {3}Algorytmy i implementacja}{17}%
-\contentsline {subsection}{\numberline {3.1}Modyfikacja do grafu Eulera}{17}%
-\contentsline {subsubsection}{\numberline {3.1.1}Modyfikacja grafu nieskierowanego}{17}%
-\contentsline {subsubsection}{\numberline {3.1.2}Modyfikacja grafu skierowanego}{19}%
-\contentsline {subsection}{\numberline {3.2}Graf rzeczywisty}{20}%
-\contentsline {subsubsection}{\numberline {3.2.1}Implementacja grafu rzeczywistego}{22}%
-\contentsline {subsection}{\numberline {3.3}Algorytm Fleury’ego}{25}%
-\contentsline {subsubsection}{\numberline {3.3.1}Wizualizacja grafu nieskierowanego}{27}%
-\contentsline {subsection}{\numberline {3.4}Algorytm Hierholzera}{30}%
-\contentsline {subsubsection}{\numberline {3.4.1}Wizualizacja grafu nieskierowanego}{31}%
-\contentsline {subsubsection}{\numberline {3.4.2}Wizualizacja grafu skierowanego}{34}%
-\contentsline {section}{\numberline {4}Wyniki}{38}%
-\contentsline {subsection}{\numberline {4.1}Generowanie grafów losowych}{38}%
-\contentsline {subsection}{\numberline {4.2}Algorytm Fleury'ego}{42}%
-\contentsline {subsection}{\numberline {4.3}Algorytm Hierholzera}{45}%
-\contentsline {subsection}{\numberline {4.4}Algorytm Fleury'ego vs. Hierholzera}{48}%
-\contentsline {subsection}{\numberline {4.5}Graf rzeczywisty}{50}%
-\contentsline {section}{\numberline {5}Podsumowanie}{52}%
-\contentsline {section}{\numberline {}Literatura}{52}%
+\contentsline {section}{\numberline {1}Wstęp}{7}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Wprowadzenie}{7}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Cel pracy}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Problemu chińskiego listonosza}{8}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Cykl Eulera}{8}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Graf Eulera}{9}{subsubsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.5}Sieci złożone}{10}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Sieć Barabási–Albert}{10}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}Sieć Wattsa–Strogatza}{12}{subsubsection.1.5.2}%
+\contentsline {section}{\numberline {2}Narzędzia}{16}{section.2}%
+\contentsline {section}{\numberline {3}Algorytmy i implementacja}{17}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Modyfikacja do grafu Eulera}{17}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Modyfikacja grafu nieskierowanego}{17}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Modyfikacja grafu skierowanego}{19}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}Graf rzeczywisty}{20}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Implementacja grafu rzeczywistego}{22}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Algorytm Fleury’ego}{25}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Wizualizacja grafu nieskierowanego}{26}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}Algorytm Hierholzera}{30}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Wizualizacja grafu nieskierowanego}{31}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Wizualizacja grafu skierowanego}{34}{subsubsection.3.4.2}%
+\contentsline {section}{\numberline {4}Wyniki}{39}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Generowanie grafów losowych}{39}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Algorytm Fleury'ego}{41}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Algorytm Hierholzera}{43}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Algorytm Fleury'ego vs. Hierholzera}{45}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Graf rzeczywisty}{46}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Podsumowanie}{50}{section.5}%
+\contentsline {section}{\numberline {}Dane testowe}{51}{section.5}%
+\contentsline {section}{\numberline {}Literatura}{51}{table.caption.32}%

@@ -12,6 +12,7 @@
 \usepackage{cellspace}
 \usepackage[top=1.3in,bottom=1.3in,right=1in,left=1in,headheight=95pt,headsep=-0.5cm]{geometry}
 \usepackage{color}
+\usepackage{hyperref}
 \usepackage{listings}
 \usepackage{caption}
 \usepackage{cmap}
@@ -132,7 +133,7 @@
 	Skupiając się na praktycznym aspekcie GRP należy wziąć pod uwagę jeden z bardziej znanych przypadków rozważań - problem chińskiego listonosza (ang. \textit{Chinese Postman Problem})$^{\cite{arcRoutingProblemsPart1}}$. 
 
 
-	W życiu codziennym wiele zawodów związanych jest wyznaczaniem trasy na tle procesów logistycznych, wśród nich różnego rodzaju dostawca, kurier czy właśnie listonosz. Ich szlakiem docelowym jest droga zawierająca w sobie każdą ulicę danego obszaru przynajmniej raz. Optymalnym rozwiązaniem CPP byłoby uniknięcie ponownych przejść jedną ścieżką, jednak w sytuacjach rzeczywistych jest to często niemożliwe.
+	W życiu codziennym wiele zawodów związanych jest z wyznaczaniem trasy na tle procesów logistycznych, wśród nich różnego rodzaju dostawcy, kurierzy czy właśnie listonosze. Ich szlakiem docelowym jest droga zawierająca w sobie każdą ulicę danego obszaru przynajmniej raz. Optymalnym rozwiązaniem CPP byłoby uniknięcie ponownych przejść jedną ścieżką, jednak w sytuacjach rzeczywistych jest to często niemożliwe.
 
 \subsection{Cel pracy}
 	\indent\par
@@ -141,9 +142,10 @@
 
 
 	Jeden z algorytmów przedstawiony w pracy dedykowany jest MG. Swoje zastosowanie ma, kiedy przebieg trasy listonosza uwarunkowany jest czynnikami zewnętrznymi tj. drogami jedno- lub dwukierunkowymi. 
-	W przypadku pieszego ruchu, w którym sposób przejścia jest  dowolny, problem dotyczy UG. Zaimplementowano dla niego drugi z schematów umożliwiający wyznaczenie najbardziej efektywnej trasy. Graf rzeczywisty tworzony jest z małych fragmentów miasta, dlatego założono, że poruszać się będzie na nim tylko jeden listonosz. 
+	W przypadku pieszego ruchu, w którym sposób przejścia jest  dowolny, problem dotyczy UG. Zaimplementowano dla niego drugi z schematów umożliwiający wyznaczenie najbardziej efektywnej trasy. Graf rzeczywisty tworzony jest z małych fragmentów miasta, dlatego założono, że poruszać się będzie po nim tylko jeden listonosz. 
 
-	Dla sprawdzenia poprawności oraz wyznaczenia złożoności algorytmów wygenerowano losowe sieci, które umożliwiły szersze ich przetestowanie. 
+
+	Dla sprawdzenia poprawności oraz wyznaczenia złożoności algorytmów wygenerowano losowe sieci, które pozwoliły na szersze ich przetestowanie. 
 	Stworzono również program do wizualizacji grafów, oraz kolejnych etapów ścieżek, umożliwiający graficzne prześledzenie działania schematów.
 
 
@@ -165,13 +167,14 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.5\textwidth]{img/wstep/w1}
-		\caption[]{Graf przestawiający problem mostów w Królewcu}
+		\caption[]{Graf przestawiający problem mostów w Królewcu\footnotemark.}
 		\label{krolewiec}
 	\end{figure}
-
+	\footnotetext{Graf wygenerowany przy pomocy strony internetowej \href{https://creately.com/}{https://creately.com/}}
+	
 	Mapa, którą rozważał, sprowadzała się do grafu z rysunku \ref{krolewiec}, gdzie krawędzie odpowiadają siedmiu mostom. Wykazał, że znalezienie EC jest możliwe tylko dla grafów spełniających określone warunki, nazwanych na jego cześć grafami Eulera. Była to jedna z pierwszych prac związanych z teorią grafów.
 	
-	\subsubsection{Graf Eulera}
+	\subsubsection{Graf Eulera} \label{grafEulera}
 	\begin{theorem}[Euler, 1736]
 		\label{twEuleraUG}
 		Graf spójny jest eulerowski wtedy i tylko wtedy, gdy
@@ -201,7 +204,7 @@
  
  	co oznaczało, że sieć WWW ma własności fraktalne.
 
- 	Zauważono, że większość układów rzeczywistych również charakteryzuje się rozkładem podobnym do równania \ref{eqn:rozkladP}. Szerszą analizę i reguły tworzenia sieci tego typu panowie Albert i Barabasi przedstawili w swojej pracy zatytułowanej \textit{Emergence of scaling in random networks}$^{\cite{barabasiAlbert}}$. Ustalili, że rozkład \ref{eqn:rozkladP} wynika z wzrostu sieci i reguły związanej z preferencyjnym dołączaniem węzłów. Model o takich zależnościach i rozkładzie nazwano na ich część.
+ 	Zauważono, że większość układów rzeczywistych również charakteryzuje się rozkładem podobnym do równania \ref{eqn:rozkladP}. Szerszą analizę i reguły tworzenia sieci tego typu panowie Albert i Barabasi przedstawili w swojej pracy zatytułowanej \textit{Emergence of scaling in random networks}$^{\cite{barabasiAlbert}}$. Ustalili, że rozkład \ref{eqn:rozkladP} wynika ze wzrostu sieci i reguły związanej z preferencyjnym dołączaniem węzłów.
  	
  
 	Formułowanie ewoluującej sieci polega na stopniowym jej rozroście w każdym momencie czasowym. Proces rozpoczęty w chwili zerowej składa się z grafu zawierającego $m_0$ połączonych wierzchołków. Podczas kolejnych kroków czasowych nowo dodawany węzeł łączony jest z $m$ innymi, istniejącymi już wierzchołkami.	Szansa, że świeżo utworzony wierzchołek połączony zostanie krawędzią do starego węzła jest proporcjonalne do stopnia węzła $k_i$:
@@ -238,16 +241,16 @@
 	\end{figure}
  	
  	
- 	Algorytm posiłkowy, z którego skorzystano w pracy, tworzący grafy w wyżej opisanym modelu to \textit{barabasi\char`_albert\char`_graph}, zaczerpnięto go z biblioteki \textit{Networkx} szerzej opisanej w rozdziale \ref{narzedzia}.
+ 	Algorytm, z którego skorzystano w pracy, tworzący grafy w wyżej opisanym modelu to \textit{barabasi\char`_albert\char`_graph}, zaczerpnięto go z biblioteki \textit{Networkx} szerzej opisanej w rozdziale \ref{narzedzia}.
 	
 	
 \subsubsection{Sieć Wattsa–Strogatza} \label{WSWS}
 \indent\par
-	W 1967 r. psycholog Stanley Milgram przeprowadził eksperyment \textit{Small-world project}$^{\cite{smallWorldProj}}$, który opisuje połączenia w dużej społeczności. Zaobserwował on, że większość osób potrzebuje niewielkiej ilości przyjaciół, którzy mogą przedstawić ich swoim znajomym, umożliwiając poznanie całej badanej grupy. Wyniki eksperymentu nazwano \textit{hipotezą o małym świecie}, co oznacza, że każdego człowieka łączy stosunkowo niewielka liczba pośredników w danym społeczeństwie.
+	W 1967 r. psycholog Stanley Milgram przeprowadził eksperyment \textit{Small-world project}$^{\cite{smallWorldProj}}$, który opisuje połączenia w dużej społeczności. Zaobserwował on, że większość osób potrzebuje niewielkiej liczby przyjaciół, którzy mogą przedstawić ich swoim znajomym, umożliwiając poznanie całej badanej grupy. Wyniki eksperymentu nazwano \textit{hipotezą o małym świecie}, co oznacza, że każdego człowieka łączy stosunkowo niewielka liczba pośredników w danym społeczeństwie.
 	
-	Charakterystyka modelu grafu, którego konsekwencja to zjawisko zaobserwowanego przez Milgrama, została zaproponowana w 1998 r. przez Duncana Wattsa i Stephena Strogatza w \textit{Collective dynamics of ‘small-world’ networks}$^{\cite{wattsS_bib}}$, na których część nazwano topologię sieci z opisanymi przez nich typami połączeń. 
+	Charakterystyka modelu grafu, która wyjaśnia zjawisko zaobserwowane przez Milgrama, została zaproponowana w 1998 r. przez Duncana Wattsa i Stephena Strogatza w pracy \textit{Collective dynamics of ‘small-world’ networks}$^{\cite{wattsS_bib}}$. 
 	
-	Model strukturalny powstaje z sieci regularnej, w której wprowadzona zostaje randomizacja wierzchołków. Ponadto, aby został zakwalifikowany do kategorii \textit{small-world}, jej parametry: współczynnik sklastrowania ${C_g}^{\Delta}$ zadany wzorem
+	Struktura grafy powstaje z sieci regularnej, w której wprowadzona zostaje randomizacja wierzchołków. Ponadto, aby została ona zakwalifikowany do kategorii \textit{small-world}, jej parametry: współczynnik klastrowania ${C_g}^{\Delta}$ zadany wzorem
 	\begin{equation}
 		\label{klastracja}
 		{C_g}^{\Delta}  = {{3t} \over {k}},
@@ -280,7 +283,7 @@
 		O sieci $G$ mówi się, że jest siecią \textit{małego świata}, jeżeli ${S}^{\Delta} > 1$, \\gdzie \indent\par${S}^{\Delta} = {{{\gamma_g}^{\Delta}} \over {\lambda_g}}$.
 	\end{theorem}
 
-	Współczynnik sklastrowania określa stopnień wykorzystania wszystkich możliwych połączeń międzywęzłowych. $C$ w praktyce pozwala na ocenienie stopnia oddalenia pomiędzy wierzchołkami$^{\cite{wlasnSieciZloz}}$.
+	Współczynnik klastrowania określa stopnień wykorzystania wszystkich możliwych połączeń międzywęzłowych. $C$ w praktyce pozwala na ocenienie stopnia oddalenia pomiędzy wierzchołkami$^{\cite{wlasnSieciZloz}}$.
 	
 	 Algorytm generujący grafy o modelu Wattsa–Strogatza wykorzystany w pracy to \textit{watts\_strogatz\_graph}, który podobnie jak model \ref{BarabasiAlbert} pochodzi z biblioteki \textit{Networkx}.
 
@@ -325,12 +328,12 @@
 \section{Narzędzia} \label{narzedzia}
 
 \indent\par
-	Aplikacja w całości została zaimplementowana w Pythonie$^{\cite{python}}$, ze względu na jego prostotę i czytelność, które ułatwiały znacznie pracę. Innym atrybutem przemawiającym za tym językiem jest duża ilość bibliotek związanych z teorią grafów. Jedna z nich została wykorzystana przy tworzeniu projektu, m. in. do wyliczania najkrótszych ścieżek, ale również przy tworzeniu losowych grafów.
+	Aplikacja w całości została zaimplementowana w Pythonie$^{\cite{python}}$, ze względu na jego prostotę i czytelność, które ułatwiały znacznie pracę. Inną kwestią przemawiającą za tym językiem jest dobrze udokumentowana, ciągle rozwijająca się biblioteka związana z teorią grafów. Kilka algorytmów pochodzących z niej zostało wykorzystane przy pisaniu projektu, m. in. do wyliczania najkrótszych ścieżek przy tworzeniu losowych grafów.
 
 	Biblioteki użyte w pracy:
 	\begin{itemize}
-		\item \textit{Networkx}$^{\cite{networkx}}$ - biblioteka w języku Python używana przy badaniu i tworzeniu dużych grafów i sieci. Wykorzystana została w algorytmie konwertującym graf do takiego, który posiada ścieżkę Eulera opisaną w \ref{SciezkaEulera} i podczas tworzenia przypadkowego digrafu oraz sieci złożonych z podpunktu \ref{SieciZlozone}.
-		\item \textit{Matplotlib}$^{\cite{matplotlib}}$ - jedna z najbogatszych bibliotek do tworzenia wykresów w języku Python. W pracy gównie wykorzystano zawarte w niej API \textit{pylab} wykorzystujące prosty interface analogiczny do środowiska MATLAB$^{\cite{matlab}}$.
+		\item \textit{Networkx}$^{\cite{networkx}}$ - biblioteka w języku Python używana przy badaniu i tworzeniu dużych grafów i sieci. Wykorzystana została w algorytmie konwertującym graf do takiego, który posiada ścieżkę Eulera opisaną w \ref{SciezkaEulera} i podczas tworzenia przypadkowego grafu skierowanego oraz sieci złożonych z podpunktu \ref{SieciZlozone}.
+		\item \textit{Matplotlib}$^{\cite{matplotlib}}$ - jedna z najbogatszych bibliotek do tworzenia wykresów w języku Python. W pracy gównie posłużono się zawartym w niej API \textit{pylab} wykorzystującym prosty interface analogiczny do środowiska MATLAB$^{\cite{matlab}}$.
 	\end{itemize}
 
 	Inną istotną rzeczą użytą w projekcie to mapa świata OpenStreetMap (OSM)$^{\cite{openstreetmap}}$, która zbudowana jest z danych gromadzonych przez szeroką społeczność. Dowolna osoba może przyczynić się do jej rozwoju poprzez dostarczenie informacji geograficznych zbieranych przez urządzenia z odbiornikami GPS lub zdjęcia satelitarne. Dane w niej są udostępnione za darmo do ogólnego użytku.
@@ -342,7 +345,7 @@
 \newpage
 \section{Algorytmy i implementacja}
 
-\subsection{Modyfikacja do grafu Eulera}
+\subsection{Modyfikacja do grafu Eulera} \label{modyfikacja}
 \indent\par
 	Algorytmy Fleury’ego i Hierholzera mające wyznaczyć ścieżki zakładają, że obiekty, które przeszukują, są grafami Eulera, co opisano szerzej w rozdziale \ref{SciezkaEulera}. Ponieważ dane testowe każdego rodzaju (losowy DG, sieci o modelu Barabásiego–Alberta oraz Wattsa–Strogatza) tworzone są randomowo, przez funkcje biblioteczne \textit{Networkx}, wymagana jest ich modyfikacja, gdyby nie było w nich cyklu Eulera. Na potrzeby tych warunków przeprowadzono implementacje dwóch algorytmów. 
 	
@@ -373,7 +376,7 @@ def makeEulerianGraph(graph):
 	appendFakeEdges(graph, minPath)
 \end{algorithm}
 
-	W idealnych warunkach wierzchołki o nieparzystych stopniach dobierane są w możliwie najlepsze pary poprzed funckję \textit{getOptimalAdditionalPaths} (wykorzystującą algorytm najkrótszych ścieżek z biblioteki \textit{Networkx}) i łączone ze sobą. Niestety dla większych grafów liczby par są bardzo duże, a ilość ich możliwych permutacji nie pozwalają na modyfikacje sieci w rozsądnym czasie. Zdecydowano się na ograniczenie wywołań funkcji bibliotecznej z linii 7 algorytmu \ref{getOptimalPaths}, poprzez obliczenie ścieżek tylko dla części możliwych par, których wybranie zaprezentowane jest w liniach 10-16 \textit{makeEulerianGraph} (alg. \ref{makeeulerianUG}) Funkcje znajdowania najkrótszych ścieżek wykorzystują wagi UG. Wszystkie grafy generowane do testowania posiadają losowo przydzielone wagi z przedziału $[1, 10]$, do każdej krawędzi.
+	W idealnych warunkach wierzchołki o nieparzystych stopniach dobierane są w możliwie najlepsze pary przy pomocy funkcji \textit{getOptimalAdditionalPaths} (wykorzystującej algorytm najkrótszych ścieżek z biblioteki \textit{Networkx}) i łączone ze sobą. Niestety dla większych grafów liczby par są bardzo duże, a ilości ich możliwych permutacji nie pozwalają na modyfikacje sieci w rozsądnym czasie. Zdecydowano się na ograniczenie wywołań funkcji bibliotecznej z linii 7 algorytmu \ref{getOptimalPaths}, poprzez obliczenie ścieżek tylko dla części możliwych par, których wybranie zaprezentowane jest w liniach 10-16 \textit{makeEulerianGraph} (alg. \ref{makeeulerianUG}) Funkcje znajdowania najkrótszych ścieżek wykorzystują wagi UG. Wszystkie grafy generowane do testowania posiadają losowo przydzielone wagi z przedziału $[1, 10]$, do każdej krawędzi.
 
 \begin{algorithm}[caption={\textit{getOptimalAdditionalPaths} funkcja obliczająca i zwracająca najlepsze pary wierzchołków do połączenia, dla \textit{makeEulerianGraph} i \textit{makeEulerianDiGraph}}, label={getOptimalPaths}]
 def getOptimalAdditionalPaths(graph, listWithAllPerm):
@@ -395,7 +398,7 @@ def getOptimalAdditionalPaths(graph, listWithAllPerm):
 
 \subsubsection{Modyfikacja grafu skierowanego} \label{modSkier}
 \indent\par
-	Analogiczna sytuacja do \ref{mgnieskier} ma miejsce dla DG w odniesieniu do twierdzenia \ref{twEuleraDG}. Początkowe informacje klasyfikujące wierzchołek do dodania nowych krawędzi zbierane są w liniach 2-16 algorytmu \ref{makeeulerianDG}, gdzie sprawdzana jest różnica połączeń wchodzących a wychodzących. Następnie również odwołujemy się do algorytmu \ref{getOptimalPaths}, przystosowanego zarówno dla UG i DG, tym razem wysyłając tablice \textit{negNodes} - wierzchołki z liczniejszą ilością krawędzi wchodzących oraz \textit{posNodes} - węzły z większą liczbą wyjść. I w tym przypadku optymalnie jest zrezygnować z wszystkich permutacji. Po  obliczeniach dodawane są fałszywe krawędzie z odpowiednią etykietą do grafu.
+	Analogiczna sytuacja do \ref{mgnieskier} ma miejsce dla DG w odniesieniu do twierdzenia \ref{twEuleraDG}. Początkowe informacje klasyfikujące wierzchołek do dodania nowych krawędzi zbierane są w liniach 2-16 algorytmu \ref{makeeulerianDG}, gdzie sprawdzana jest różnica połączeń wchodzących i wychodzących. Następnie również odwołujemy się do algorytmu \ref{getOptimalPaths}, przystosowanego zarówno dla UG i DG, tym razem wysyłając tablice \textit{negNodes} - wierzchołki z liczniejszą ilością krawędzi wchodzących oraz \textit{posNodes} - węzły z większą liczbą wyjść. I w tym przypadku optymalnie jest zrezygnować z wszystkich permutacji. Po  obliczeniach dodawane są fałszywe krawędzie z odpowiednią etykietą do grafu.
 	
 \begin{algorithm}[caption={\textit{makeEulerianDiGraph} przekształcający graf skierowany do grafu Eulera}, label={makeeulerianDG}]
 def makeEulerianDiGraph(graph):
@@ -436,11 +439,11 @@ Algorytmy docelowo szukają optymalnej trasy na planie miasta Kraków. Poprawne 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{img/grafRzecz/osm1}
-	\caption[]{Fragment mapy Krakowa\footnotemark}
+	\caption[]{Fragment mapy Krakowa\footnotemark.}
 	\label{osm1}
 \end{figure}
 
-\footnotetext{Zrzut ekranu z strony https://www.openstreetmap.org/}
+\footnotetext{Zrzut ekranu z strony \href{https://www.openstreetmap.org/}{https://www.openstreetmap.org/}}
 
 Fragment programu przetwarzający mapę z rysunku \ref{osm1} formuje graf, którego krawędzie odpowiadają ulicom, a wierzchołki reprezentują zarówno budynki, jak i istotne elementy dróg: skrzyżowania i strategiczne punkty trasy, które to potrzebne są do idealnego przeprowadzenia ulicy, czyli uwzględnienia zakrętów lub nieliniowych fragmentów drogi.
 
@@ -461,7 +464,7 @@ Analizując kierunki dróg na rysunku \ref{osm1} można zauważyć, że wpływaj
 
 \subsubsection{Implementacja grafu rzeczywistego}
 \indent\par
-Graf rzeczywisty stworzony został  jako obiekt klasy \textit{OsmGraph} przy pomocy funkcji z \textit{OsmParser}, która to odpowiedzialna była za poprawne sparsowanie łańcucha znaków danych w formacie XML$^{\cite{xml}}$.
+Graf rzeczywisty stworzony został  jako obiekt klasy \textit{OsmGraph} przy pomocy funkcji z \textit{OsmParser}, która to odpowiedzialna była za poprawne przetworzenie łańcucha znaków danych w formacie XML$^{\cite{xml}}$.
 
 Dane pobierane z strony internetowej OpenStreetMap za pomocą algorytmu \ref{getData}.
 \begin{algorithm}[caption={\textit{getOsmData} funkcja pobierająca dane z strony \textit{opensteermap.org} w formacie \textit{osm}, dla zadanych jej początkowych wartości szerokości i długości geograficznych, tworzących prostokątny obszar do wygenerowania danych.}, label={getData}]
@@ -505,7 +508,7 @@ Kolejne elementy zaimplementowane do stworzenia grafu rzeczywistego:
 
 
 
-Odległości pomiędzy budynkami zostały zachowane jako wartości wag odpowiednich krawędzi. Ponieważ pobrano informacje o położeniu geograficznym wskazanych budynków na globie, wykorzystano funkcję Haversine\cite{haver}, do wyznaczenia dystansu (równania \ref{haversie} - \ref{haversieD}) między nimi. Określa ona najkrótszą odległość po ortodromie pomiędzy dowolnymi punktami na globie, dzięki ich współrzędnym geograficznym.
+Odległości pomiędzy budynkami zostały zachowane jako wartości wag odpowiednich krawędzi. Ponieważ pobrano informacje o położeniu geograficznym wskazanych budynków na globie, wykorzystano funkcję Haversine$^{\cite{haver}}$, do wyznaczenia dystansu (równania \ref{haversie} - \ref{haversieD}) między nimi. Określa ona najkrótszą odległość po ortodromie pomiędzy dowolnymi punktami na globie, dzięki ich współrzędnym geograficznym.
 
 \begin{equation} \label{haversie}
 	a = \sqrt{sin^2({{\Delta\phi}\over{2}}) + cos(\phi_1) \cdot cos(\phi_2) \cdot sin^2({{\Delta\lambda}\over{2}})}
@@ -542,7 +545,7 @@ def getDistance(x1, y1, x2, y2):
 	findNextNode(adjList, startNode, EulerCycle)
 	return EulerCycle
 \end{algorithm}	
-	UG, na którym wywołujemy \textit{FleuryAlgorithm} konwertowany przez prostą funkcję \textit{getAdjList} do listy sąsiedztwa, jednej z możliwych reprezentacji grafu, która zazwyczaj jest jego najefektywniejszym przedstawicielstwem. Wierzchołek startowy, narzucony przez parametr wejściowy, jest tym od którego zaczynane jest poszukiwanie ścieżki. Algorytm odwiedza kolejne krawędzie i usuwa je odkładając kolejno na listę, kierując się zasadą, że połączenie będące mostem (czyli taką krawędzią w grafie, której usunięcie zwiększy ilość jego spójnych składowych SS\footnote{ Jako spójną składową określamy taki podgraf grafu, który jesteśmy w stanie wyodrębnić z całości bez usuwania krawędzi}) usuwane jest w ostateczności. Program trwa, aż do odwiedzenia wszystkich krawędzi, a cykl Eulera, będącym rozwiązaniem algorytmu, jest listą kolejno odwiedzonych wierzchołków.
+	UG, na którym wywołujemy \textit{FleuryAlgorithm} konwertowany przez prostą funkcję \textit{getAdjList} do listy sąsiedztwa, czyli jednej z możliwych reprezentacji grafu. Wierzchołek startowy, narzucony przez parametr wejściowy, jest tym od którego zaczynane jest poszukiwanie ścieżki. Algorytm odwiedza kolejne krawędzie i usuwa je odkładając kolejno na listę, kierując się zasadą, że połączenie będące mostem (czyli taką krawędzią w grafie, której usunięcie zwiększy ilość jego spójnych składowych SS\footnote{ Jako spójną składową określamy taki podgraf grafu, który jesteśmy w stanie wyodrębnić z całości bez usuwania krawędzi}) usuwane jest w ostateczności. Program działa, aż do odwiedzenia wszystkich krawędzi, a cykl Eulera, będącym rozwiązaniem algorytmu, jest listą kolejno odwiedzonych wierzchołków.
 
 \begin{algorithm}[caption={\textit{findNextNode} rekurencyjna funkcja pomocnicza dla \textit{FleuryAlgorithm} }, label={findNextNode}]
 	def findNextNode(adjList, n, EulerCycle):
@@ -556,9 +559,9 @@ def getDistance(x1, y1, x2, y2):
 
 	Implementacja problemu w pracy została podzielona na 3 główne funkcje: \textit{FleuryAlgorithm} przedstawiony jako nr \ref{FleuryAlgorithm}, który wywołuje rekurencyjną część oznaczoną jako algorytm \ref{findNextNode} oraz fragment sprawdzający, czy aktualnie sprawdzana krawędź jest mostem (alg. \ref{isBridge}).
  
-	W algorytmie \ref{isBridge}, w przypadku gdy ilość sąsiadów jest większa niż jeden, program najpierw posiłkuje się prostym algorytmem rekurencyjnym $DFS$ (przeszukiwanie w głąb$^{\cite{cormen}}$), który ma za zadanie wyznaczyć ilość spójnych składowych. Następnie usuwana jest sprawdzana krawędź i ponownie obliczana jest ilość SS. Finalnie przywraca się wcześniej wspomniane połączenie między-wierzchołkowe. W zależności, czy wartości obliczone są różne zwracana jest zmienna typu $Bool$, pozwalająca lub nie na poszukiwanie kolejnego wierzchołka w funkcji \textit{findNextNode}.
+	W algorytmie \ref{isBridge}, w przypadku gdy ilość sąsiadów jest większa niż jeden, program najpierw posiłkuje się prostym algorytmem rekurencyjnym $DFS$ (przeszukiwanie w głąb$^{\cite{cormen}}$), który ma za zadanie wyznaczyć ilość spójnych składowych. Następnie usuwana jest sprawdzana krawędź i ponownie obliczana jest ilość SS. Finalnie przywraca się wcześniej wspomniane połączenie między-wierzchołkowe. W zależności, od tego czy wartości obliczone są różne zwracana jest zmienna typu $Bool$, pozwalająca lub nie na poszukiwanie kolejnego wierzchołka w funkcji \textit{findNextNode}.
 	
-	Złożoność obliczeniowa szacowana jest na $O(V(V+E))$.
+	Złożoność obliczeniowa szacowana jest na $O(V(V+E))$ \label{zl_Fle}.
 
 \begin{algorithm}[caption={\textit{isBridge} rekurencyjna funkcja pomocnicza dla \textit{FleuryAlgorithm} }, label={isBridge}]
 def isBridge(adjList, u, v):
@@ -578,70 +581,74 @@ def isBridge(adjList, u, v):
 		return cntBeforeRestoreEdge < cntAfterRestoreEdge
 
 \end{algorithm}
-	\newpage
+
 \subsubsection{Wizualizacja grafu nieskierowanego}
-	\begin{figure}[H]
+\indent\par
+Działanie algorytmu opisanego w rozdziale \ref{FleuryAlgo} zaprezentowano na podstawie grafu z rysunku \ref{f_DD}. Jest to sieć o modelu Barabási–Alberta, jednak aby zaimplementowany program zadziałał poprawnie wymagane było spełnienie twierdzenia \ref{twEuleraUG}. Stworzony przy pomocy algorytmu \ref{makeeulerianUG}, nowy graf, który bazował na wspomnianym modelu BA, zaprezentowano na rysunku \ref{f_DDD}. 
+
+Na rysunkach \ref{imgFluAlgoEgz1} i \ref{imgFluAlgoEgz2} przedstawiono kolejne kroki  cyklu Eulera wygenerowanego przez algorytm \ref{FleuryAlgorithm} na grafie \ref{f_DDD}.
+	\begin{figure}[!p]
 			\centering
-		\subfloat[]{\label{f_DD}
+		\subfloat[Sieć złożona o modelu Barabási–Alberta.]{\label{f_DD}
 			\includegraphics[width=0.7\textwidth]{img/fluAlgo/flu_algo99.png}}		\quad
-		\subfloat[]{\label{f_DDD}
+		\subfloat[Graf stworzony na podstawie sieci o modelu Barabási–Alberta, przetworzonej przez funkcję \textit{makeEulerianGraph}.]{\label{f_DDD}
 			\includegraphics[width=0.7\textwidth]{img/fluAlgo/flu_algo0.png}}
 		
-		\caption[]{Sieć złożona o modelu Barabási–Albert (rozdział \ref{BarabasiAlbert}), dla parametrów $m_0=5, t=7$ na rysunku \ref{f_DD}. Ta sama sieć po modyfikacji do grafu Eulera na rysunku \ref{f_DDD}, na niebiesko zaznaczono krawędzie wielokrotne, stworzone sztucznie algorytmem \ref{makeeulerianUG}, czerwony wierzchołek jest punktem startowym wyznaczania cyklu.}
+		\caption[]{Sieć złożona o modelu Barabási–Alberta (rozdział \ref{BarabasiAlbert}), dla parametrów $m_0=5, t=7$ na rysunku \ref{f_DD}. Ta sama sieć po modyfikacji do grafu Eulera na rysunku \ref{f_DDD}, na niebiesko zaznaczono krawędzie wielokrotne,w tym przypadku są to połączenia pomiędzy wierzchołkami (1, 5) i (5, 6), stworzone sztucznie algorytmem \ref{makeeulerianUG}. Czerwony wierzchołek jest punktem startowym wyznaczania cyklu.}
 		\label{f_graph}
 	\end{figure}	
 	\captionsetup{justification=centering}
 	
-	\begin{figure}[p]
+	\begin{figure}[!p]
 		\centering
-		\subfloat[]{\label{f_a}
-			\includegraphics[width=0.4\textwidth]{img/fluAlgo/flu_algo1.png}}
+		\subfloat[Krok 1: 0 -> 5]{\label{f_a}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo1.png}}
 		\quad
-		\subfloat[]{\label{f_b}
-			\includegraphics[width=0.4\textwidth]{img/fluAlgo/flu_algo2.png}}
+		\subfloat[Krok 2: 5 -> 1]{\label{f_b}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo2.png}}
 		\quad
-		\subfloat[]{\label{f_c}
-			\includegraphics[width=0.4\textwidth]{img/fluAlgo/flu_algo3.png}}
+		\subfloat[Krok 3: 1 -> 5]{\label{f_c}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo3.png}}
 		\quad
-		\subfloat[]{\label{f_d}
-			\includegraphics[width=0.4\textwidth]{img/fluAlgo/flu_algo4.png}}
+		\subfloat[Krok 4: 5 -> 2]{\label{f_d}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo4.png}}
 		\quad
-		\subfloat[]{\label{f_e}
-			\includegraphics[width=0.4\textwidth]{img/fluAlgo/flu_algo5.png}}
+		\subfloat[Krok 5: 2 -> 6]{\label{f_e}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo5.png}}
 		\quad
-		\subfloat[]{\label{f_f}
-			\includegraphics[width=0.4\textwidth]{img/fluAlgo/flu_algo6.png}}
+		\subfloat[Krok 6: 6 -> 4]{\label{f_f}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo6.png}}
 		
-		\caption[]{Kroki 1-6 algorytmu Fleury'ego na nieskierowanym grafie wejściowym z rysunku \ref{f_graph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne. \\Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 5, 1, 5, 2, 6, 4, 5, 3, 6, 5, 6, 0.}
+		\caption[]{Pierwsze 6 kroków algorytmu Fleury'ego na grafie z rysunku \ref{f_DDD}. Grubą linią czerwoną oznaczono aktualną krawędź cyklu, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne, wynikające z funkcji \textit{makeEulerianGraph}. Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 5, 1, 5, 2, 6, 4, 5, 3, 6, 5, 6, 0.}
 		\label{imgFluAlgoEgz1}
 	\end{figure}	
 	
-	\begin{figure}[p]
+	\begin{figure}[!p]
 		\centering
-		\subfloat[]{\label{f_g}
-			\includegraphics[width=0.47\textwidth]{img/fluAlgo/flu_algo7.png}}
+		\subfloat[Krok 7: 4 -> 5]{\label{f_g}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo7.png}}
 		\quad
-		\subfloat[]{\label{f_h}
-			\includegraphics[width=0.47\textwidth]{img/fluAlgo/flu_algo8.png}}
+		\subfloat[Krok 8: 5 -> 3]{\label{f_h}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo8.png}}
 		\quad
-		\subfloat[]{\label{f_i}
-			\includegraphics[width=0.47\textwidth]{img/fluAlgo/flu_algo9.png}}
+		\subfloat[Krok 9: 3 -> 6]{\label{f_i}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo9.png}}
 		\quad
-		\subfloat[]{\label{f_j}
-			\includegraphics[width=0.47\textwidth]{img/fluAlgo/flu_algo10.png}}
+		\subfloat[Krok 10: 6 -> 5]{\label{f_j}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo10.png}}
 		\quad
-		\subfloat[]{\label{f_k}
-			\includegraphics[width=0.47\textwidth]{img/fluAlgo/flu_algo11.png}}
+		\subfloat[Krok 11: 5 -> 6]{\label{f_k}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo11.png}}
 		\quad
-		\subfloat[]{\label{f_l}
-			\includegraphics[width=0.47\textwidth]{img/fluAlgo/flu_algo12.png}}
+		\subfloat[Krok 12: 6 -> 0]{\label{f_l}
+			\includegraphics[width=0.45\textwidth]{img/fluAlgo/flu_algo12.png}}
 		
-		\caption[]{Kontynuacja rysunku \ref{imgFluAlgoEgz1}.\\Kroki 7-12 algorytmu Fleury'ego na nieskierowanym grafie wejściowym z rysunku \ref{f_graph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne. \\Cały  cykl Eulera przebiega kolejno przez wierzchołki: 0, 5, 1, 5, 2, 6, 4, 5, 3, 6, 5, 6, 0.}
+		\caption[]{Kontynuacja rysunku \ref{imgFluAlgoEgz1}. Kolejne 6 kroków algorytmu Fleury'ego na grafie z rysunku \ref{f_DDD}, które kończą pełny cykl Eulera. Grubą linią czerwoną oznaczono aktualną krawędź cyklu, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne, wynikające z funkcji \textit{makeEulerianGraph}. Cały  cykl Eulera przebiega kolejno przez wierzchołki: 0, 5, 1, 5, 2, 6, 4, 5, 3, 6, 5, 6, 0.}
 		\label{imgFluAlgoEgz2}
 	\end{figure}
 
 
-\subsection{Algorytm Hierholzera}
+\subsection{Algorytm Hierholzera} \label{hier}
 \indent\par
 	Kolejnym zaimplementowanym sposobem znajdowania cyklu Eulera w UG i DG jest algorytm Hierholzera$^{\cite{hierholzer}}$. Tak jak dla algorytmu opisanego w \ref{FleuryAlgo} wymagane jest, żeby graf był eulerowski, co w tym przypadku mogą zapewnić algorytmy \ref{makeeulerianUG} i \ref{makeeulerianDG}, w zależności od wartości zmiennej \textit{isDirected}.
 	
@@ -674,10 +681,11 @@ def HierholzerAlgorithm(graph, isDirected, startNode):
 	return EulerCycle
 \end{algorithm}
 
-	Złożoność obliczeniowa szacowana jest na $O(E)$.
+	Złożoność obliczeniowa szacowana jest na $O(E)$. \label{zl_H}
+	
 \subsubsection{Wizualizacja grafu nieskierowanego}
 \indent\par
-	Przebieg algorytmu dla grafu nieskierowanego z rysunku \ref{h_graph}, który został stworzony według modelu sieci \textit{small-world}, dla parametrów $n=6, k=4, p=0$, zilustrowano na rysunkach \ref{imgHierAlgoEgz1} i \ref{imgHierAlgoEgz2}.
+	Na rysunkach \ref{imgHierAlgoEgz1} i \ref{imgHierAlgoEgz2} zilustrowano przebieg algorytmu z rozdziału \ref{hier} dla grafu nieskierowanego o modelu sieci \textit{small-world} (rys. \ref{h_graph}). Przed wykonaniem programu sprawdzono stworzoną sieć Wattsa–Strogatza pod kątem spełnienia warunków koniecznych do miana grafu Eulera (tw. \ref{twEuleraUG}). Ponieważ parzysta ilość krawędzi przy każdym z wierzchołków była zachowana, niewymagane były dalsze modyfikacje, więc algorytm przeszukiwał pierwotnie stworzony graf.
 	
 	\begin{figure}[!htb]
 		\centering
@@ -689,131 +697,135 @@ def HierholzerAlgorithm(graph, isDirected, startNode):
 	\captionsetup{justification=centering}
 	\begin{figure}[!p]
 		\centering
-		\subfloat[]{\label{h_b}
+		\subfloat[Krok 1: 0 -> 1]{\label{h_b}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo1.png}}
 		\quad
-		\subfloat[]{\label{h_c}
+		\subfloat[Krok 2: 1 -> 2]{\label{h_c}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo2.png}}
 		\quad
-		\subfloat[]{\label{h_d}
+		\subfloat[Krok 3: 2 -> 0]{\label{h_d}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo3.png}}
 		\quad
-		\subfloat[]{\label{h_e}
+		\subfloat[Krok 4: 0 -> 5]{\label{h_e}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo4.png}}
 		\quad
-		\subfloat[]{\label{h_f}
+		\subfloat[Krok 5: 5 -> 1]{\label{h_f}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo5.png}}
 		\quad
-		\subfloat[]{\label{h_g}
+		\subfloat[Krok 6: 1 -> 3]{\label{h_g}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo6.png}}
-		\caption[]{Kroki 1-6 algorytmu Hierholzera na nieskierowanym grafie wejściowym z rysunku \ref{h_graph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone.\\Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0 , 5, 1, 3, 2, 4, 3, 5, 4, 0.}
+		\caption[]{Pierwsze 6 kroków algorytmu Hierholzera na nieskierowanym grafie wejściowym z rysunku \ref{h_graph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone. Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0 , 5, 1, 3, 2, 4, 3, 5, 4, 0.}
 		\label{imgHierAlgoEgz1}
 	\end{figure}	
 	
 	\begin{figure}[!p]
 		\centering		
-		\subfloat[]{\label{h_h}
+		\subfloat[Krok 7: 3 -> 2]{\label{h_h}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo7.png}}
 		\quad
-		\subfloat[]{\label{h_i}
+		\subfloat[Krok 8: 2 -> 4]{\label{h_i}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo8.png}}
 		\quad
-		\subfloat[]{\label{h_j}
+		\subfloat[Krok 9: 4 -> 3]{\label{h_j}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo9.png}}
 		\quad
-		\subfloat[]{\label{h_k}
+		\subfloat[Krok 10: 3 -> 5]{\label{h_k}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo10.png}}
 		\quad	
-		\subfloat[]{\label{h_l}
+		\subfloat[Krok 11: 5 -> 4]{\label{h_l}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo11.png}}
 		\quad
-		\subfloat[]{\label{h_m}
+		\subfloat[Krok 12: 4 -> 0]{\label{h_m}
 			\includegraphics[width=0.47\textwidth]{img/heiAlgo/hei_algo12.png}}
 		
-		\caption[]{Kontynuacja rysunku \ref{imgHierAlgoEgz1}.\\Kroki 7-12 algorytmu Hierholzera na nieskierowanym grafie wejściowym z rysunku \ref{h_graph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone.\\Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0 , 5, 1, 3, 2, 4, 3, 5, 4, 0.}
+		\caption[]{Kontynuacja rysunku \ref{imgHierAlgoEgz1}. Kolejne 6 kroków algorytmu Hierholzera na nieskierowanym grafie wejściowym z rysunku \ref{h_graph}, znajdujących pełen cykl. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone. Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0 , 5, 1, 3, 2, 4, 3, 5, 4, 0.}
 		\label{imgHierAlgoEgz2}
 	\end{figure}
 \newpage
 \subsubsection{Wizualizacja grafu skierowanego}
 \indent\par
-%	Algorytm zilustrowano również dla losowego grafu skierowanego z rysunku \ref{h_Dgraph}, który został stworzony z parametrów $n=5, p=0.5$, gdzie $n$ to ilość wierzchołków, a $p$ to prawdopodobieństwo utworzenia krawędzi. Przebieg kolejnych kroków można zaobserwować na rysunkach \ref{imgHierAlgoEgz3}, \ref{imgHierAlgoEgz4} i \ref{imgHierAlgoEgz5}. Ponadto zauważyć można działanie funkcji modyfikującej graf do postaci eulerowskiej (opisanej w \ref{modSkier}) na rysunku \ref{h_DDD}, gdzie niebieskie krawędzie zostały sztucznie dodane.
+	Algorytm zilustrowano również dla losowego grafu skierowanego z rysunku \ref{h_DD}, który został stworzony przy pomocy funkcji \textit{fast\_gnp\_random\_graph} z biblioteki \textit{Networkx}. 
+	
+	Należy zwrócić uwagę na działanie funkcji modyfikującej do postaci eulerowskiej (opisanej w \ref{modSkier}). Początkowo stworzony graf nie spełniał warunków twierdzenia \ref{twEuleraDG}, dlatego wymagana była jego konwersja przy pomocy algorytmu \ref{makeeulerianDG}. Nowo powstały DG zaprezentowano na rysunku \ref{h_DDD}, gdzie niebieski kolor symbolizuje sztuczne dodane krawędzie wielokrotne. W tym przypadku są to [2, 0], [3, 1] i [4, 3], stabilizujące różnicę wejść i wyjść z każdego wierzchołka.
+	
+	Przebieg kolejnych kroków pomiędzy wierzchołkami można zaobserwować na rysunkach \ref{imgHierAlgoEgz3}, \ref{imgHierAlgoEgz4} i \ref{imgHierAlgoEgz5}.
 	
 	\captionsetup{justification=centering}	
-	\begin{figure}[!h]
+	\begin{figure}[!p]
 		\centering
-		\subfloat[]{\label{h_DD}
+		\subfloat[Losowy graf skierowany.]{\label{h_DD}
 			\includegraphics[width=0.69\textwidth]{img/heiAlgo/DIRhei_algo99.png}}		\quad
-		\subfloat[]{\label{h_DDD}
+		\subfloat[Graf skierowany po modyfikacjach algorytmu \textit{makeEulerianDiGraph} do postaci grafu eulerowskiego.]{\label{h_DDD}
 			\includegraphics[width=0.69\textwidth]{img/heiAlgo/DIRhei_algo0.png}}
 		
-		\caption[]{Losowy graf skierowany o parametrach $n=5, p=0.5$, gdzie $n$ to ilość wierzchołków, a $p$ to prawdopodobieństwo utworzenia krawędzi na rysunku \ref{h_DD}.\\Ten sam graf po modyfikacji do grafu Eulera na rysunku \ref{h_DDD}, na niebiesko zaznaczono krawędzie wielokrotne, stworzone sztucznie algorytmem nr \ref{makeeulerianDG}, czerwony wierzchołek jest punktem startowym wyznaczania cyklu.}
+		\caption[]{Losowy graf skierowany stworzony przy pomocy funkcji \textit{fast\_gnp\_random\_graph} o parametrach $n=5, p=0.5$, gdzie $n$ - ilość wierzchołków, a $p$ - prawdopodobieństwo utworzenia krawędzi na rysunku \ref{h_DD}. Ten sam graf po modyfikacji do grafu Eulera na rysunku \ref{h_DDD}, na niebiesko zaznaczono krawędzie wielokrotne, stworzone sztucznie algorytmem nr \ref{makeeulerianDG}, są to [2, 0], [3, 1] i [4, 3]. Czerwony wierzchołek jest punktem startowym wyznaczania cyklu.}
 		\label{h_Dgraph}
 	\end{figure}	
 
    \captionsetup{justification=centering}
    \begin{figure}[!p]
    	\centering
-   	\subfloat[]{\label{hd_a}
+   	\subfloat[Krok 1: 0 -> 1]{\label{hd_a}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo1.png}}
    	\quad
-   	\subfloat[]{\label{hd_b}
+   	\subfloat[Krok 2: 1 -> 2]{\label{hd_b}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo2.png}}
    	\quad
-   	\subfloat[]{\label{hd_c}
+   	\subfloat[Krok 3: 2 -> 0]{\label{hd_c}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo3.png}}
    	\quad
-   	\subfloat[]{\label{hd_d}
+   	\subfloat[Krok 4: 0 -> 4]{\label{hd_d}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo4.png}}
    	\quad
-   	\subfloat[]{\label{hd_e}
+   	\subfloat[Krok 5: 4 -> 2]{\label{hd_e}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo5.png}}
    	
-   	\caption[]{Kroki 1-5 algorytmu Hierholzera na skierowanym grafie wejściowym z rysunku \ref{h_Dgraph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne. \\Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0, 4, 2, 3, 1, 3, 1, 4, 3, 4, 3, 2, 0.}
+   	\caption[]{Kroki 1-5 algorytmu Hierholzera na skierowanym grafie wejściowym z rysunku \ref{h_Dgraph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne. Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0, 4, 2, 3, 1, 3, 1, 4, 3, 4, 3, 2, 0.}
    	\label{imgHierAlgoEgz3}
    \end{figure}	
 
    \captionsetup{justification=centering}
    \begin{figure}[p]
    	\centering
-   	\subfloat[]{\label{hd_f}
+   	\subfloat[Krok 6: 2 -> 3]{\label{hd_f}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo6.png}}
    	\quad
-   	\subfloat[]{\label{hd_g}
+   	\subfloat[Krok 7: 3 -> 1]{\label{hd_g}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo7.png}}
    	\quad
-   	\subfloat[]{\label{hd_h}
+   	\subfloat[Krok 8: 1 -> 3]{\label{hd_h}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo8.png}}
    	\quad
-   	\subfloat[]{\label{hd_i}
+   	\subfloat[Krok 9: 3 -> 1]{\label{hd_i}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo9.png}}
    	\quad
-   	\subfloat[]{\label{hd_j}
+   	\subfloat[Krok 10: 1 -> 4]{\label{hd_j}
    		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo10.png}}
    	
-   	\caption[]{Kontynuacja rysunku \ref{imgHierAlgoEgz3}.\\Kroki 6-10 algorytmu Hierholzera na skierowanym grafie wejściowym z rysunku \ref{h_Dgraph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne. \\Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0, 4, 2, 3, 1, 3, 1, 4, 3, 4, 3, 2, 0.}
+   	\caption[]{Kontynuacja rysunku \ref{imgHierAlgoEgz3}. Kroki 6-10 algorytmu Hierholzera na skierowanym grafie wejściowym z rysunku \ref{h_Dgraph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone, a na niebiesko krawędzie wielokrotne. Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0, 4, 2, 3, 1, 3, 1, 4, 3, 4, 3, 2, 0.}
    	\label{imgHierAlgoEgz4}
    \end{figure}	
 
 	\captionsetup{justification=centering}
 	\begin{figure}[p]
-		\centering
-		\subfloat[]{\label{hd_k}
-			\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo11.png}}
-		\quad
-		\subfloat[]{\label{hd_l}
-			\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo12.png}}
-		\quad
-		\subfloat[]{\label{hd_m}
-			\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo13.png}}
-		\quad
-		\subfloat[]{\label{hd_n}
-			\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo14.png}}
-		\quad
-		\subfloat[]{\label{hd_o}
-			\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo15.png}}
-		
-		\caption[]{Kontynuacja rysunku \ref{imgHierAlgoEgz4}.\\Kroki 11-15 algorytmu Hierholzera na skierowanym grafie wejściowym z rysunku \ref{h_Dgraph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone. \\Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0, 4, 2, 3, 1, 3, 1, 4, 3, 4, 3, 2, 0.}
-		\label{imgHierAlgoEgz5}
+	\centering
+	\subfloat[Krok 11: 4 -> 3]{\label{hd_k}
+		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo11.png}}
+	\quad
+	\subfloat[Krok 12: 3 -> 4]{\label{hd_l}
+		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo12.png}}
+	\quad
+	\subfloat[Krok 13: 4 -> 3]{\label{hd_m}
+		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo13.png}}
+	\quad
+	\subfloat[Krok 14: 3 -> 2]{\label{hd_n}
+		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo14.png}}
+	\quad
+	\subfloat[Krok 15: 2 -> 0]{\label{hd_o}
+		\includegraphics[width=0.47\textwidth]{img/heiAlgo/DIRhei_algo15.png}}
+	
+	\caption[]{Kontynuacja rysunku \ref{imgHierAlgoEgz4}. Kroki 11-15 algorytmu Hierholzera na skierowanym grafie wejściowym z rysunku \ref{h_Dgraph}. Grubą linią czerwoną oznaczono aktualną krawędź, cieńszą krawędzie już odwiedzone. Cały cykl Eulera przebiega kolejno przez wierzchołki: 0, 1, 2, 0, 4, 2, 3, 1, 3, 1, 4, 3, 4, 3, 2, 0.}
+	\label{imgHierAlgoEgz5}
 	\end{figure}	
 \newpage
 % ======================= 4 =======================
@@ -821,104 +833,21 @@ def HierholzerAlgorithm(graph, isDirected, startNode):
 \section{Wyniki}
 \subsection{Generowanie grafów losowych}
 \indent\par
+Grafy losowe opisane w tym rozdziale generowane są do maksymalnej ilości 2000 wierzchołków. Ograniczona liczba wynika z długiego czasu ich powstawania, co można zauważyć w tabelach \ref{Tab:gen_BA}, \ref{Tab:gen_WS} i \ref{Tab:gen_DiG}. Średnia długość tworzenia dla skrajnego przypadku sięga ponad 11h, a próbek testowych dla każdej ilości węzłów było 5. 
+
+Długi czas wynikał z ilości permutacji wykorzystanych przy tworzeniu grafu Eulera (rozdział \ref{modyfikacja}), które i tak zostały ograniczone. Dla każdego zestawu możliwych par wykorzystywana była funkcja \textit{shortest\_path\_length} z biblioteki \textit{Networkx}. Duże ilości jej wywołań wypłynęły znacznie na wydajność programu.
+
 Podczas generowania sieci złożonych Barabási–Alberta i Wattsa–Strogatza, które są szerzej opisane w rozdziale \ref{SieciZlozone}, zebrano wyniki zaprezentowane odpowiednio w tabelach \ref{Tab:gen_BA} i \ref{Tab:gen_WS}. Parametry, dla których tworzono sieci o modelu BA to $m_0 = w$, $t = {w\over2}$, gdzie $w$ jest liczbą wierzchołków. Przy generowaniu losowych sieci WS, wybrano następujące wielkości: $n = w$, $k = {w\over2}$, $p=0.75$, gdzie $w$ - liczba węzłów.
 
-\begin{table}[ht]
-	\centering
-	\caption{Wyniki generowania sieci złożonych o modelu Barabási–Alberta, średnie wartości obliczono z 5 próbek testowych.}
-	\resizebox{14.5cm}{!}
-	{
-	\begin{tabular}{|c c c|}
-		\hline
-		ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas generowania grafu [s]\\ \hline \hline
-		20 	& 107.6 		& 0.1611 	\\ \hline
-		50 	& 651.0 		& 0.5011 	\\ \hline
-		80 	& 1638.8        & 2.0973	\\ \hline
-		100 & 2548.6        & 4.2081	\\ \hline
-		120 & 3660.0        & 7.2537	\\ \hline
-		150 & 5699.8   		& 14.7364	\\ \hline
-		180 & 8192.6        & 26.9951	\\ \hline
-		200 & 10091.2 		& 34.1516	\\ \hline
-		220 & 12205.8 		& 59.1929	\\ \hline
-		250 & 15740.0 		& 87.9036	\\ \hline
-		500 & 62727.0 		& 674.8682	\\ \hline				
-		700 & 122825.0      & 2145.4006	\\ \hline
-		1000& 250455.2	    & 4536.7447 \\ \hline
-		2000& 1000931.0    	& 41671.2410\\ \hline
-	\end{tabular} 
-	}
-	\label{Tab:gen_BA}
-\end{table}
 
-\begin{table}[ht]
-	\centering
-	\caption{Wyniki generowania sieci złożonych o modelu Wattsa–Strogatza, średnie wartości obliczono z 5 próbek testowych.}
-	\resizebox{14.5cm}{!}
-	{
-	\begin{tabular}{|c c c|}
-		\hline
-		ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas generowania grafu [s]\\ \hline \hline
-		20 	& 108.6  		& 0.0452 	\\ \hline
-		50 	& 624.8 		& 0.6187 	\\ \hline
-		80 	& 1639.6        & 2.6913	\\ \hline
-		100 & 2549.2        & 5.7963	\\ \hline
-		120 & 3656.4        & 10.1062	\\ \hline
-		150 & 5628.0   		& 19.9065	\\ \hline
-		180 & 8184.6        & 34.0788	\\ \hline
-		200 & 10098.6 		& 47.2212	\\ \hline
-		220 & 12204.2 		& 62.1643	\\ \hline
-		250 & 15618.0 		& 91.3247	\\ \hline
-		500 & 62737.2 		& 732.4247	\\ \hline				
-		700 & 122820.4      & 165.9884	\\ \hline
-		1000& 250480.6	    & 5070.8936 \\ \hline
-		2000& 1000950.8    	& 47148.0105\\ \hline
-	\end{tabular} 
-	}
-	\label{Tab:gen_WS}
-\end{table}
 
 Porównując wyniki z tabel \ref{Tab:gen_BA} i \ref{Tab:gen_WS} łatwo można zauważyć, że pomimo podobnej ilość krawędzi w grafach, czasy ich generowania (uwzględniające funkcję z rozdziału \ref{mgnieskier}) zaczynają się rozbiegać już w okolicach 100 wierzchołków, na korzyść modelu Barabási–Alberta.
 
 Wyniki z tabeli \ref{Tab:gen_DiG} znacznie różnią się od \ref{Tab:gen_BA} i \ref{Tab:gen_WS}, spowodowane jest to innym typem wejściowym (w tym przypadku jest to DG), a co za tym idzie, funkcja modyfikująca do grafu Eulera jest inna. Warunki twierdzenia o grafie skierowanym (tw. \ref{twEuleraDG}) wpływają na ilość obliczeń możliwych permutacji. 
 
-Do generowania skierowanych grafów losowych, których dane zebrano w tabeli \ref{Tab:gen_DiG}, wykorzystano funkcję \textit{fast\_gnp\_random\_graph} z biblioteki \textit{Networkx}, która przyjmuje wartości $n$ i $p$, gdzie $n$ - ilość wierzchołków, $p$ - prawdopodobieństwo stworzenia krawędzi (w przypadku stworzonych danych obrano jego stałą wartość: $p= 0.75$).
-
-
-\begin{table}[ht]
+\begin{figure}[H]
 	\centering
-	\caption{Wyniki generowania grafu losowego, średnie wartości obliczono z 5 próbek testowych.}
-
-	\resizebox{14.5cm}{!}
-	{
-	\begin{tabular}{|c c c|}
-		\hline
-		ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas generowania grafu [s]\\ \hline \hline
-		20 	& 323.2  		& 0.1844 	\\ \hline
-		50 	& 2032.8 		& 5.5678 	\\ \hline
-		80 	& 5144.0        & 43.1782	\\ \hline
-		100 & 7892.2        & 76.6788	\\ \hline
-		120 & 11297.6       & 136.4873	\\ \hline
-		150 & 17611.2 		& 306.0416	\\ \hline
-		180 & 25294.8       & 599.1041	\\ \hline
-		200 & 31180.2  		& 1143.3872	\\ \hline
-		220 & 37617.4 		& 1213.5494	\\ \hline
-		250 & 48416.0   	& 1918.1350	\\ \hline
-		500 & 192001.6   	& 21215.9172\\ \hline				
-		700 & 387793.2		& 43215.4681\\ \hline
-		1000& 767803.0	    & 90381.0973\\ \hline
-		2000& 3003152.6	  	& 219311.4794\\ \hline
-	\end{tabular} 
-	}
-	\label{Tab:gen_DiG}
-\end{table}
-
-
-
-Wyniki zgromadzone w tabelach \ref{Tab:gen_BA}, \ref{Tab:gen_WS} i \ref{Tab:gen_DiG} przeniesione zostały na wykresy z rysunków \ref{e_n}, \ref{gen_n}. Na pierwszym z nich można zauważyć znaczą różnicę w ilości krawędzi pomiędzy grafem skierowanym a sieciami złożonymi, natomiast te drugie (modele WS i BA) są sobie bardzo bliskie, ich funkcję nakładają się na siebie. Ma to swoje przełożenie na czas generowania takich grafów (rys. \ref{gen_n}), gdzie funkcja DG rośnie bardzo szybko, z znaczną różnicą względem dwóch pozostałych. Natomiast dla sieci Barabási–Alberta i Wattsa–Strogatza czasy zaczynają się zauważalnie różnić powyżej 1000 wierzchołków.
-
-\begin{figure}[!p]
 	\centering
-		\centering
 	\subfloat[Zależność stworzonych krawędzi dla każdego typu grafów testowych w zależności od ilości wierzchołków, gdzie $n$ - liczba wierzchołków, $e$ - liczba krawędzi.]{\label{e_n}
 		\includegraphics[angle=270,width=0.85\textwidth]{img/wyniki/E_N}}
 	\quad
@@ -929,8 +858,10 @@ Wyniki zgromadzone w tabelach \ref{Tab:gen_BA}, \ref{Tab:gen_WS} i \ref{Tab:gen_
 \end{figure}
 
 
-\newpage
+Do generowania skierowanych grafów losowych, których dane zebrano w tabeli \ref{Tab:gen_DiG}, wykorzystano funkcję \textit{fast\_gnp\_random\_graph} z biblioteki \textit{Networkx}, która przyjmuje wartości $n$ i $p$, gdzie $n$ - ilość wierzchołków, $p$ - prawdopodobieństwo stworzenia krawędzi (w przypadku stworzonych danych obrano jego stałą wartość: $p= 0.75$).
 
+
+Wyniki zgromadzone w tabelach \ref{Tab:gen_BA}, \ref{Tab:gen_WS} i \ref{Tab:gen_DiG} przeniesione zostały na wykresy z rysunków \ref{e_n}, \ref{gen_n}. Na pierwszym z nich można zauważyć znaczą różnicę w ilości krawędzi pomiędzy grafem skierowanym a sieciami złożonymi, natomiast te drugie (modele WS i BA) są sobie bardzo bliskie, ich funkcję nakładają się na siebie. Ma to swoje przełożenie na czas generowania takich grafów (rys. \ref{gen_n}), gdzie funkcja DG rośnie bardzo szybko, z znaczną różnicą względem dwóch pozostałych. Natomiast dla sieci Barabási–Alberta i Wattsa–Strogatza czasy zaczynają się zauważalnie różnić powyżej 1000 wierzchołków.
 
 
 
@@ -939,152 +870,343 @@ Wyniki zgromadzone w tabelach \ref{Tab:gen_BA}, \ref{Tab:gen_WS} i \ref{Tab:gen_
 	Wyniki z znajdowania cyklu Eulera dla grafów nieskierowanych przy pomocy algorytmu Fleury'ego zostały zaprezentowane w tabelach \ref{Tab:BA_Fleury} i \ref{Tab:WS_Fleury}. 
 	
 	Stos w języku Python posiada limit zapobiegający nieskończonej rekurencji i zbyt wielkiemu wykorzystaniu zasobów pamięciowych, co mogłoby skutkować awarią systemu. Ponieważ funkcja ta działa rekurencyjnie, nawet przy zwiększeniu limitu do maksymalnej wartości, wykonano pomiary tylko do 280 węzłów.
-\\
-\begin{table}[ht]
-	\centering
-	\caption{Czasy wyszukiwania cyklu Eulera sieci złożonych o modelu Barabási–Alberta, dla algorytmu Fleury'ego, średnie wartości obliczono z 5 próbek testowych.}
-	
-	\resizebox{14.5cm}{!}
-	{
-	\begin{tabular}{|c c c|}
-		\hline
-		ilość wierzchołków	& śr. ilość krawędzi 	& śr. czas szukania ścieżki	\\ \hline \hline
-		20 	& 107.6 	 	& 0.0025	\\ \hline
-		40 	& 418.4 		& 0.0331	\\ \hline
-		50 	& 651.0 	 	& 0.0496	\\ \hline
-		60 	& 930.2 		& 0.0941	\\ \hline
-		70 	& 1258.8      	& 0.1438	\\ \hline
-		80 	& 1638.8     	& 0.2552	\\ \hline
-		90  & 2072.4    	& 0.4181	\\ \hline
-		100 & 2548.6    	& 0.5565	\\ \hline
-		120 & 3660.0    	& 1.1322	\\ \hline
-		150 & 5699.8   		& 2.7246	\\ \hline
-		180 & 8192.6     	& 5.4286	\\ \hline
-		200 & 10091.2 		& 8.1718	\\ \hline
-		220 & 12205.8 		& 11.8271	\\ \hline
-		250 & 15740.0 		& 19.0686	\\ \hline
-		280 & 19730.4 		& 30.2086	\\ \hline
-	\end{tabular} 
-	}
-	\label{Tab:BA_Fleury}
-\end{table}
 
-Analizując rysunek \ref{fle_n}, na którym przedstawiono wykresy powstałe z danych z dwóch tabel reprezentujących czasy wykonania algorytmu dla modeli sieci złożonych Barabási–Alberta i Wattsa–Strogatza (tab. \ref{Tab:BA_Fleury}, \ref{Tab:WS_Fleury}), możliwe jest zauważenie, że dla początkowych mniejszych ilości wierzchołków nie ma większej różnicy. Wprowadzając oznaczenie $\Delta t(n) = t_{WattsaStrogatz}(n) - t_{BarabásiAlbert}(n)$, można określić kilka różnic.
-\\
-\begin{table}[ht]
-	\centering
-	\caption{Czasy wyszukiwania cyklu Eulera sieci złożonych o modelu Wattsa–Strogatza, dla algorytmu Fleury'ego, średnie wartości obliczono z 5 próbek testowych.}
-	
-	\resizebox{14.5cm}{!}
-	{
-	\begin{tabular}{|c c c|}
-		\hline
-		ilość wierzchołków	& śr. ilość krawędzi 	& śr. czas szukania ścieżki	\\ \hline \hline
-		20 	& 107.6 	 	& 0.0038	\\ \hline
-		40 	& 422.4 		& 0.0265	\\ \hline
-		50 	& 622.2 	 	& 0.0653	\\ \hline
-		60 	& 928.0 		& 0.1114	\\ \hline
-		70 	& 1225.6      	& 0.2043	\\ \hline
-		80 	& 1641.2     	& 0.3526	\\ \hline
-		90  & 2021.4    	& 0.4789	\\ \hline
-		100 & 2547.0    	& 0.7555	\\ \hline
-		120 & 3656.2    	& 1.5154	\\ \hline
-		150 & 5625.8   		& 3.4387	\\ \hline
-		180 & 8192.6     	& 7.0422	\\ \hline
-		200 & 10099.2 		& 10.3851	\\ \hline
-		220 & 12203.6 		& 15.6236	\\ \hline
-		250 & 15628.8 		& 24.4495	\\ \hline
-		280 & 19733.4 		& 38.3141	\\ \hline
-	\end{tabular} 
-	}
-	\label{Tab:WS_Fleury}
-\end{table}
+	Analizując rysunek \ref{fle_n}, na którym przedstawiono wykresy powstałe z danych z dwóch tabel reprezentujących czasy wykonania algorytmu dla modeli sieci złożonych Barabási–Alberta i Wattsa–Strogatza (tab. \ref{Tab:BA_Fleury}, \ref{Tab:WS_Fleury}), możliwe jest zauważenie, że dla początkowych mniejszych ilości wierzchołków nie ma większej różnicy. Wprowadzając oznaczenie $\Delta t(n) = t_{WattsaStrogatz}(n) - t_{BarabásiAlbert}(n)$, można określić kilka różnic.
 	
 	Zgodnie z danymi z tabel wyznaczono różnice dla trzech ilości $n$ $\Delta t(100) \approx 0.2s $, $\Delta t(200) \approx 2.2s $ i  $\Delta t(280) \approx 8.1s$. Czasy te nie są mocno rozbieżne, ale należy mieć na uwadze, że ilość węzłów jest niestety mała i ograniczona przez wymagania sprzętowe. Dla większej ilość wierzchołków różnica może być drastyczna.
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\includegraphics[angle=270,width=1\textwidth]{img/wyniki/Fleury_n}
-	\caption[]{Czas obliczania ścieżki w grafach wykorzystujący algorytm Fleury'ego, gdzie $n$ - liczba wierzchołków, $t$ - czas podany w sekundach.}
+	\caption[]{Czas obliczania ścieżki w grafach wykorzystujący algorytm Fleury'ego, gdzie $n$ - liczba wierzchołków, $e$ - liczba krawędzi, $t$ - czas podany w sekundach, $f(n)$ - funkcja dopasowująca, na wzór estymowanej złożoności obliczeniowej $O(V(V+E)))$ (rozdział \ref{zl_Fle}) wyznaczona ze zbioru wszystkich punktów danych, wartości obliczono przy pomocy programu \textit{gnuplot}$^{\cite{gnuplot}}$: $a = 8.15 \cdot 10^{-4}$, $b = - 0.13$, $c = 4.47$.}
 	\label{fle_n}
 \end{figure}
-\newpage
 
+	Inną ważną i zauważalną zależnością z rysunku \ref{fle_n} jest fakt, że krzywa $f(n)$ przybiera postać wielomianową adekwatną do spodziewanej złożoności obliczeniowej.
 
 
 
 \subsection{Algorytm Hierholzera}\par\indent
 
 
-Wyniki drugiego z zaimplementowanych algorytmów do znajdowania cyklu Eulera dla grafów skierowanych i nieskierowanych przedstawiono w tabelach \ref{Tab:Hie_BA}, \ref{Tab:Hie_WS} i \ref{Tab:Hie_DiG}.
-
-\begin{table}[H]
-	\centering
-	\caption{Wyniki testowania sieci złożonych o modelu Barabási–Alberta, dla algorytmu Hierholzera, średnie wartości obliczono z 5 próbek testowych.}
-
-	\resizebox{14.5cm}{!}
-	{
-	\begin{tabular}{|c c c|}
-		\hline
-		ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas szukania ścieżki \\ \hline \hline
-		20 	& 107.6 		& 0.0005 	\\ \hline
-		50 	& 651.0 		& 0.0031 	\\ \hline
-		80 	& 1638.8        & 0.0077	\\ \hline
-		100 & 2548.6        & 0.0179	\\ \hline
-		120 & 3660.0        & 0.0215	\\ \hline
-		150 & 5699.8   		& 0.0320	\\ \hline
-		180 & 8192.6        & 0.0482	\\ \hline
-		200 & 10091.2 		& 0.0554	\\ \hline
-		220 & 12205.8 		& 0.0710	\\ \hline
-		250 & 15740.0 		& 0.0804	\\ \hline
-		500 & 62727.0 		& 0.3441	\\ \hline				
-		700 & 122825.0      & 0.7875	\\ \hline
-		1000& 250455.2	    & 1.1889 	\\ \hline
-		2000& 1000931.0    	& 5.6991	\\ \hline
-	\end{tabular} 
-	}
-	\label{Tab:Hie_BA}
-\end{table}
+	Wyniki drugiego z zaimplementowanych algorytmów do znajdowania cyklu Eulera dla grafów skierowanych i nieskierowanych przedstawiono w tabelach \ref{Tab:Hie_BA}, \ref{Tab:Hie_WS} i \ref{Tab:Hie_DiG}.
 
 	Analizując tabele dla sieci złożonych oraz rysunek \ref{hie_n} można zauważyć, że krzywe reprezentujące te modele, dla mniejszej liczby wierzchołków nachodzą na siebie. Czas wykonania dla zwiększonej liczny $n$, podobne jak dla poprzedniego algorytmu (rozdział \ref{Fleu_wyniki}), jest lepszy dla sieci Barabási–Alberta. Jednak $\Delta t(n) = t_{WattsaStrogatz}(n) - t_{BarabásiAlbert}(n)$ dla rozwiązania Hierholzera przy maksymalnej zbadanej ilości wierzchołków wynosi $\Delta t(2000) = 1.8$ (uwzględnione są tylko sieci złożone).
-
-\begin{table}[H]
+	
+\begin{figure}[h]
 	\centering
-	\caption{Wyniki testowania sieci złożonych o modelu Wattsa–Strogatza, dla algorytmu Hierholzera, średnie wartości obliczono z 5 próbek testowych.}
-	\resizebox{14.5cm}{!}
-	{
-	\begin{tabular}{|c c c|}
-		\hline
-		ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas szukania ścieżki\\ \hline \hline
-		20 	& 108.6  		& 0.0003 	\\ \hline
-		50 	& 624.8 		& 0.0033 	\\ \hline
-		80 	& 1639.6        & 0.0105	\\ \hline
-		100 & 2549.2        & 0.0141	\\ \hline
-		120 & 3656.4        & 0.0208	\\ \hline
-		150 & 5628.0   		& 0.0383	\\ \hline
-		180 & 8184.6        & 0.0495	\\ \hline
-		200 & 10098.6 		& 0.0591	\\ \hline
-		220 & 12204.2 		& 0.0766	\\ \hline
-		250 & 15618.0 		& 0.0865	\\ \hline
-		500 & 62737.2 		& 0.3775	\\ \hline				
-		700 & 122820.4      & 0.8825	\\ \hline
-		1000& 250480.6	    & 1.4426 	\\ \hline
-		2000& 1000950.8    	& 7.5426	\\ \hline
-	\end{tabular} 
-	}
-	\label{Tab:Hie_WS}
-\end{table}
+	\includegraphics[angle=270,width=1\textwidth]{img/wyniki/Hierholzer_n}
+	\caption[]{Czas obliczania ścieżki w grafach wykorzystujący algorytm Hierholzera, gdzie $n$ - liczba wierzchołków, $t$ - czas podany w sekundach.}
+	\label{hie_n}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[angle=270,width=1\textwidth]{img/wyniki/Hierholzer_e}
+	\caption[]{Czas obliczania ścieżki w grafach wykorzystujący algorytm Hierholzera, gdzie $e$ - liczba krawędzi, $t$ - czas podany w sekundach, $f(e)$ - funkcja dopasowująca, na wzór estymowanej złożoności obliczeniowej $O(E)$ (rozdział \ref{zl_H}) stworzona ze zbioru wszystkich punktów danych, wartości obliczono przy pomocy programu \textit{gnuplot}: $a = 6.0683 \cdot 10^{-6}$.}
+	\label{hie_e}
+\end{figure}
 
 	Poza wcześniej wspomnianą informacją, uwagę może zwrócić fakt, że DG występujący w tej analizie, mimo tego, że jest najwolniejszy, to jego czas wykonywania nie różni się drastycznie od wyników dla UG. 
 	
 	Warto wziąć pod uwagę ilość wygenerowanych krawędzi: średnia ilość krawędzi w grafie skierowanym tabela \ref{Tab:gen_DiG}, dla grafów nieskierowanych \ref{Tab:gen_BA} i \ref{Tab:gen_WS}. Różnica pomiędzy krzywymi oznaczonymi na szaro i czerwono, a tą koloru niebieskiego na rys. \ref{hie_n} nie jest duża, a ilość krawędzi w losowym digrafie jest trzykrotnie większa od liczby połączeń w obydwu sieciach złożonych.
 
-\begin{table}[H]
+	Naniesiono prostą dopasowaną do postaci $f(e) = a \cdot e$ na rysunek \ref{hie_e}, gdzie wyprowadzone są zależności od ilości krawędzi w celu sprawdzenia poprawności estymowanej złożoności obliczeniowej ($O(E)$). Jak można zauważyć, wartości każdej z krzywych, reprezentujących różne typy danych testowych, są liniowe w granicach błędu. Spowodowany on może być pracą komputera, na którym uruchomiony były algorytm. W przypadku wykorzystywania go jednocześnie do innych rzeczy podczas pomiarów, wyniki mogły zostać zakłócone, jednak nie odchodzą znacznie od spodziewanej prostej.
+
+
+\subsection{Algorytm Fleury'ego vs. Hierholzera}
+
+	\begin{figure}[h]
+	\centering
+	\includegraphics[angle=270,width=1\textwidth]{img/wyniki/Hierholzer_vs_Fleury_WS_BA_n}
+	\caption[]{Porównanie czasów obliczania ścieżki w sieciach złożonych algorytmów Hierholzera oraz Fleury'ego dla modeli Wattsa–Strogatza i Barabási–Alberta, gdzie $n$ - liczba wierzchołków, $t$ - czas podany w sekundach.}
+	\label{fh}
+	\end{figure}
+
+\par\indent
+
+	Algorytmy porównano względem grafów nieskierowanych, ponieważ jeden z nich działa tylko dla takich.
+	
+	Patrząc na wykresy z rysunku \ref{fh}, bez większej analizy jesteśmy w stanie określić bardziej optymalne rozwiązanie w szukaniu cyklu Eulera, zarówno dla modelu Wattsa–Strogatza i Barabási–Alberta, którym jest algorytm Hierholzera. 
+	
+	Należy wziąć pod uwagę, że przedstawiono tu porównanie tylko do 280 wierzchołków, ze względu na ograniczenia ilości rekurencji dla algorytmu Fleury'ego, a już widoczna jest znaczna przewaga drugiego z nich.
+	
+
+	
+	
+	Maksymalny czas obliczony dla funkcji Hierholzera przy 2000 wierzchołkach wynosił $t_{max} \approx 7.5$, dla trudniejszego do przeszukiwań modelu sieci Barabási–Alberta. Dla funkcji Fleury'ego czas przybliżony do $t_{max}$ osiągany jest już pomiędzy 180 węzłami sprawdzanymi, a 200.
+	
+
+
+\subsection{Graf rzeczywisty}
+\par\indent
+
+Dla grafu rzeczywistego z rysunku \ref{osm1G} wygenerowano cykl Eulera, przy pomocy funkcji Hierholzera. Stworzony graf miał parametry $n=211$, $e=852$, gdzie $n$ - liczba wierzchołków, $e$ - ilość krawędzi. 
+
+Czas trwania algorytmu wynosił w przybliżeniu $t\approx0.0018$. Porównując wynik z tabelą \ref{Tab:Hie_DiG} można zauważyć, że dla podobnej ilości wierzchołków różnica ta jest rzędu $10^{-2}$, jednak złożoność tego algorytmu to $O(E)$, co oscyluje pomiędzy pierwszym, a drugim wierszem tabeli i zgodne jest z otrzymanym czasem.
+
+\captionsetup{justification=centering}
+\begin{figure}[!p]
+	\centering
+	\subfloat[Listonosz znajduje się na pierwszej ulicy \textit{Krzywy Zaułek}.]{\label{g_1}
+		\includegraphics[width=0.75\textwidth]{img/wyniki/g_rzecz1.png}}		
+	\quad
+	\subfloat[Listonosz znajduje się na drugiej z ulic cyklu \textit{Adama Staszczyka}.]{\label{g_2}
+		\includegraphics[width=0.75\textwidth]{img/wyniki/g_rzecz2.png}}
+	
+	\caption[]{Przebieg algorytmu Hierholzera na grafie powstałym z mapy rzeczywistej z rysunku \ref{osm1}, zaprezentowano niektóre z kroków w cyklu Eulera. Aktualna krawędź ścieżki rysowana jest na czerwono wyraźniejszą linią z większa grotą, a odwiedzone zaznaczone są cieniej na czerwono. Po przejściu całej mapy, każda z krawędzi finalnie jest czerwona.}
+	\label{g_rzecz1}
+\end{figure}	
+
+\begin{figure}[!p]
+	\centering
+	\subfloat[Listonosz znajduje się na ulicy \textit{Jadwigi z Łobzowa}, nie odwiedzając jeszcze drogi \textit{Kaspra Żelechowskiego}.]{\label{g_3}
+		\includegraphics[width=0.75\textwidth]{img/wyniki/g_rzecz3.png}}		
+	\quad
+	\subfloat[Listonosz znajduje się na ulicy \textit{Jadwigi z Łobzowa}, ale po odwiedzeniu drogi \textit{Kaspra Żelechowskiego}, oznacza to powieloną tasę.]{\label{g_4}
+		\includegraphics[width=0.75\textwidth]{img/wyniki/g_rzecz4.png}}
+	
+	\caption[]{Przebieg algorytmu Hierholzera na grafie powstałym z mapy rzeczywistej z rysunku \ref{osm1}, zaprezentowano niektóre z kroków w cyklu Eulera. Aktualna krawędź ścieżki rysowana jest na czerwono wyraźniejszą linią z większa grotą, a odwiedzone zaznaczone są cieniej na czerwono. Po przejściu całej mapy, każda z krawędzi finalnie jest czerwona.}
+	\label{g_rzecz2}
+\end{figure}	
+
+Przebieg wybranych etapów ścieżki zaprezentowano na rysunkach \ref{g_rzecz1} i \ref{g_rzecz2}. Czerwona gruba krawędź symbolizuje aktualną drogę pomiędzy wierzchołkami w cyklu. Na cieńsze krawędzie tego kolory zaznaczono fragmenty trasy już odwiedzone. Wybrano fragment z ulicami jednokierunkowymi odpowiednio zaznaczonymi na grafie. Listonosz dla takiego przypadku zmuszony jest do przejścia jedną z dróg wielokrotnie, z powodu kierunków dróg, co będzie miało miejsce np. na ulicy \textit{Jadwigi z Łobzowa}, ze względu na układ sąsiedniej szosy \textit{Kaspra Żelechowskiego} (rys. \ref{osm1G}).
+
+Graf wygenerowany z mapy rzeczywistej został poddany modyfikacji przez funkcję \ref{makeeulerianDG}, krawędzie powielono, jednak nie zostały one zaznaczone na rysunkach \ref{g_rzecz1} i \ref{g_rzecz2}, ponieważ skupiono się na osiągnięciu maksymalnej czytelności, na której niekorzyść wypłynęło duże zagęszczenie wierzchołków.
+
+% ======================= 5 =======================
+\newpage
+\section{Podsumowanie}
+\indent\par
+	Dwa algorytmy rozwiązujące problem chińskiego listonosza obrane za cel pracy zostały zaimplementowane. Ich poprawność zilustrowano autorskim programem zaznaczającym przebieg szukanego cyklu Eulera oraz podsumowaniem testów rożnych modeli grafów, gdzie wyniki wyszły zgodne z estymowaną złożonością obliczeniową. Dzięki kilku typom danych testujących (sieci Barabási–Alberta i Wattsa–Strogatza oraz losowy graf skierowany) możliwe było szersze porównanie działania algorytmów, w zależności od typów połączeń, ilości wierzchołków, czy krawędzi w grafie. Ponadto udało się stworzyć graf z danych rzeczywistych, na którym wywołano jeden z napisanych algorytmów.
+	
+	Funkcja konwertująca graf na eulerowski została zaimplementowana i pomimo braku wszystkich możliwych permutacji, określa najlepsze rozwiązanie na danym zbiorze, które jest wystarczające na potrzeby działań programów.
+	
+	Algorytm Fleury'ego był znacznie prostszy do stworzenia, ale słabszy wydajnościowo. Problematyczny może być również w jego przypadku limit rekurencji uniemożliwiający zebranie większej ilości danych testowych na przeciętnej klasy sprzęcie.
+	Funkcja Hierholzera rozwiązuje problemy zarówno dla grafów skierowany i nieskierowanych, jest znacznie szybsza, co całkowicie przeważa na jej korzyść.
+	
+	Innym ciekawym rozszerzeniem pracy mogłoby być porównanie czasów oraz ścieżek wygenerowanych dla grafów rzeczywistych z danymi statystycznymi otrzymanymi po kontakcie z placówką pocztową lub firmą kurierską.
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%% Tabele %%%%%%%%%%%%%%%%%%%%%
+
+
+\addcontentsline{toc}{section}{\protect\numberline{}Dane testowe}
+\section*{Dane testowe}
+
+\begin{table}[h]
+	\centering
+	\caption{Wyniki generowania sieci złożonych o modelu Barabási–Alberta, średnie wartości obliczono z 5 próbek testowych.}
+	\resizebox{16cm}{!}
+	{
+		\begin{tabular}{|c c c|}
+			\hline
+			ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas generowania grafu [s]\\ \hline \hline
+			20 	& 107.6 		& 0.1611 	\\ \hline
+			50 	& 651.0 		& 0.5011 	\\ \hline
+			80 	& 1638.8        & 2.0973	\\ \hline
+			100 & 2548.6        & 4.2081	\\ \hline
+			120 & 3660.0        & 7.2537	\\ \hline
+			150 & 5699.8   		& 14.7364	\\ \hline
+			180 & 8192.6        & 26.9951	\\ \hline
+			200 & 10091.2 		& 34.1516	\\ \hline
+			220 & 12205.8 		& 59.1929	\\ \hline
+			250 & 15740.0 		& 87.9036	\\ \hline
+			500 & 62727.0 		& 674.8682	\\ \hline				
+			700 & 122825.0      & 2145.4006	\\ \hline
+			1000& 250455.2	    & 4536.7447 \\ \hline
+			1500& 563214.0	    & 28492.1274\\ \hline
+			2000& 1000931.0    	& 41671.2410\\ \hline
+		\end{tabular} 
+	}
+	\label{Tab:gen_BA}
+\end{table}
+
+\begin{table}[!p]
+	\centering
+	\caption{Wyniki generowania sieci złożonych o modelu Wattsa–Strogatza, średnie wartości obliczono z 5 próbek testowych.}
+	\resizebox{16cm}{!}
+	{
+		\begin{tabular}{|c c c|}
+			\hline
+			ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas generowania grafu [s]\\ \hline \hline
+			20 	& 108.6  		& 0.0452 	\\ \hline
+			50 	& 624.8 		& 0.6187 	\\ \hline
+			80 	& 1639.6        & 2.6913	\\ \hline
+			100 & 2549.2        & 5.7963	\\ \hline
+			120 & 3656.4        & 10.1062	\\ \hline
+			150 & 5628.0   		& 19.9065	\\ \hline
+			180 & 8184.6        & 34.0788	\\ \hline
+			200 & 10098.6 		& 47.2212	\\ \hline
+			220 & 12204.2 		& 62.1643	\\ \hline
+			250 & 15618.0 		& 91.3247	\\ \hline
+			500 & 62737.2 		& 732.4247	\\ \hline				
+			700 & 122820.4      & 165.9884	\\ \hline
+			1000& 250480.6	    & 5070.8936 \\ \hline
+			1500& 563220.2	    & 31880.5400\\ \hline
+			2000& 1000950.8    	& 47148.0105\\ \hline
+		\end{tabular} 
+	}
+	\label{Tab:gen_WS}
+\end{table}
+
+
+\begin{table}[!p]
+	\centering
+	\caption{Wyniki generowania grafu losowego, średnie wartości obliczono z 5 próbek testowych.}
+	
+	\resizebox{16cm}{!}
+	{
+		\begin{tabular}{|c c c|}
+			\hline
+			ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas generowania grafu [s]\\ \hline \hline
+			20 	& 323.2  		& 0.1844 	\\ \hline
+			50 	& 2032.8 		& 5.5678 	\\ \hline
+			80 	& 5144.0        & 43.1782	\\ \hline
+			100 & 7892.2        & 76.6788	\\ \hline
+			120 & 11297.6       & 136.4873	\\ \hline
+			150 & 17611.2 		& 306.0416	\\ \hline
+			180 & 25294.8       & 599.1041	\\ \hline
+			200 & 31180.2  		& 1143.3872	\\ \hline
+			220 & 37617.4 		& 1213.5494	\\ \hline
+			250 & 48416.0   	& 1918.1350	\\ \hline
+			500 & 192001.6   	& 21215.9172\\ \hline				
+			700 & 387793.2		& 43215.4681\\ \hline
+			1000& 767803.0	    & 90381.0973\\ \hline
+			1500& 1713489.0    	& 214269.5485\\ \hline			
+			2000& 3003152.6	  	& 449311.4794\\ \hline
+		\end{tabular} 
+	}
+	\label{Tab:gen_DiG}
+\end{table}
+
+\begin{table}[!p]
+	\centering
+	\caption{Czasy wyszukiwania cyklu Eulera sieci złożonych o modelu Barabási–Alberta, dla algorytmu Fleury'ego, średnie wartości obliczono z 5 próbek testowych.}
+	
+	\resizebox{16cm}{!}
+	{
+		\begin{tabular}{|c c c|}
+			\hline
+			ilość wierzchołków	& śr. ilość krawędzi 	& śr. czas szukania ścieżki	\\ \hline \hline
+			20 	& 107.6 	 	& 0.0025	\\ \hline
+			40 	& 418.4 		& 0.0331	\\ \hline
+			50 	& 651.0 	 	& 0.0496	\\ \hline
+			60 	& 930.2 		& 0.0941	\\ \hline
+			70 	& 1258.8      	& 0.1438	\\ \hline
+			80 	& 1638.8     	& 0.2552	\\ \hline
+			90  & 2072.4    	& 0.4181	\\ \hline
+			100 & 2548.6    	& 0.5565	\\ \hline
+			120 & 3660.0    	& 1.1322	\\ \hline
+			150 & 5699.8   		& 2.7246	\\ \hline
+			180 & 8192.6     	& 5.4286	\\ \hline
+			200 & 10091.2 		& 8.1718	\\ \hline
+			220 & 12205.8 		& 11.8271	\\ \hline
+			250 & 15740.0 		& 19.0686	\\ \hline
+			280 & 19730.4 		& 30.2086	\\ \hline
+		\end{tabular} 
+	}
+	\label{Tab:BA_Fleury}
+\end{table}
+
+
+\begin{table}[!p]
+	\centering
+	\caption{Czasy wyszukiwania cyklu Eulera sieci złożonych o modelu Wattsa–Strogatza, dla algorytmu Fleury'ego, średnie wartości obliczono z 5 próbek testowych.}
+	
+	\resizebox{16cm}{!}
+	{
+		\begin{tabular}{|c c c|}
+			\hline
+			ilość wierzchołków	& śr. ilość krawędzi 	& śr. czas szukania ścieżki	\\ \hline \hline
+			20 	& 107.6 	 	& 0.0038	\\ \hline
+			40 	& 422.4 		& 0.0265	\\ \hline
+			50 	& 622.2 	 	& 0.0653	\\ \hline
+			60 	& 928.0 		& 0.1114	\\ \hline
+			70 	& 1225.6      	& 0.2043	\\ \hline
+			80 	& 1641.2     	& 0.3526	\\ \hline
+			90  & 2021.4    	& 0.4789	\\ \hline
+			100 & 2547.0    	& 0.7555	\\ \hline
+			120 & 3656.2    	& 1.5154	\\ \hline
+			150 & 5625.8   		& 3.4387	\\ \hline
+			180 & 8192.6     	& 7.0422	\\ \hline
+			200 & 10099.2 		& 10.3851	\\ \hline
+			220 & 12203.6 		& 15.6236	\\ \hline
+			250 & 15628.8 		& 24.4495	\\ \hline
+			280 & 19733.4 		& 38.3141	\\ \hline
+		\end{tabular} 
+	}
+	\label{Tab:WS_Fleury}
+\end{table}
+
+
+\begin{table}[!p]
+	\centering
+	\caption{Wyniki testowania sieci złożonych o modelu Barabási–Alberta, dla algorytmu Hierholzera, średnie wartości obliczono z 5 próbek testowych.}
+	
+	\resizebox{16cm}{!}
+	{
+		\begin{tabular}{|c c c|}
+			\hline
+			ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas szukania ścieżki \\ \hline \hline
+			20 	& 107.6 		& 0.0005 	\\ \hline
+			50 	& 651.0 		& 0.0031 	\\ \hline
+			80 	& 1638.8        & 0.0077	\\ \hline
+			100 & 2548.6        & 0.0179	\\ \hline
+			120 & 3660.0        & 0.0215	\\ \hline
+			150 & 5699.8   		& 0.0320	\\ \hline
+			180 & 8192.6        & 0.0482	\\ \hline
+			200 & 10091.2 		& 0.0554	\\ \hline
+			220 & 12205.8 		& 0.0710	\\ \hline
+			250 & 15740.0 		& 0.0804	\\ \hline
+			500 & 62727.0 		& 0.3441	\\ \hline				
+			700 & 122825.0      & 0.7875	\\ \hline
+			1000& 250455.2	    & 1.1889 	\\ \hline
+			1500& 563214.2	    & 3.7094 	\\ \hline
+			2000& 1000931.0    	& 5.6991	\\ \hline
+		\end{tabular} 
+	}
+	\label{Tab:Hie_BA}
+\end{table}
+
+
+\begin{table}[!p]
+	\centering
+	\caption{Wyniki testowania sieci złożonych o modelu Wattsa–Strogatza, dla algorytmu Hierholzera, średnie wartości obliczono z 5 próbek testowych.}
+	\resizebox{16cm}{!}
+	{
+		\begin{tabular}{|c c c|}
+			\hline
+			ilość wierzchołków	& śr. ilość krawędzi 		& śr. czas szukania ścieżki\\ \hline \hline
+			20 	& 108.6  		& 0.0003 	\\ \hline
+			50 	& 624.8 		& 0.0033 	\\ \hline
+			80 	& 1639.6        & 0.0105	\\ \hline
+			100 & 2549.2        & 0.0141	\\ \hline
+			120 & 3656.4        & 0.0208	\\ \hline
+			150 & 5628.0   		& 0.0383	\\ \hline
+			180 & 8184.6        & 0.0495	\\ \hline
+			200 & 10098.6 		& 0.0591	\\ \hline
+			220 & 12204.2 		& 0.0766	\\ \hline
+			250 & 15618.0 		& 0.0865	\\ \hline
+			500 & 62737.2 		& 0.3775	\\ \hline				
+			700 & 122820.4      & 0.8825	\\ \hline
+			1000& 250480.6	    & 1.4426 	\\ \hline
+			1500& 563220.0	    & 4.5047	\\ \hline
+			2000& 1000950.8    	& 7.5426	\\ \hline
+		\end{tabular} 
+	}
+	\label{Tab:Hie_WS}
+\end{table}
+
+
+\begin{table}[!p]
 	\centering
 	\caption{Wyniki testowania grafu skierowanego, dla algorytmu Hierholzera, średnie wartości obliczono z 5 próbek testowych.}
 	
-	\resizebox{14.5cm}{!}
+	\resizebox{16cm}{!}
 	{
 		\begin{tabular}{|c c c|}
 			\hline
@@ -1102,107 +1224,19 @@ Wyniki drugiego z zaimplementowanych algorytmów do znajdowania cyklu Eulera dla
 			500 & 192001.6   	& 0.6641	\\ \hline				
 			700 & 387793.2		& 1.6977	\\ \hline
 			1000& 767803.0	    & 2.8085	\\ \hline
+			1500& 1713489.0	    & 4.9445	\\ \hline
 			2000& 3003152.6	  	& 7.8537	\\ \hline
 		\end{tabular} 
 	}
 	\label{Tab:Hie_DiG}
 \end{table}
 
-Czasy do około 200 wierzchołków są bardzo podobne dla każdego badanego typu grafu.
 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[angle=270,width=1\textwidth]{img/wyniki/Hierholzer_n}
-	\caption[]{Czas obliczania ścieżki w grafach wykorzystujący algorytm Hierholzera, gdzie $n$ - liczba wierzchołków, $t$ - czas podany w sekundach.}
-	\label{hie_n}
-\end{figure}
-\newpage
-
-
-
-
-\subsection{Algorytm Fleury'ego vs. Hierholzera}
-
-
-\begin{figure}[!p]
-	\centering
-	\subfloat[Sieci o modelu Wattsa–Strogatza.]{\label{fh_ws}
-		\includegraphics[angle=270,width=0.83\textwidth]{img/wyniki/Hierholzer_vs_Fleury_WS_n}}
-	\quad
-	\subfloat[Sieci o modelu Barabási–Alberta.]{\label{fh_ba}
-		\includegraphics[angle=270,width=0.83\textwidth]{img/wyniki/Hierholzer_vs_Fleury_BA_n}}
-	\caption[]{Porównanie czasów obliczania ścieżki w sieciach złożonych algorytmów Hierholzera oraz Fleury'ego, gdzie $n$ - liczba wierzchołków, $t$ - czas podany w sekundach.}
-	\label{fh}
-\end{figure}
-
-\par\indent
-
-	Algorytmy porównano względem grafów nieskierowanych, ponieważ jeden z nich działa tylko dla takich.
-	
-	Patrząc na wykresy z rysunku \ref{fh}, bez większej analizy jesteśmy w stanie określić bardziej optymalne rozwiązanie w szukaniu cyklu Eulera, zarówno dla modelu Wattsa–Strogatza i Barabási–Alberta, którym jest algorytm Hierholzera. 
-	
-	Należy wziąć pod uwagę, że przedstawiono tu porównanie tylko do 280 wierzchołków, ze względu na ograniczenia ilości rekurencji dla algorytmu Fleury'ego, a już widoczna jest znaczna przewaga drugiego z nich.
-	
-	
-	
-	Maksymalny czas obliczony dla funkcji Hierholzera przy 2000 wierzchołkach wynosił $t_{max} \approx 7.5$, dla trudniejszego do przeszukiwań modelu sieci Barabási–Alberta. Dla funkcji Fleury'ego czas przybliżony do $t_{max}$ osiągany jest już pomiędzy 180 węzłami sprawdzanymi, a 200.
-	
-
-
-\subsection{Graf rzeczywisty}
-\par\indent
-
-Dla grafu rzeczywistego z rysunku \ref{osm1G} wygenerowano cykle Eulera, przy pomocy funkcji Hierholzera. Stworzony graf miał parametry $n=211$, $e=852$, gdzie $n$ to liczba wierzchołków, a $e$ krawędzi. 
-
-Czas trwania algorytmu wynosił w przybliżeniu $t\approx0.0018$. Porównując wynik z tabelą \ref{Tab:Hie_DiG} można zauważyć, że dla podobnej ilości wierzchołków różnica ta jest rzędu $10^{-2}$, jednak złożoność tego algorytmu to $O(E)$, co oscyluje pomiędzy pierwszy, a drugim wierszem tabeli i zgodne jest z danymi testowymi.
-
-Zaprezentowano je na rysunku \ref{g_rzecz}
-
-\begin{figure}[!p]
-	\centering
-	\subfloat[]{\label{g_1}
-		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz1.png}}		
-	\quad
-	\subfloat[]{\label{g_2}
-		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz2.png}}
-	\quad	
-		\subfloat[]{\label{g_3}
-		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz3.png}}		
-	\quad
-	\subfloat[]{\label{g_4}
-		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz4.png}}
-	\quad	
-		\subfloat[]{\label{g_5}
-		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz5.png}}		
-	\quad
-	\subfloat[]{\label{g_6}
-		\includegraphics[width=0.4\textwidth]{img/wyniki/g_rzecz6.png}}
-	
-	\caption[]{Przebieg algorytmu Hierholzera na grafie powstałym z mapy rzeczywistej z rysunku \ref{osm1}, zaprezentowano niektóre z kroków w cyklu Eulera.}
-	\label{g_rzecz}
-\end{figure}	
-\captionsetup{justification=centering}
-
-
-% ======================= 5 =======================
-\newpage
-\section{Podsumowanie}
-\indent\par
-Dwa programy rozwiązujące problem chińskiego listonosza obrane za cel pracy zostały zaimplementowane. Ich poprawność zilustrowano autorskim programem zaznaczającym przebieg szukanego cyklu Eulera oraz podsumowaniem testów rożnych modeli grafów, gdzie wyniki wyszły zgodne z estymowaną złożonością obliczeniową. Dzięki kilku typom danych testujących (sieci Barabási–Alberta i Wattsa–Strogatza oraz losowy graf skierowany) możliwe było szersze porównanie działania algorytmów, w zależności od typów połączeń, ilości wierzchołków, czy krawędzi w grafie. Ponadto udało się stworzyć graf z danych rzeczywistych, na którym wywołano jeden z napisanych algorytmów.
-
-Funkcja konwertująca graf na eulerowski została zaimplementowana i pomimo braku wszystkich możliwych permutacji, określa najlepsze rozwiązanie na danym zbiorze, które jest wystarczające na potrzeby działań programów.
-
-Algorytm Fleury'ego był znacznie prostszy do stworzenia, ale słabszy wydajnościowo. Problematyczny może być również w jego przypadku limit rekurencji uniemożliwiający zebranie większej ilości danych testowych na przeciętnej klasy sprzęcie.
-Funkcja Hierholzera rozwiązuje problemy zarówno dla grafów skierowany i nieskierowanych, jest znacznie szybsza, co całkowicie przeważa na jej korzyść.
-
-Innym ciekawym rozszerzeniem pracy mogłoby być porównanie czasów oraz ścieżek wygenerowanych dla grafów rzeczywistych z danymi statystycznymi otrzymanymi po kontakcie z placówką pocztową lub firmą kurierską.
-
-
-\addcontentsline{toc}{section}{\protect\numberline{}Literatura}
 
 
 % ======================= LITERATURA =======================
+\addcontentsline{toc}{section}{\protect\numberline{}Literatura}
+
 \newpage
 \bibliographystyle{srt}
 \begin{thebibliography}{99}
@@ -1250,41 +1284,30 @@ Innym ciekawym rozszerzeniem pracy mogłoby być porównanie czasów oraz ście�
 	Small World i Scale Free} BIULETYN INSTYTUTU SYSTEMÓW INFORMATYCZNYCH 1 25-30, 2008	
 
 	
-	%%%%%%%%%%%%%%%%%%
-	
-%	\bibitem{samllWorld}
-%	K. Klemm, V. M. Eguiluz \textit{Growing scale-free networks with small-world behavior},
-%	Physical Review , vol. 65, 057102, 2002
-	
-%	\bibitem{swiatSieciZlozonych}
-%	A. Fronczak, P. Fronczak \textit{Świat sieci złożonych. Od fizyki do %Internetu}, Wydawnictwo
-%	Naukowe PWN, 2009
-
-	
 	% 2
-	\bibitem{python} https://pl.python.org/ [dostęp: 23.12.2020]
+	\bibitem{python} \href{https://pl.python.org/}{https://pl.python.org/} [dostęp: 23.12.2020]
 	
-	\bibitem{networkx} https://networkx.org/ [dostęp: 23.12.2020]
+	\bibitem{networkx} \href{https://networkx.org/}{https://networkx.org/} [dostęp: 23.12.2020]
 	
-	\bibitem{matplotlib} https://matplotlib.org/ [dostęp: 23.12.2020]
+	\bibitem{matplotlib} \href{https://matplotlib.org/}{https://matplotlib.org/} [dostęp: 23.12.2020]
 
-	\bibitem{matlab} https://www.mathworks.com/help/matlab/ [dostęp: 23.12.2020]
+	\bibitem{matlab} \href{https://www.mathworks.com/help/matlab/}{https://www.mathworks.com/help/matlab/} [dostęp: 23.12.2020]
 	
-	\bibitem{openstreetmap} https://www.openstreetmap.org/ [dostęp: 23.12.2020]
+	\bibitem{openstreetmap} \href{https://www.openstreetmap.org/}{https://www.openstreetmap.org/} [dostęp: 23.12.2020]
 	
 	
 	%3.2
-	\bibitem{osmPropertis} https://wiki.openstreetmap.org/wiki/Category:Properties
+	\bibitem{osmPropertis} \href{https://wiki.openstreetmap.org/wiki/Category:Properties}{https://wiki.openstreetmap.org/wiki/Category:Properties}
 	
 		
 	[dostęp: 20.12.2020]
 
 	% 3.3
 	\bibitem{xml}
-	https://www.w3.org/XML/ 	[dostęp: 25.12.2020]
+	\href{https://www.w3.org/XML/}{https://www.w3.org/XML/} 	[dostęp: 25.12.2020]
 	
 	\bibitem{haver}
-	https://www.movable-type.co.uk/scripts/latlong.html 
+	\href{https://www.movable-type.co.uk/scripts/latlong.html }{https://www.movable-type.co.uk/scripts/latlong.html }
 	
 	
 	[dostęp: 25.12.2020]
@@ -1296,7 +1319,10 @@ Innym ciekawym rozszerzeniem pracy mogłoby być porównanie czasów oraz ście�
 	\bibitem{hierholzer}
 	Z. Qiu, Z. Liu, X. Zhang \textit{Tweaking for Better Algorithmic Implementation}	Computer Science Department, Southeast Missouri State University, Cape Girardeau, MO, U. S. A. CAINE 2017, San Diego, California, USA, 2017
 	
+	\bibitem{gnuplot}
+	\href{http://www.gnuplot.info/}{http://www.gnuplot.info/}	[dostęp: 01.01.2021]
 \end{thebibliography}	
+
 
 
 \end{document}
